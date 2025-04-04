@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'features/onboarding/presentation/pages/onboarding_view.dart';
+import 'package:store/features/onboarding/presentation/pages/onboarding_view.dart';
 
 void main() {
   runApp(Ecommerce());
