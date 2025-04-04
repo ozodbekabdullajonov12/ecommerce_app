@@ -7,7 +7,7 @@ import 'package:store/main.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.onboarding,
+  initialLocation: Routes.splashScreen,
   routes: [
     GoRoute(
       path: Routes.onboarding,
