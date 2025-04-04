@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/features/common/ecommerce_auth_app_bar.dart';
 import 'package:store/features/common/ecommerce_text_button_container.dart';
 import 'package:store/features/common/ecommerce_text_form_field.dart';
@@ -24,7 +25,7 @@ class SignUpView extends StatelessWidget {
         children: [
           Form(
             child: Column(
-              spacing: 20,
+              spacing: 20.h,
               children: [
                 EcommerceTextFormField(
                   label: "Full Name",
@@ -83,7 +84,7 @@ class SignUpView extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 20.h),
           EcommerceTextButtonContainer(
             text: "Create an account",
             textColor: Color(0xFFFFFFFF),
@@ -94,7 +95,8 @@ class SignUpView extends StatelessWidget {
           Row(
             spacing: 5,
             children: [
-              Container(width: 154,
+              Container(
+                width: 154.w,
                 height: 1,
                 color: Color(0xFFE6E6E6),
               ),
@@ -113,10 +115,10 @@ class SignUpView extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 20.h),
           GestureDetector(
             child: Container(
-              height: 56,
+              height: 56.h,
               width: double.infinity,
               color: Colors.white,
               child: Center(

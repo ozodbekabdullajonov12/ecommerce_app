@@ -13,7 +13,7 @@ final GoRouter router = GoRouter(
       path: Routes.onboarding,
       builder: (context, state) => OnboardingView(),
     ),
-    GoRoute(path: Routes.signup, builder: (context, state) => SignUpView()),
+    GoRoute(path: Routes.signUp, builder: (context, state) => SignUpView()),
     GoRoute(path: Routes.splashScreen,
       builder: (context, state)=>
           SplashScreen(),
