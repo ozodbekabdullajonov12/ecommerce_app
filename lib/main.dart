@@ -17,13 +17,13 @@ class Ecommerce extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: const Size(390, 844));
     return MultiProvider(
-      providers: providers,
-      builder: (context,child) {
-        return MaterialApp.router(
-          routerConfig: router,
-          debugShowCheckedModeBanner: false,
-        );
-      }
+        providers: providers,
+        builder: (context,child) {
+          return MaterialApp.router(
+            routerConfig: router,
+            debugShowCheckedModeBanner: false,
+          );
+        }
     );
   }
 }
