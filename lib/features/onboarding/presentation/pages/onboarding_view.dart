@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:store/core/routing/routes.dart';
+import 'package:store/features/common/ecommerce_text_button_container.dart';
 
 class OnboardingView extends StatelessWidget {
   const OnboardingView({super.key});
@@ -7,7 +10,10 @@ class OnboardingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(backgroundColor: Colors.white,surfaceTintColor: Colors.transparent,),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.transparent,
+      ),
       body: Stack(
         children: [
           Container(
@@ -31,37 +37,27 @@ class OnboardingView extends StatelessWidget {
             top: 40,
             left: 64,
             child: IgnorePointer(
-              child: Image.asset("assets/images/onboarding.png",
+              child: Image.asset(
+                "assets/images/onboarding.png",
                 width: 358,
-                height: 697,),
+                height: 697,
+              ),
             ),
           ),
         ],
       ),
       bottomNavigationBar: Container(
         width: double.infinity,
-        height: 107,
+        height: 107.h,
         color: Colors.white,
         child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 22),
-            child: GestureDetector(
-                onTap: (){},
-                child:  SizedBox(
-                  width: 341,
-                  height: 54,
-                  child: ElevatedButton(onPressed: (){},
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.black
-                    ),
-                    child:Text('Get Started',
-                      style: TextStyle(
-                          color: Colors.white
-                      ),
-                    ),
-                  ),
-                )
-            )
+          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 22),
+          child: EcommerceTextButtonContainer(
+            text: "Get started",
+            textColor: Colors.white,
+            containerColor: Colors.black,
+            callback: () => context.go(Routes.signUp),
+          ),
         ),
       ),
     );
