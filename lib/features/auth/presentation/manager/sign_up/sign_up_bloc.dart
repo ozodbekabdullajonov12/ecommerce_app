@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:store/core/routing/routes.dart';
-import 'package:store/core/utils/colors.dart';
 import 'package:store/data/repositories/auth_repository.dart';
 import 'package:store/features/auth/presentation/manager/sign_up/sign_up_state.dart';
 import 'package:store/main.dart';
@@ -14,27 +14,69 @@ class SignUpBloc extends Bloc<SignUpEvents, SignUpState> {
 
   final fullNameController = TextEditingController();
 
-  final emailController = TextEditingController();
+  final  emailController = TextEditingController();
 
   final passwordController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   SignUpBloc({required AuthRepository repo})
-    : _repo = repo,
-      super(SignUpState.initial()) {
+    : _repo = repo, super(SignUpState.initial()) {
     on<CreateAnAccount>(_createAccount);
     on<ShowPassword>(_showPassword);
+    on<FullNameValidationFailed>((event, emit) {
+      emit(
+        state.copyWith(
+          fullNameStatus: TextFormFieldStatus.error,
+          fullNamePrefix: "validation_error.svg",
+        ),
+      );
+    });
+    on<FullNameValidationSuccess>((event, emit) {
+      emit(
+        state.copyWith(
+          fullNameStatus: TextFormFieldStatus.success,
+          fullNamePrefix: "validation_success.svg",
+          fullNameBorderColor: Colors.green,
+        ),
+      );
+    });
+    on<EmailValidationFailed>((event, emit) {
+      emit(
+        state.copyWith(
+          emailStatus: TextFormFieldStatus.error,
+          emailPrefix: "validation_error.svg",
+        ),
+      );
+    });
+    on<EmailValidationSuccess>((event, emit) {
+      emit(
+        state.copyWith(
+          emailPrefix: "validation_success.svg",
+          emailStatus: TextFormFieldStatus.success,
+          emailBorderColor: Colors.green,
+        ),
+      );
+    });
+    on<PasswordValidationFailed>((event, emit) {
+      emit(
+        state.copyWith(
+          passwordStatus: TextFormFieldStatus.error,
+          passwordPrefix: "validation_error.svg",
+        ),
+      );
+    });
+    on<PasswordValidationSuccess>((event, emit) {
+      emit(
+        state.copyWith(
+          passwordPrefix: "validation_success.svg",
+          passwordStatus: TextFormFieldStatus.success,
+          passwordBorderColor: Colors.green,
+        ),
+      );
+    });
   }
-
   Future _createAccount(CreateAnAccount event, Emitter emit) async {
-    emit(
-      state.copyWith(
-        fullNameStatus: TextFormFieldStatus.idle,
-        emailStatus: TextFormFieldStatus.idle,
-        passwordStatus: TextFormFieldStatus.idle,
-      ),
-    );
     if (formKey.currentState!.validate()) {
       bool result = await _repo.signUp(
         fullName: fullNameController.text,
@@ -47,56 +89,37 @@ class SignUpBloc extends Bloc<SignUpEvents, SignUpState> {
         emit(
           state.copyWith(
             fullNameStatus: TextFormFieldStatus.error,
-            fullNamePrefix: "validation_error",
+            fullNamePrefix: "validation_error.svg",
             emailStatus: TextFormFieldStatus.error,
-            emailPrefix: "validation_error",
+            emailPrefix: "validation_error.svg",
             passwordStatus: TextFormFieldStatus.error,
-            passwordPrefix: "validation_error",
+            passwordPrefix: "validation_error.svg",
           ),
         );
       }
     }
+    else{
+      emit(state.copyWith());
+    }
   }
 
-  String? fullNameValidator(String? value, Emitter emit) {
+  String? fullNameValidator(String? value) {
     if (value == null) {
-      emit(
-        state.copyWith(
-          fullNameStatus: TextFormFieldStatus.error,
-          fullNamePrefix: "validation_error",
-        ),
-      );
+      add(FullNameValidationFailed());
       return "Enter full name,please";
     } else {
-      emit(
-        state.copyWith(
-          fullNamePrefix: "validation_success",
-          fullNameStatus: TextFormFieldStatus.success,
-          fullNameBorderColor: Colors.green,
-        ),
-      );
+   add(FullNameValidationSuccess());
       return null;
     }
   }
 
-  String? emailValidator(String? value, Emitter emit) {
+  String? emailValidator(String? value) {
     if (state.fullNameStatus == TextFormFieldStatus.success) {
       if (value == null) {
-        emit(
-          state.copyWith(
-            emailStatus: TextFormFieldStatus.error,
-            emailPrefix: "validation_error",
-          ),
-        );
+        add(EmailValidationFailed());
         return "Enter email,please";
       } else {
-        emit(
-          state.copyWith(
-            emailPrefix: "validation_success",
-            emailStatus: TextFormFieldStatus.success,
-            emailBorderColor: Colors.green,
-          ),
-        );
+       add(EmailValidationSuccess());
         return null;
       }
     } else {
@@ -104,32 +127,20 @@ class SignUpBloc extends Bloc<SignUpEvents, SignUpState> {
     }
   }
 
-  String? passwordValidator(String? value, Emitter emit) {
+  String? passwordValidator(String? value) {
     if (state.fullNameStatus == TextFormFieldStatus.success &&
         state.emailStatus == TextFormFieldStatus.success) {
       if (value == null) {
-        emit(
-          state.copyWith(
-            passwordStatus: TextFormFieldStatus.error,
-            passwordPrefix: "validation_error",
-          ),
-        );
+       add(PasswordValidationFailed());
         return "Enter password,please";
       } else {
-        emit(
-          state.copyWith(
-            passwordPrefix: "validation_success",
-            passwordStatus: TextFormFieldStatus.success,
-            passwordBorderColor: Colors.green,
-          ),
-        );
+        add(PasswordValidationSuccess());
         return null;
       }
     } else {
       return null;
     }
   }
-
   Future _showPassword(ShowPassword event, Emitter emit) async {
     emit(state.copyWith(showPassword: !state.showPassword));
   }

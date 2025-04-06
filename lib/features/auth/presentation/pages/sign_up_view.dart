@@ -36,10 +36,7 @@ class SignUpView extends StatelessWidget {
                             context.read<SignUpBloc>().fullNameController,
                         borderColor: state.fullNameBorderColor,
                         prefix: state.fullNamePrefix,
-                        validator:
-                            (value) => context
-                                .read<SignUpBloc>()
-                                .fullNameValidator(value, Emitter<SignUpState>),
+                        validator: (value)   =>  context.read<SignUpBloc>().fullNameValidator(value),
                       ),
                       EcommerceTextFormField(
                         label: "Email",
@@ -47,24 +44,20 @@ class SignUpView extends StatelessWidget {
                         controller: context.read<SignUpBloc>().emailController,
                         borderColor: state.emailBorderColor,
                         prefix: state.emailPrefix,
-                        validator:()=> context.read<SignUpBloc>().emailValidator(value, emit),
-
-    ),
-                      EcommerceTextFormField(
-                        label: "Password",
-                        hintText: "Enter your password",
-                        controller:
-                            context.read<SignUpBloc>().passwordController,
-                        borderColor: state.passwordBorderColor,
-                        prefix: state.passwordPrefix,
                         validator:
                             (value) => context
                                 .read<SignUpBloc>()
-                                .fullNameValidator(value, Emitter<SignUpState>),
-                        isPassword: state.showPassword,
-                        showPasswordFunc:
-                            () async =>
-                                context.read<SignUpBloc>().add(ShowPassword()),
+                                .emailValidator(value),
+                      ),
+                      EcommerceTextFormField(
+                        label: "Password",
+                        hintText: "Enter your password",
+                        controller: context.read<SignUpBloc>().passwordController,
+                        borderColor: state.passwordBorderColor,
+                        prefix: state.passwordPrefix,
+                        validator: (value) => context.read<SignUpBloc>().passwordValidator(value),
+                        showPassword: state.showPassword,
+                        showPasswordFunc: ()  => context.read<SignUpBloc>().add(ShowPassword()),
                       ),
                     ],
                   ),
@@ -111,15 +104,12 @@ class SignUpView extends StatelessWidget {
           ),
           SizedBox(height: 20.h),
           BlocBuilder<SignUpBloc, SignUpState>(
-            builder:
-                (context, state) => EcommerceTextButtonContainer(
+            builder: (context, state) => EcommerceTextButtonContainer(
                   text: "Create an account",
                   textColor: Colors.white,
                   containerColor: AppColors.primary.withValues(
                     alpha:
-                        (state.passwordStatus != TextFormFieldStatus.success)
-                            ? 0.2
-                            : 1,
+                        (state.passwordStatus != TextFormFieldStatus.success) ? 0.2 : 1,
                   ),
                   callback: () {
                     context.read<SignUpBloc>().add(CreateAnAccount());

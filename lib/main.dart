@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:store/core/dependencies.dart';
 import 'package:store/core/routing/router.dart';
+
 
 
 final navigatorKey=GlobalKey<NavigatorState>();
@@ -16,14 +18,12 @@ class Ecommerce extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: const Size(390, 844));
-    return MultiProvider(
+    return MultiBlocProvider(
         providers: providers,
-        builder: (context,child) {
-          return MaterialApp.router(
-            routerConfig: router,
-            debugShowCheckedModeBanner: false,
-          );
-        }
+       child: MaterialApp.router(
+         routerConfig: router,
+         debugShowCheckedModeBanner: false,
+       ),
     );
   }
 }

@@ -6,17 +6,14 @@ class CreateAnAccount extends SignUpEvents {}
 
 class ShowPassword extends SignUpEvents {}
 
-class FullNameChanged extends SignUpEvents {
-  final String? value;
-  FullNameChanged(this.value);
-}
+final class FullNameValidationFailed extends SignUpEvents {}
 
-class EmailChanged extends SignUpEvents {
-  final String? value;
-  EmailChanged(this.value);
-}
+final class FullNameValidationSuccess extends SignUpEvents {}
 
-class PasswordChanged extends SignUpEvents {
-  final String? value;
-  PasswordChanged(this.value);
-}
+final class EmailValidationFailed extends SignUpEvents {}
+
+final class EmailValidationSuccess extends SignUpEvents {}
+
+final class PasswordValidationFailed extends SignUpEvents {}
+
+final class PasswordValidationSuccess extends SignUpEvents {}

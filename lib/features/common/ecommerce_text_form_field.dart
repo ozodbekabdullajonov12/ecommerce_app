@@ -47,7 +47,7 @@ class EcommerceTextFormField extends StatelessWidget {
           ),
         ),
         TextFormField(
-          obscureText: showPassword!,
+          obscureText: isPassword! ? !showPassword! : false,
           obscuringCharacter: "*",
           validator: validator,
           minLines: minLines,
@@ -60,21 +60,21 @@ class EcommerceTextFormField extends StatelessWidget {
               fontFamily: "General Sans",
               fontWeight: FontWeight.w500,
             ),
-            suffixIcon: IconButton(
-              onPressed: (isPassword!) ? showPasswordFunc : () {},
-              icon: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child:
-                    (prefix != null)
-                        ? SvgPicture.asset(
+            suffixIcon:
+                (prefix != null)
+                    ? IconButton(
+                      onPressed: (isPassword!) ? showPasswordFunc : () {},
+                      icon: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: SvgPicture.asset(
                           "assets/icons/$prefix",
                           width: 24,
                           height: 24,
                           fit: BoxFit.cover,
-                        )
-                        : null,
-              ),
-            ),
+                        ),
+                      ),
+                    )
+                    : null,
             hintStyle: TextStyle(
               color: Color(0xFF999999),
               fontWeight: FontWeight.w500,
@@ -83,7 +83,7 @@ class EcommerceTextFormField extends StatelessWidget {
             filled: true,
             fillColor: Colors.white,
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: borderColor,width: 1),
+              borderSide: BorderSide(color: borderColor, width: 1),
               borderRadius: BorderRadius.circular(10),
             ),
             focusedBorder: OutlineInputBorder(

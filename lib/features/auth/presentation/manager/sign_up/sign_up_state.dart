@@ -69,7 +69,7 @@ class SignUpState extends Equatable {
       emailPrefix: null,
       emailBorderColor: AppColors.primary.withValues(alpha: 0.1),
       emailStatus: TextFormFieldStatus.idle,
-      passwordPrefix: "show_password",
+      passwordPrefix: "show_password.svg",
       passwordBorderColor: AppColors.primary.withValues(alpha: 0.1),
       showPassword: true,
       passwordStatus: TextFormFieldStatus.idle,
