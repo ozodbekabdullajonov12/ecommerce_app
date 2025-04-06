@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store/core/utils/colors.dart';
 
 class EcommerceAuthAppBar extends StatelessWidget
     implements PreferredSizeWidget {
@@ -25,7 +26,7 @@ class EcommerceAuthAppBar extends StatelessWidget
             Text(
               title,
               style: TextStyle(
-                color: Color(0xFF1A1A1A),
+                color: AppColors.primary.withValues(alpha: 0.9),
                 fontWeight: FontWeight.w600,
                 fontSize: 32,
               ),
@@ -33,7 +34,7 @@ class EcommerceAuthAppBar extends StatelessWidget
             Text(
               titleDesc,
               style: TextStyle(
-                color: Color(0xFF808080),
+                color: AppColors.primary.withValues(alpha: 0.5),
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
               ),
