@@ -10,17 +10,13 @@ class OnboardingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       appBar: AppBar(
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.transparent,
       ),
       body: Stack(
         children: [
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: Colors.white,
-          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 24),
             child: Text(
@@ -33,17 +29,16 @@ class OnboardingView extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            top: 40,
-            left: 64,
-            child: IgnorePointer(
-              child: Image.asset(
-                "assets/images/onboarding.png",
-                width: 358,
-                height: 697,
-              ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Image.asset(
+              "assets/images/onboarding.png",
+              width: 358.w,
+              height: 697.h,
+              fit: BoxFit.fitWidth,
             ),
           ),
+
         ],
       ),
       bottomNavigationBar: Container(
