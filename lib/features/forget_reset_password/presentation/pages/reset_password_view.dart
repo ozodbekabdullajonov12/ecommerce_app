@@ -34,14 +34,14 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                 controller: passwordControllerOne,
                 borderColor: AppColors.primary100,
                 validator: (null),
-                prefix: "hide_password.svg"),
+                suffix: "hide_password.svg"),
               EcommerceTextFormField(
                 label: "Password",
                 hintText: "**********",
                 controller: passwordControllerTwo,
                 borderColor: AppColors.primary100,
                 validator: (null),
-                  prefix: "hide_password.svg"
+                  suffix: "hide_password.svg"
               ),
               Spacer(),
               SizedBox(
