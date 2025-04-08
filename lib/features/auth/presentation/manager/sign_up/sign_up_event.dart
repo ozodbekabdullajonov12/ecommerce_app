@@ -5,6 +5,7 @@ abstract class SignUpEvents {}
 class CreateAnAccount extends SignUpEvents {}
 
 class ShowPassword extends SignUpEvents {}
+class CShowPassword extends SignUpEvents {}
 
 final class FullNameValidationFailed extends SignUpEvents {}
 
@@ -17,3 +18,8 @@ final class EmailValidationSuccess extends SignUpEvents {}
 final class PasswordValidationFailed extends SignUpEvents {}
 
 final class PasswordValidationSuccess extends SignUpEvents {}
+
+
+final class CPasswordValidationFailed extends SignUpEvents {}
+
+final class CPasswordValidationSuccess extends SignUpEvents {}

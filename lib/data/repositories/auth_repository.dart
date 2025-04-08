@@ -8,12 +8,15 @@ class AuthRepository {
 
   AuthRepository({required this.client});
 
-  Future<void> login({required String login, required String password}) async {
-    final String token = await client.login(login: login, password: password);
+  Future<bool> login({required String login, required String password}) async {
+    final result=await client.login(login: login, password: password);
+  if(result["result"]){
     await SecureStorage.deleteCredentials();
     await SecureStorage.saveCredentials(login: login, password: password);
     await SecureStorage.deleteToken();
-    await SecureStorage.saveToken(token: token);
+    await SecureStorage.saveToken(token: result["token"]);
+  }
+  return result["result"];
   }
 
   Future logout() async {
@@ -31,7 +34,7 @@ class AuthRepository {
         password: credentials["password"]!,
       );
       await SecureStorage.deleteToken();
-      await SecureStorage.saveToken(token: jwt);
+      await SecureStorage.saveToken(token: jwt["token"]);
       return true;
     }
   }
