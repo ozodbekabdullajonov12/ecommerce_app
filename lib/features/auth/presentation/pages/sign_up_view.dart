@@ -10,7 +10,7 @@ import 'package:store/features/common/ecommerce_text_form_field.dart';
 import 'package:store/features/common/ecommerce_text_icon_button.dart';
 
 class SignUpView extends StatelessWidget {
-  SignUpView({super.key});
+  const SignUpView({super.key});
 
   @override
   Widget build(BuildContext context) {

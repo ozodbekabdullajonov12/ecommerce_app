@@ -5,7 +5,7 @@ import '../../../../../core/utils/colors.dart';
 
 enum TextFormFieldStatus { idle, error, success }
 
-enum SignUpStatus { idle, error, success }
+enum SignUpStatus { idle, error, success}
 
 @immutable
 class SignUpState extends Equatable {

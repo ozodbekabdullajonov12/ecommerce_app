@@ -38,7 +38,6 @@ class AuthRepository {
 
   Future<bool> signUp({
     required String fullName,
-
     required String email,
 
     required String password,
@@ -50,6 +49,7 @@ class AuthRepository {
         fullName: fullName,
       ),
     );
+
     if (result["result"]) {
       SecureStorage.deleteToken();
       SecureStorage.saveToken(token: result["token"]);
@@ -60,4 +60,15 @@ class AuthRepository {
       return false;
     }
   }
+  Future<String> forgot(String email) async{
+    return await client.postForgotEmail(email);
+  }
+}
+class ForgotPassword{
+  final String email;
+  final String code;
+  ForgotPassword({
+    required this.email,
+    required this.code
+});
 }

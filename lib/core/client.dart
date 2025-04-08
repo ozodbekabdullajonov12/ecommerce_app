@@ -7,7 +7,7 @@ class ApiClient {
   ApiClient() {
     dio = Dio(
       BaseOptions(
-        baseUrl: "http://192.168.40.182:8888/api/v1",
+        baseUrl: "http://10.10.0.222:8888/api/v1",
         validateStatus: (value) => true,
       ),
     );
@@ -46,4 +46,19 @@ class ApiClient {
       };
     }
   }
+  Future<String> postForgotEmail(String email) async {
+    var response = await dio.post(
+      "/auth/reset-password/email",
+      data: {
+        'email': email,
+      },
+    );
+    if (response.statusCode==200){
+      final data=Map<String,String>.from(response.data);
+      return data['email']!;
+    }else{
+      throw Exception("xato ketdi reset email");
+    }
+  }
+
 }
