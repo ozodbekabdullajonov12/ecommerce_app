@@ -61,7 +61,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (formKey.currentState!.validate()) {
       bool result =await _repo.login(login:emailController.text , password: passwordController.text);
       if (result) {
-        navigatorKey.currentContext!.go(Routes.onboarding);
+        navigatorKey.currentContext!.go(Routes.home);
         emit(state.copyWith(loginStatus: LoginStatus.success));
       } else {
         emit(state.copyWith(
