@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:store/core/routing/routes.dart';
 import 'package:store/core/utils/colors.dart';
 import 'package:store/features/auth/presentation/manager/sign_up/sign_up_bloc.dart';
 import 'package:store/features/auth/presentation/manager/sign_up/sign_up_state.dart';
@@ -35,29 +37,44 @@ class SignUpView extends StatelessWidget {
                         controller:
                             context.read<SignUpBloc>().fullNameController,
                         borderColor: state.fullNameBorderColor,
-                        prefix: state.fullNamePrefix,
-                        validator: (value)   =>  context.read<SignUpBloc>().fullNameValidator(value),
+                        suffix: state.fullNameSuffix,
+                        validator: context.read<SignUpBloc>().fullNameValidator,
                       ),
                       EcommerceTextFormField(
                         label: "Email",
                         hintText: "Enter your email address",
                         controller: context.read<SignUpBloc>().emailController,
                         borderColor: state.emailBorderColor,
-                        prefix: state.emailPrefix,
-                        validator:
-                            (value) => context
-                                .read<SignUpBloc>()
-                                .emailValidator(value),
+                        suffix: state.emailSuffix,
+                        validator: context.read<SignUpBloc>().emailValidator,
                       ),
                       EcommerceTextFormField(
                         label: "Password",
                         hintText: "Enter your password",
-                        controller: context.read<SignUpBloc>().passwordController,
+                        controller:
+                            context.read<SignUpBloc>().passwordController,
                         borderColor: state.passwordBorderColor,
-                        prefix: state.passwordPrefix,
-                        validator: (value) => context.read<SignUpBloc>().passwordValidator(value),
+                        isPassword: true,
+                        validator: context.read<SignUpBloc>().passwordValidator,
                         showPassword: state.showPassword,
-                        showPasswordFunc: ()  => context.read<SignUpBloc>().add(ShowPassword()),
+                        showPasswordFunc:
+                            () =>
+                                context.read<SignUpBloc>().add(ShowPassword()),
+                      ),
+
+                      EcommerceTextFormField(
+                        label: "Confirm Password",
+                        hintText: "Enter your Confirm Password",
+                        controller:
+                            context.read<SignUpBloc>().cPasswordController,
+                        borderColor: state.cPasswordBorderColor,
+                        isPassword: true,
+                        validator:
+                            context.read<SignUpBloc>().cPasswordValidator,
+                        showPassword: state.cShowPassword,
+                        showPasswordFunc:
+                            () =>
+                                context.read<SignUpBloc>().add(CShowPassword()),
                       ),
                     ],
                   ),
@@ -104,12 +121,19 @@ class SignUpView extends StatelessWidget {
           ),
           SizedBox(height: 20.h),
           BlocBuilder<SignUpBloc, SignUpState>(
-            builder: (context, state) => EcommerceTextButtonContainer(
+            builder:
+                (context, state) => EcommerceTextButtonContainer(
                   text: "Create an account",
                   textColor: Colors.white,
                   containerColor: AppColors.primary.withValues(
                     alpha:
-                        (state.passwordStatus != TextFormFieldStatus.success) ? 0.2 : 1,
+                        (state.passwordStatus == TextFormFieldStatus.success &&
+                                state.fullNameStatus ==
+                                    TextFormFieldStatus.success &&
+                                state.emailStatus ==
+                                    TextFormFieldStatus.success&&state.cPasswordStatus==TextFormFieldStatus.success)
+                            ? 1
+                            : 0.2,
                   ),
                   callback: () {
                     context.read<SignUpBloc>().add(CreateAnAccount());
@@ -172,7 +196,9 @@ class SignUpView extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.go(Routes.login);
+                },
                 child: Text(
                   "Log In",
                   style: TextStyle(

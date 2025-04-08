@@ -16,18 +16,20 @@ class ApiClient {
 
   late final Dio dio;
 
-
-  Future<String> login(
-      {required String login, required String password}) async {
+  Future<Map<String, dynamic>> login({
+    required String login,
+    required String password,
+  }) async {
     var response = await dio.post(
       "/auth/login",
       data: {"login": login, "password": password},
     );
     if (response.statusCode == 200) {
       var data = Map<String, String>.from(response.data);
-      return data["accessToken"]!.toString();
+      String token = data["accessToken"]!.toString();
+      return {"result": true, "token": token};
     } else {
-      throw AuthException();
+      return {"result": false, "token": null};
     }
   }
 
@@ -35,15 +37,9 @@ class ApiClient {
     var responce = await dio.post("/auth/register", data: user.toJson());
     if (responce.statusCode == 201) {
       String token = responce.data["accessToken"];
-      return {
-        "result": true,
-        "token": token,
-      };
+      return {"result": true, "token": token};
     } else {
-      return {
-        "result": true,
-        "token": null,
-      };
+      return {"result": true, "token": null};
     }
   }
   Future<String> postForgotEmail(String email) async {
