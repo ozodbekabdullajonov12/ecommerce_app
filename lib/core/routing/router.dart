@@ -3,13 +3,16 @@ import 'package:go_router/go_router.dart';
 import 'package:store/core/routing/routes.dart';
 import 'package:store/features/auth/presentation/manager/sign_up/sign_up_bloc.dart';
 import 'package:store/features/auth/presentation/pages/sign_up_view.dart';
+import 'package:store/features/home/presentation/pages/home_view.dart';
+import 'package:store/features/home/presentation/pages/notifications_view.dart';
+import 'package:store/features/home/presentation/pages/search_view.dart';
 import 'package:store/features/onboarding/presentation/pages/onboarding_view.dart';
 import 'package:store/features/onboarding/presentation/pages/splash_screen.dart';
 import 'package:store/main.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.signUp,
+  initialLocation: Routes.home,
   routes: [
     GoRoute(
       path: Routes.onboarding,
@@ -26,6 +29,12 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: Routes.splashScreen,
       builder: (context, state) => SplashScreen(),
+    ),
+    GoRoute(path: Routes.home, builder: (context, state) => HomeView()),
+    GoRoute(path: Routes.search, builder: (context, state) => SearchView()),
+    GoRoute(
+      path: Routes.notifications,
+      builder: (context, state) => NotificationsView(),
     ),
   ],
 );
