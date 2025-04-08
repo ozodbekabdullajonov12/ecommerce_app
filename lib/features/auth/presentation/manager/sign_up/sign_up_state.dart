@@ -9,84 +9,98 @@ enum SignUpStatus { idle, error, success }
 
 @immutable
 class SignUpState extends Equatable {
-  final String? fullNamePrefix;
+  final String? fullNameSuffix;
   final Color fullNameBorderColor;
   final TextFormFieldStatus fullNameStatus;
 
-  final String? emailPrefix;
+  final String? emailSuffix;
   final Color emailBorderColor;
   final TextFormFieldStatus emailStatus;
 
-  final String? passwordPrefix;
   final Color passwordBorderColor;
   final bool showPassword;
   final TextFormFieldStatus passwordStatus;
 
+  final Color cPasswordBorderColor;
+  final bool cShowPassword;
+  final TextFormFieldStatus cPasswordStatus;
+
   const SignUpState({
-    required this.fullNamePrefix,
+    required this.fullNameSuffix,
     required this.fullNameBorderColor,
     required this.fullNameStatus,
-    required this.emailPrefix,
+    required this.emailSuffix,
     required this.emailBorderColor,
     required this.emailStatus,
-    required this.passwordPrefix,
     required this.passwordBorderColor,
     required this.showPassword,
     required this.passwordStatus,
+    required this.cPasswordBorderColor,
+    required this.cShowPassword,
+    required this.cPasswordStatus,
   });
 
   SignUpState copyWith({
-    String? fullNamePrefix,
+    String? fullNameSuffix,
     Color? fullNameBorderColor,
     TextFormFieldStatus? fullNameStatus,
-    String? emailPrefix,
+    String? emailSuffix,
     Color? emailBorderColor,
     TextFormFieldStatus? emailStatus,
-    String? passwordPrefix,
     Color? passwordBorderColor,
     bool? showPassword,
     TextFormFieldStatus? passwordStatus,
+    Color? cPasswordBorderColor,
+    bool? cShowPassword,
+    TextFormFieldStatus? cPasswordStatus,
   }) {
     return SignUpState(
-      fullNamePrefix: fullNamePrefix ?? this.fullNamePrefix,
+      fullNameSuffix: fullNameSuffix ?? this.fullNameSuffix,
       fullNameBorderColor: fullNameBorderColor ?? this.fullNameBorderColor,
       fullNameStatus: fullNameStatus ?? this.fullNameStatus,
-      emailPrefix: emailPrefix ?? this.emailPrefix,
+      emailSuffix: emailSuffix ?? this.emailSuffix,
       emailBorderColor: emailBorderColor ?? this.emailBorderColor,
       emailStatus: emailStatus ?? this.emailStatus,
-      passwordPrefix: passwordPrefix ?? this.passwordPrefix,
       passwordBorderColor: passwordBorderColor ?? this.passwordBorderColor,
       showPassword: showPassword ?? this.showPassword,
       passwordStatus: passwordStatus ?? this.passwordStatus,
+      cPasswordBorderColor: cPasswordBorderColor ?? this.cPasswordBorderColor,
+      cShowPassword: cShowPassword ?? this.cShowPassword,
+      cPasswordStatus: cPasswordStatus ?? this.cPasswordStatus,
     );
   }
 
+
   factory SignUpState.initial() {
     return SignUpState(
-      fullNamePrefix: null,
+      fullNameSuffix: null,
       fullNameBorderColor: AppColors.primary.withValues(alpha: 0.1),
       fullNameStatus: TextFormFieldStatus.idle,
-      emailPrefix: null,
+      emailSuffix: null,
       emailBorderColor: AppColors.primary.withValues(alpha: 0.1),
       emailStatus: TextFormFieldStatus.idle,
-      passwordPrefix: "show_password.svg",
       passwordBorderColor: AppColors.primary.withValues(alpha: 0.1),
       showPassword: true,
       passwordStatus: TextFormFieldStatus.idle,
+      cPasswordBorderColor: AppColors.primary.withValues(alpha: 0.1),
+      cShowPassword: true,
+      cPasswordStatus: TextFormFieldStatus.idle,
     );
   }
 
   @override
   List<Object?> get props => [
-    fullNamePrefix,
+    fullNameSuffix,
     fullNameBorderColor,
     fullNameStatus,
-    emailPrefix,
+    emailSuffix,
     emailBorderColor,
     emailStatus,
-    passwordPrefix,
     passwordBorderColor,
     showPassword,
     passwordStatus,
+    cPasswordBorderColor,
+    cShowPassword,
+    cPasswordStatus,
   ];
 }

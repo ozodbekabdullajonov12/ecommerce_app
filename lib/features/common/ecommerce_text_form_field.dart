@@ -14,16 +14,16 @@ class EcommerceTextFormField extends StatelessWidget {
     this.minLines = 1,
     this.maxLines = 1,
     this.isPassword = false,
-    this.prefix,
+    this.suffix,
     this.showPasswordFunc,
     this.showPassword = false,
   });
 
   final String label, hintText;
-  final String? prefix;
+  final String? suffix;
   final TextEditingController controller;
   final int minLines, maxLines;
-  final bool? isPassword;
+  final bool isPassword;
   final Color borderColor;
 
   final String? Function(String?)? validator;
@@ -47,7 +47,9 @@ class EcommerceTextFormField extends StatelessWidget {
           ),
         ),
         TextFormField(
-          obscureText: isPassword! ? !showPassword! : false,
+          controller: controller,
+          autovalidateMode: AutovalidateMode.onUnfocus,
+          obscureText: isPassword && showPassword != null  ? !showPassword! : false,
           obscuringCharacter: "*",
           validator: validator,
           minLines: minLines,
@@ -60,21 +62,32 @@ class EcommerceTextFormField extends StatelessWidget {
               fontFamily: "General Sans",
               fontWeight: FontWeight.w500,
             ),
-            suffixIcon:
-                (prefix != null)
-                    ? IconButton(
-                      onPressed: (isPassword!) ? showPasswordFunc : () {},
-                      icon: Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: SvgPicture.asset(
-                          "assets/icons/$prefix",
-                          width: 24,
-                          height: 24,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    )
-                    : null,
+            suffixIcon: isPassword
+                ? IconButton(
+              onPressed: showPasswordFunc,
+              icon: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: SvgPicture.asset(
+                  "assets/icons/${showPassword! ? "show_password" : "hide_password"}.svg",
+                  width: 24,
+                  height: 24,
+                  fit: BoxFit.contain,
+                  colorFilter: ColorFilter.mode(borderColor, BlendMode.srcIn),
+                ),
+              ),
+            )
+                : (suffix != null
+                ? Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: SvgPicture.asset(
+                "assets/icons/$suffix",
+                width: 24,
+                height: 24,
+                fit: BoxFit.cover,
+              ),
+            )
+                : null),
+
             hintStyle: TextStyle(
               color: Color(0xFF999999),
               fontWeight: FontWeight.w500,
