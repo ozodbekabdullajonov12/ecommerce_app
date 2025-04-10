@@ -18,7 +18,7 @@ import '../../features/home/presentation/pages/notifications_view.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.login,
+  initialLocation: Routes.enterPassword,
   routes: [
     GoRoute(
       path: Routes.onboarding,

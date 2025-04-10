@@ -2,37 +2,15 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pinput/pinput.dart';
 import 'package:store/core/utils/colors.dart';
 import 'package:store/features/forget_reset_password/presentation/widgets/auth_page_title_and_subtitle.dart';
 import 'package:store/features/forget_reset_password/presentation/widgets/store_app_bar_button.dart';
 
-class EnterOtpView extends StatefulWidget {
+class EnterOtpView extends StatelessWidget {
   const EnterOtpView({super.key});
 
-  @override
-  State<EnterOtpView> createState() => _EnterOtpViewState();
-}
 
-class _EnterOtpViewState extends State<EnterOtpView> {
-  late final List<TextEditingController> controllers;
-  late final List<FocusNode> focusNodes;
-
-  final formKey = GlobalKey<FormState>();
-  @override
-  void initState() {
-    super.initState();
-    focusNodes = List.generate(numOfDigits,(_) =>FocusNode());
-    controllers = List.generate(numOfDigits, (_)=>TextEditingController());
-  }
-  Color getBackgroundColor(){
-    for(var controller in controllers){
-      if (controller.text.isEmpty) {
-        return AppColors.primary200;
-      }
-    }
-    return AppColors.primary;
-  }
-  final int numOfDigits = 4;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,46 +23,13 @@ class _EnterOtpViewState extends State<EnterOtpView> {
             children: [
               AuthPageTitleAndSubtitle(title: "Enter 4 Digit Code", subTitle: 'Enter 4 digit code that your receive on your \nemail (cody.fisher45@example.com).'),
               SizedBox(height: 24,),
-              Row(
-                spacing: 12,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:
-                  List.generate(numOfDigits, (index)=> TextFormField(
-                    maxLength: 1,
-                    textAlign: TextAlign.center,
-                    controller: controllers[index],
-                    focusNode: focusNodes[index],
-                    style: TextStyle(
-                      color: AppColors.primary,
-                      fontSize: 32.r,
-                      fontWeight: FontWeight.w600,
-                      height: 1,
-                    ),
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      FilteringTextInputFormatter(RegExp(r"[0-9]"),
-                          allow: true,
-                      )
-                    ],
-                    onChanged: (value){
-                      if (value.isNotEmpty && index != numOfDigits -1) {
-                        focusNodes[index + 1].requestFocus();
-                      }
-                      setState(() {});
-                    },
-                    decoration: InputDecoration(
-                      constraints: BoxConstraints.tight(Size(64.w,60.h)),
-                      counter: SizedBox.shrink(),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.primary100),
-                        borderRadius: BorderRadius.circular(10),
-                      )
-                    ),
-                  ),
-                  ),
+              Center(
+                child: Pinput(length: 4,
+                  defaultPinTheme: defaultPinTheme,
+                  focusedPinTheme: focusedPinTheme,
+                  submittedPinTheme: submittedPinTheme,
+                  errorPinTheme: errorPinTheme,
+                ),
               ),
               SizedBox(height: 16.h,),
               Center(
@@ -138,3 +83,39 @@ class _EnterOtpViewState extends State<EnterOtpView> {
     );
   }
 }
+
+
+final defaultPinTheme = PinTheme(
+  width: 64.w,
+  height: 64.h,
+  textStyle: TextStyle(
+    fontSize: 32,
+    color: AppColors.primary,
+    fontWeight: FontWeight.w600,
+  ),
+  decoration: BoxDecoration(
+    border: Border.all(color: AppColors.primary100),
+    borderRadius: BorderRadius.circular(10),
+  ),
+);
+
+
+final focusedPinTheme = defaultPinTheme.copyWith(
+  decoration: defaultPinTheme.decoration!.copyWith(
+    border: Border.all(color: AppColors.primary),
+  ),
+);
+
+final submittedPinTheme = defaultPinTheme.copyWith(
+  decoration: defaultPinTheme.decoration!.copyWith(
+    border: Border.all(color: AppColors.successGreen),
+  ),
+);
+
+final errorPinTheme = defaultPinTheme.copyWith(
+  decoration: defaultPinTheme.decoration!.copyWith(
+    border: Border.all(color: AppColors.error),
+  ),
+);
+
+
