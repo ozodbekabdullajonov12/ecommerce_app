@@ -96,6 +96,7 @@ class SignUpBloc extends Bloc<SignUpEvents, SignUpState> {
         email: emailController.text,
         password: passwordController.text,
       );
+      print("$result");
       if (result) {
         navigatorKey.currentContext!.go(Routes.onboarding);
       } else {

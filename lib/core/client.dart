@@ -7,7 +7,7 @@ class ApiClient {
   ApiClient() {
     dio = Dio(
       BaseOptions(
-        baseUrl: "http://10.10.0.222:8888/api/v1",
+        baseUrl: "http://192.168.0.103:8888/api/v1",
         validateStatus: (value) => true,
       ),
     );
@@ -42,19 +42,27 @@ class ApiClient {
       return {"result": true, "token": null};
     }
   }
+
   Future<String> postForgotEmail(String email) async {
     var response = await dio.post(
       "/auth/reset-password/email",
-      data: {
-        'email': email,
-      },
+      data: {'email': email},
     );
-    if (response.statusCode==200){
-      final data=Map<String,String>.from(response.data);
+    if (response.statusCode == 200) {
+      final data = Map<String, String>.from(response.data);
       return data['email']!;
-    }else{
+    } else {
       throw Exception("xato ketdi reset email");
     }
   }
-
+  
+  Future<List<dynamic>> fetchProducts()async {
+    var response = await dio.get("/products/list");
+    List<dynamic> data = response.data;
+    if (response.statusCode == 200) {
+      return data;
+    } else {
+      throw Exception("FetchProducts ishlamadi");
+    }
+  }
 }
