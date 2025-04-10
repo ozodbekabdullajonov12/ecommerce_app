@@ -61,7 +61,6 @@ class SignUpView extends StatelessWidget {
                             () =>
                                 context.read<SignUpBloc>().add(ShowPassword()),
                       ),
-
                       EcommerceTextFormField(
                         label: "Confirm Password",
                         hintText: "Enter your Confirm Password",

@@ -5,6 +5,7 @@ import 'package:store/features/auth/presentation/manager/login/login_bloc.dart';
 import 'package:store/features/auth/presentation/manager/sign_up/sign_up_bloc.dart';
 import 'package:store/features/auth/presentation/pages/login_view.dart';
 import 'package:store/features/auth/presentation/pages/sign_up_view.dart';
+import 'package:store/features/home/presentation/manager/home_bloc.dart';
 import 'package:store/features/home/presentation/pages/home_view.dart';
 import 'package:store/features/home/presentation/pages/search_view.dart';
 import 'package:store/features/forget_reset_password/presentation/pages/enter_otp_view.dart';
@@ -18,18 +19,23 @@ import '../../features/home/presentation/pages/notifications_view.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.login,
+  initialLocation: Routes.home,
   routes: [
     GoRoute(
       path: Routes.onboarding,
       builder: (context, state) => OnboardingView(),
     ),
     GoRoute(
-        path: Routes.signUp,
-        builder: (context, state) => SignUpView()),
+      path: Routes.signUp,
+      builder:
+          (context, state) => BlocProvider(
+            create: (context) => SignUpBloc(repo: context.read()),
+            child: SignUpView(),
+          ),
+    ),
     GoRoute(
       path: Routes.splashScreen,
-      builder: (context, state)=> SplashScreen(),
+      builder: (context, state) => SplashScreen(),
     ),
     GoRoute(
       path: Routes.login,
@@ -39,17 +45,30 @@ final GoRouter router = GoRouter(
             child: LoginView(),
           ),
     ),
-    GoRoute(path: Routes.home, builder: (context, state) => HomeView()),
+    GoRoute(
+      path: Routes.home,
+      builder:
+          (context, state) => BlocProvider(
+            create: (context) => HomeBloc(repo: context.read()),
+            child: HomeView(),
+          ),
+    ),
     GoRoute(path: Routes.search, builder: (context, state) => SearchView()),
     GoRoute(
       path: Routes.notifications,
       builder: (context, state) => NotificationsView(),
     ),
-    GoRoute(path: Routes.forgotPassword,
-    builder: (context, state)=>ForgotView()),
-    GoRoute(path: Routes.enterPassword,
-    builder: (context, state)=> EnterOtpView()),
-    GoRoute(path: Routes.resetPassword,
-    builder: (context,state)=>ResetPasswordView()),
+    GoRoute(
+      path: Routes.forgotPassword,
+      builder: (context, state) => ForgotView(),
+    ),
+    GoRoute(
+      path: Routes.enterPassword,
+      builder: (context, state) => EnterOtpView(),
+    ),
+    GoRoute(
+      path: Routes.resetPassword,
+      builder: (context, state) => ResetPasswordView(),
+    ),
   ],
 );
