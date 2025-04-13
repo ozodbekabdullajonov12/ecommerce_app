@@ -13,13 +13,15 @@ import 'package:store/features/forget_reset_password/presentation/pages/forgot_v
 import 'package:store/features/forget_reset_password/presentation/pages/reset_password_view.dart';
 import 'package:store/features/onboarding/presentation/pages/onboarding_view.dart';
 import 'package:store/features/onboarding/presentation/pages/splash_screen.dart';
+import 'package:store/features/product_details/presentation/pages/product_details_view.dart';
+import 'package:store/features/review/presentation/pages/review_view.dart';
 import 'package:store/main.dart';
 
 import '../../features/home/presentation/pages/notifications_view.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.home,
+  initialLocation: Routes.reviews,
   routes: [
     GoRoute(
       path: Routes.onboarding,
@@ -70,5 +72,7 @@ final GoRouter router = GoRouter(
       path: Routes.resetPassword,
       builder: (context, state) => ResetPasswordView(),
     ),
+    GoRoute(path: Routes.product_details,builder: (context, state) => ProductDetailsView(),),
+    GoRoute(path: Routes.reviews,builder: (context, state) => ReviewView(),),
   ],
 );
