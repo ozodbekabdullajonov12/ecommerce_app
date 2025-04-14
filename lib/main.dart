@@ -9,6 +9,7 @@ import 'package:store/core/routing/router.dart';
 
 final navigatorKey=GlobalKey<NavigatorState>();
 void main() {
+
   runApp(Ecommerce());
 }
 

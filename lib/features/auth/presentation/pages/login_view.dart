@@ -72,7 +72,8 @@ class  LoginView extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {context.push(Routes.forgotPassword);
+                  },
                 child: Text(
                   "Reset Your Password",
                   style: TextStyle(

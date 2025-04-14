@@ -7,7 +7,7 @@ class ApiClient {
   ApiClient() {
     dio = Dio(
       BaseOptions(
-        baseUrl: "http://10.10.0.222:8888/api/v1",
+        baseUrl: "http://10.10.2.74:8888/api/v1",
         validateStatus: (value) => true,
       ),
     );
@@ -83,4 +83,14 @@ class ApiClient {
 
   }
 
+
+  Future<List<dynamic>> fetchProducts()async {
+    var response = await dio.get("/products/list");
+    List<dynamic> data = response.data;
+    if (response.statusCode == 200) {
+      return data;
+    } else {
+      throw Exception("FetchProducts ishlamadi");
+    }
+  }
 }
