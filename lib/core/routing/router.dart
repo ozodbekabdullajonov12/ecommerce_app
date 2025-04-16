@@ -5,6 +5,7 @@ import 'package:store/features/auth/presentation/manager/login/login_bloc.dart';
 import 'package:store/features/auth/presentation/manager/sign_up/sign_up_bloc.dart';
 import 'package:store/features/auth/presentation/pages/login_view.dart';
 import 'package:store/features/auth/presentation/pages/sign_up_view.dart';
+import 'package:store/features/checkout/presentation/pages/checkout_view.dart';
 import 'package:store/features/home/presentation/manager/home_bloc.dart';
 import 'package:store/features/home/presentation/pages/home_view.dart';
 import 'package:store/features/home/presentation/pages/search_view.dart';
@@ -21,7 +22,7 @@ import '../../features/home/presentation/pages/notifications_view.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.reviews,
+  initialLocation: Routes.checkout,
   routes: [
     GoRoute(
       path: Routes.onboarding,
@@ -74,5 +75,6 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(path: Routes.product_details,builder: (context, state) => ProductDetailsView(),),
     GoRoute(path: Routes.reviews,builder: (context, state) => ReviewView(),),
+    GoRoute(path: Routes.checkout,builder: (context, state) => CheckoutView(),),
   ],
 );
