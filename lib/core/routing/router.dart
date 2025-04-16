@@ -75,6 +75,5 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(path: Routes.product_details,builder: (context, state) => ProductDetailsView(),),
     GoRoute(path: Routes.reviews,builder: (context, state) => ReviewView(),),
-    GoRoute(path: Routes.checkout,builder: (context, state) => CheckoutView(),),
   ],
 );
