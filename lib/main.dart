@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:store/core/dependencies.dart';
 import 'package:store/core/routing/router.dart';
+import 'package:store/core/utils/theme.dart';
 
 
 
@@ -24,6 +25,7 @@ class Ecommerce extends StatelessWidget {
        child: MaterialApp.router(
          routerConfig: router,
          debugShowCheckedModeBanner: false,
+         theme: AppThemes.lightTheme,
        ),
     );
   }

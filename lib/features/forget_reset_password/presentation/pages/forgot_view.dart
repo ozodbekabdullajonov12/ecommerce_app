@@ -40,11 +40,13 @@ class ForgotView extends StatelessWidget {
                     validator: context.read<ResetPasswordBloc>().emailValidator
                   ),
                   Spacer(),
-                  EcommerceTextButtonContainer(text: "Send Code",
-                      textColor: Colors.white,
-                      containerColor: AppColors.primary.withValues(
-                        alpha: (state.emailStatus == TextFormFieldStatus.success ) ? 1 : 0.2,
-                      ), callback: () => context.read<ResetPasswordBloc>().add(SendEmail())
+                  Center(
+                    child: EcommerceTextButtonContainer(text: "Send Code",
+                        textColor: Colors.white,
+                        containerColor: AppColors.primary.withValues(
+                          alpha: (state.emailStatus == TextFormFieldStatus.success ) ? 1 : 0.2,
+                        ), callback: () => context.read<ResetPasswordBloc>().add(SendEmail())
+                    ),
                   )
                 ],
               ),

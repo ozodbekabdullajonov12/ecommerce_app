@@ -36,31 +36,41 @@ class EnterOtpView extends StatelessWidget {
                     defaultPinTheme: defaultPinTheme,
                     focusedPinTheme: focusedPinTheme,
                     submittedPinTheme: submittedPinTheme,
+                     controller: context.read<ResetPasswordBloc>().codeController,
                     errorPinTheme: errorPinTheme,
                     onCompleted: (code)=>context.read<ResetPasswordBloc>().add(VerifyPassword(code: code)),
                   ),
                 ),
                 SizedBox(height: 16.h,),
-                Center(
-                  child: RichText(text:
-                  TextSpan(
-                      text: "Don't receive the code?",
-                      style: TextStyle(color: AppColors.primary,
-                          fontSize: 14.r),
-                      children: [
-                        TextSpan(
-                            text: "Reset Code",
-                            recognizer: TapGestureRecognizer(),
-                            style: TextStyle(
-                                color: AppColors.primary,
-                                fontSize: 14.r,
-                                fontWeight: FontWeight.w500,
-                                decoration: TextDecoration.underline
-                            )
-                        )
-                      ]
-                  )
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Email not received",
+                      style: TextStyle(
+                        color: AppColors.primary.withValues(alpha: 0.5),
+                        fontSize: 16,
+                        fontFamily: "General Sans",
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        context.read<ResetPasswordBloc>().add(ResendCode());
+                      },
+                      child: Text(
+                        "Resend Code",
+                        style: TextStyle(
+                          color: AppColors.primary,
+                          fontSize: 16,
+                          fontFamily: "General Sans",
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 Spacer(),
                 BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
@@ -68,7 +78,7 @@ class EnterOtpView extends StatelessWidget {
                     width: 341.w,
                     height: 54.h,
                     child: TextButton(
-                      onPressed: () => context.go(Routes.resetPassword),
+                      onPressed: () => context.read<ResetPasswordBloc>().add(VerifyPassword(code: state.code!)),
                       style: TextButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: AppColors.primary,

@@ -4,12 +4,13 @@ import 'package:store/core/utils/colors.dart';
 
 import '../../../auth/presentation/manager/sign_up/sign_up_state.dart';
 
-enum ResetPasswordLoading { idle, error, success }
+enum ResetPasswordStatus { idle, error, success }
 
 @immutable
 class ResetPasswordState extends Equatable {
   final String? emailSuffix;
   final Color emailBorderColor;
+
   final TextFormFieldStatus emailStatus;
   final Color passwordBorderColor;
   final bool showPassword;
@@ -18,6 +19,7 @@ class ResetPasswordState extends Equatable {
   final bool cShowPassword;
   final TextFormFieldStatus cPasswordStatus;
   final String? code;
+  final ResetPasswordStatus status;
 
   const ResetPasswordState({
     required this.emailSuffix,
@@ -30,6 +32,7 @@ class ResetPasswordState extends Equatable {
     required this.cShowPassword,
     required this.cPasswordStatus,
     required this.code,
+    required this.status
   });
 
   factory ResetPasswordState.initial() {
@@ -44,6 +47,7 @@ class ResetPasswordState extends Equatable {
       cShowPassword: true,
       cPasswordStatus: TextFormFieldStatus.idle,
       code: null,
+      status: ResetPasswordStatus.idle
     );
   }
 
@@ -59,6 +63,7 @@ class ResetPasswordState extends Equatable {
     bool? cShowPassword,
     TextFormFieldStatus? cPasswordStatus,
     String? code,
+    ResetPasswordStatus? status
   }) {
     return ResetPasswordState(
       emailSuffix: emailSuffix ?? this.emailSuffix,
@@ -71,6 +76,7 @@ class ResetPasswordState extends Equatable {
       cShowPassword: cShowPassword ?? this.cShowPassword,
       cPasswordStatus: cPasswordStatus ?? this.cPasswordStatus,
       code: code ?? this.code,
+      status: status ?? this.status
     );
   }
 
@@ -86,5 +92,6 @@ class ResetPasswordState extends Equatable {
     cShowPassword,
     cPasswordStatus,
     code,
+    status,
   ];
 }

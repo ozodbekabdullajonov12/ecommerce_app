@@ -13,20 +13,23 @@ import 'package:store/main.dart';
 part "reset_password_event.dart";
 
 class ResetPasswordBloc extends Bloc<ResetPasswordEvents, ResetPasswordState>{
-  final AuthRepository _repoReset;
+  final AuthRepository _authRepo;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final cPasswordController = TextEditingController();
+  final codeController = TextEditingController();
 
   final GlobalKey<FormState> formKeyEmail = GlobalKey<FormState>();
   final GlobalKey<FormState> formKeyPassword = GlobalKey<FormState>();
 
   ResetPasswordBloc({required AuthRepository repoReset})
-  : _repoReset = repoReset,
+  : _authRepo = repoReset,
   super(ResetPasswordState.initial()){
     on<ShowPassword>(_showPassword);
     on<VerifyPassword>(_verifyCode);
     on<SendEmail>(_sendEmail);
+    on<ResetPasswordLogin>(_resetPasswordLogin);
+    on<ResendCode>(_resendCode);
 
     on<EmailValidationFailed>((event, emit){
       emit(state.copyWith(
@@ -56,19 +59,32 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvents, ResetPasswordState>{
   }
   Future _sendEmail(SendEmail event, Emitter emit)async {
     if (formKeyEmail.currentState!.validate()) {
-      await _repoReset.resetPasswordEmail(email: emailController.text);
+      await _authRepo.resetPasswordEmail(email: emailController.text);
       navigatorKey.currentContext!.go(Routes.enterCode);
     }
   }
-  Future _verifyCode(VerifyPassword event , Emitter emit) async{
-    bool result = await _repoReset.resetPasswordVerify(email: emailController.text, code: event.code);
+  Future _verifyCode(VerifyPassword event , Emitter<ResetPasswordState> emit) async{
+    bool result = await _authRepo.resetPasswordVerify(email: emailController.text, code: event.code);
     if (result) {
-      emit(state.copyWith(emailStatus: TextFormFieldStatus.success));
+      emit(state.copyWith(emailStatus: TextFormFieldStatus.success, code: event.code));
       navigatorKey.currentContext!.go(Routes.resetPassword);
     }else{
       emit(state.copyWith(emailStatus: TextFormFieldStatus.error));
     }
   }
+  Future _resetPasswordLogin(ResetPasswordLogin event, Emitter emit) async{
+    await _authRepo.resetPasswordReset(email: emailController.text, code: state.code!, password: passwordController.text);
+    emit(state.copyWith(
+      status: ResetPasswordStatus.success,
+    ));
+  }
+  Future _resendCode(ResendCode event , Emitter emit) async {
+    await _authRepo.resetPasswordEmail(email: emailController.text);
+    codeController.text = "";
+    emit(state.copyWith(
+    ));
+  }
+
   Future _showPassword(ShowPassword event, Emitter emit)async{
     emit(state.copyWith(showPassword: !state.showPassword));
   }

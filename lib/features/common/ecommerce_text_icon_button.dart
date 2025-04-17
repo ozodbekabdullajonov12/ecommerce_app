@@ -34,17 +34,11 @@ class EcommerceTextIconButton extends StatelessWidget {
       ),
       child: Center(
         child: Row(
-          spacing: 6,
+          spacing: 10,
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SvgPicture.asset(
-              "assets/icons/$icon",
-              width: 24,
-              height: 24,
-              fit: BoxFit.cover,
-            ),
             Text(
               text,
               style: TextStyle(
@@ -52,6 +46,14 @@ class EcommerceTextIconButton extends StatelessWidget {
                 fontSize: fontSize,
                 fontWeight: fontWeight,
                 height: 1,
+              ),
+            ),
+            Center(
+              child: SvgPicture.asset(
+                "assets/icons/$icon",
+                width: 14,
+                height: 14,
+                fit: BoxFit.cover,
               ),
             ),
           ],

@@ -13,7 +13,6 @@ final class EmailValidationSuccess extends ResetPasswordEvents{}
 final class PasswordValidationFailed extends ResetPasswordEvents {}
 final class PasswordValidationSuccess extends ResetPasswordEvents {}
 final class CPasswordValidationFailed extends ResetPasswordEvents {
-
 }
 final class CPasswordValidationSuccess extends ResetPasswordEvents {}
 final class ResetPasswordLogin extends ResetPasswordEvents{}

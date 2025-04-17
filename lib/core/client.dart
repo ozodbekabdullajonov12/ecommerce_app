@@ -7,7 +7,7 @@ class ApiClient {
   ApiClient() {
     dio = Dio(
       BaseOptions(
-        baseUrl: "http://10.10.2.74:8888/api/v1",
+        baseUrl: "http://10.10.1.141:8888/api/v1",
         validateStatus: (value) => true,
       ),
     );
@@ -61,7 +61,7 @@ class ApiClient {
         'code': code,
       },
     );
-    if (response.statusCode ==200){
+    if (response.data == true && response.statusCode == 200){
        return response.data;
     }
     else{

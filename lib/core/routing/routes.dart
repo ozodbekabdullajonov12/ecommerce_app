@@ -11,4 +11,10 @@ class Routes {
   static const search = '/search';
   static const notifications = '/notifications';
   static const savedItems = "/saved-items";
+  static const myCart = "/my-cart";
+  static const yourCart = "/your-cart";
+  static const checkout = '/checkout';
+  static const paymentMethod = '/my_cart-payment';
+  static const newCard = '/new-card';
+  static const account = '/account';
 }
