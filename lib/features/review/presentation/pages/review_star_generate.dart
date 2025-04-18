@@ -4,9 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:store/core/utils/colors.dart';
 
 class ReviewStarGenerate extends StatelessWidget {
-  const ReviewStarGenerate({super.key, required this.starsCount});
+  const ReviewStarGenerate({super.key, required this.starsCount, required this.ratingStarCount});
 
-  final int starsCount;
+  final int starsCount, ratingStarCount;
 
   @override
   Widget build(BuildContext context) {
