@@ -1,19 +1,25 @@
 class ReviewModel {
+  final int id;
   final num rating;
-  final int reviewCount;
-  final String date;
+  final String  comment;
+  final String userFullName;
+  final String created;
 
   ReviewModel({
-    required this.date,
+    required this.id,
+    required this.userFullName,
+    required this.comment,
+    required this.created,
     required this.rating,
-    required this.reviewCount,
   });
 
   factory ReviewModel.fromJson(Map<String, dynamic> json) {
     return ReviewModel(
-      date: json['date'],
+      id: json['id'],
+      created: json['created'],
       rating: json['rating'],
-      reviewCount: json['reviewCount'],
+      userFullName: json['userFullName'],
+      comment: json['comment'],
     );
   }
 }

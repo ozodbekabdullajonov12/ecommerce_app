@@ -5,7 +5,6 @@ import 'package:store/features/auth/presentation/manager/login/login_bloc.dart';
 import 'package:store/features/auth/presentation/manager/sign_up/sign_up_bloc.dart';
 import 'package:store/features/auth/presentation/pages/login_view.dart';
 import 'package:store/features/auth/presentation/pages/sign_up_view.dart';
-import 'package:store/features/checkout/presentation/pages/checkout_view.dart';
 import 'package:store/features/home/presentation/manager/home_bloc.dart';
 import 'package:store/features/home/presentation/pages/home_view.dart';
 import 'package:store/features/home/presentation/pages/search_view.dart';
@@ -17,12 +16,12 @@ import 'package:store/features/onboarding/presentation/pages/splash_screen.dart'
 import 'package:store/features/product_details/presentation/pages/product_details_view.dart';
 import 'package:store/features/review/presentation/pages/review_view.dart';
 import 'package:store/main.dart';
-
 import '../../features/home/presentation/pages/notifications_view.dart';
+import '../../features/review/presentation/manager/review/review_bloc.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.checkout,
+  initialLocation: Routes.review(1),
   routes: [
     GoRoute(
       path: Routes.onboarding,
@@ -73,7 +72,17 @@ final GoRouter router = GoRouter(
       path: Routes.resetPassword,
       builder: (context, state) => ResetPasswordView(),
     ),
-    GoRoute(path: Routes.product_details,builder: (context, state) => ProductDetailsView(),),
-    GoRoute(path: Routes.reviews,builder: (context, state) => ReviewView(),),
+    GoRoute(
+      path: Routes.productDetails,
+      builder: (context, state) => ProductDetailsView(),
+    ),
+    GoRoute(
+      path: Routes.review(1),
+      builder:
+          (context, state) => BlocProvider(
+        create: (context) => ReviewBloc(repo: context.read()),
+        child: ReviewView(),
+      ),
+    ),
   ],
 );

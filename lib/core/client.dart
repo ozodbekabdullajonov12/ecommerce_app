@@ -7,7 +7,7 @@ class ApiClient {
   ApiClient() {
     dio = Dio(
       BaseOptions(
-        baseUrl: "http://192.168.10.227:8888/api/v1",
+        baseUrl: "http://192.168.11.47:8888/api/v1",
         validateStatus: (value) => true,
       ),
     );
@@ -55,8 +55,8 @@ class ApiClient {
       throw Exception("xato ketdi reset email");
     }
   }
-  
-  Future<List<dynamic>> fetchProducts()async {
+
+  Future<List<dynamic>> fetchProducts() async {
     var response = await dio.get("/products/list");
     List<dynamic> data = response.data;
     if (response.statusCode == 200) {
@@ -66,13 +66,28 @@ class ApiClient {
     }
   }
 
-  Future<List<dynamic>> fetchReviews() async {
-    var response = await dio.get('reviews');
+  Future<List<dynamic>> fetchReviews(int productId) async {
+    var response = await dio.get('/reviews/list/$productId');
     List<dynamic> data = response.data;
     if (response.statusCode == 200) {
       return data;
-    }else {
+    } else {
       throw Exception("Reviewsda xatolik");
     }
   }
+
+  Future<dynamic> fetchReviewStats(int productId) async {
+    try {
+      var response = await dio.get("/reviews/stats/$productId");
+      if (response.statusCode == 200) {
+        return response.data;
+      } else {
+        throw Exception("reviews Statsda xatolik (statusCode: ${response.statusCode})");
+      }
+    } catch (e) {
+      throw Exception("reviews Statsda xatolik");
+    }
+  }
+
+
 }
