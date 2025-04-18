@@ -7,7 +7,8 @@ class ApiClient {
   ApiClient() {
     dio = Dio(
       BaseOptions(
-        baseUrl: "http://10.10.1.123:8888/api/v1",
+
+        baseUrl: "http://192.168.10.227:8888/api/v1",
         validateStatus: (value) => true,
       ),
     );
@@ -121,6 +122,16 @@ class ApiClient {
     }
     else{
       throw Exception("Saved Products   not found");
+    }
+  }
+
+  Future<List<dynamic>> fetchReviews() async {
+    var response = await dio.get('reviews');
+    List<dynamic> data = response.data;
+    if (response.statusCode == 200) {
+      return data;
+    }else {
+      throw Exception("Reviewsda xatolik");
     }
   }
 }
