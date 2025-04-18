@@ -21,7 +21,7 @@ import '../../features/review/presentation/manager/review/review_bloc.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.review(1),
+  initialLocation: Routes.home,
   routes: [
     GoRoute(
       path: Routes.onboarding,
