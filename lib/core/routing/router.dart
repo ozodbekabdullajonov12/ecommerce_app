@@ -22,7 +22,8 @@ import '../../features/home/presentation/pages/notifications_view.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.checkout,
+  initialLocation: Routes.home,
+
   routes: [
     GoRoute(
       path: Routes.onboarding,
