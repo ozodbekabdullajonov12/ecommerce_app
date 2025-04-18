@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:store/core/routing/routes.dart';
+import 'package:store/features/account/presentation/pages/account_help_center_view.dart';
+import 'package:store/features/account/presentation/pages/account_my_orders_view.dart';
 import 'package:store/features/account/presentation/pages/account_view.dart';
 import 'package:store/features/auth/presentation/manager/login/login_bloc.dart';
 import 'package:store/features/auth/presentation/manager/sign_up/sign_up_bloc.dart';
@@ -27,7 +29,7 @@ import '../../features/home/presentation/pages/notifications_view.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.myCart,
+  initialLocation: Routes.account,
   routes: [
     GoRoute(path: Routes.onboarding, builder: (context, state) => OnboardingView()),
     GoRoute(
@@ -74,5 +76,7 @@ final GoRouter router = GoRouter(
     GoRoute(path: Routes.paymentMethod, builder: (context, state) => MyCartPaymentMethodView()),
     GoRoute(path: Routes.newCard, builder: (context, state) => MyCartNewCardView()),
     GoRoute(path: Routes.account, builder: (context, state) => AccountView()),
+    GoRoute(path: Routes.helpCenter, builder: (context, state) => AccountHelpCenterView()),
+    GoRoute(path: Routes.myOrders, builder: (context, state) => AccountMyOrdersView()),
   ],
 );
