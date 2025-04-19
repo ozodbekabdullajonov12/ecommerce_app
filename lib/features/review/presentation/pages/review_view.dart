@@ -6,7 +6,9 @@ import 'package:store/features/common/ecommerce_app_bar.dart';
 import 'package:store/core/utils/colors.dart';
 import 'package:store/features/review/presentation/manager/review/review_bloc.dart';
 import 'package:store/features/review/presentation/manager/review/review_state.dart';
-import 'package:store/features/review/presentation/pages/review_star_generate.dart';
+import 'package:store/features/review/presentation/widgets/review_star_generate.dart';
+import 'package:store/features/review/presentation/widgets/avg_rating_calculator.dart';
+import 'package:store/features/review/presentation/widgets/star_generate.dart';
 
 class ReviewView extends StatelessWidget {
   const ReviewView({super.key});
@@ -37,9 +39,15 @@ class ReviewView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${state.stats!.twoStars}',
+                      AvgRatingCalculator(
+                        oneStars: stats!.oneStars,
+                        twoStars: stats.twoStars,
+                        threeStars: stats.threeStars,
+                        fourStars: stats.fourStars,
+                        fiveStars: stats.fiveStars,
+                      ).calculateAverageRating(),
                       style: TextStyle(
-                        color: AppColors.primary.withValues(alpha: 0.9),
+                        color: AppColors.primary.withOpacity(0.9),
                         fontWeight: FontWeight.w600,
                         fontSize: 64,
                         fontFamily: "General Sans",
@@ -85,41 +93,104 @@ class ReviewView extends StatelessWidget {
                 ReviewStarGenerate(
                   starsCount: 5,
                   ratingStarCount: stats.fiveStars,
+                  totalCount: stats.totalCount,
                 ),
                 SizedBox(height: 5.h),
                 ReviewStarGenerate(
                   starsCount: 4,
-                  ratingStarCount: state.stats!.fourStars
+                  ratingStarCount: state.stats!.fourStars,
+                  totalCount: stats.totalCount,
                 ),
                 SizedBox(height: 5.h),
                 ReviewStarGenerate(
                   starsCount: 3,
-                  ratingStarCount: state.stats!.threeStars
+                  ratingStarCount: state.stats!.threeStars,
+                  totalCount: stats.totalCount,
                 ),
                 SizedBox(height: 5.h),
                 ReviewStarGenerate(
                   starsCount: 2,
-                  ratingStarCount: state.stats!.twoStars
+                  ratingStarCount: state.stats!.twoStars,
+                  totalCount: stats.totalCount,
                 ),
                 SizedBox(height: 5.h),
                 ReviewStarGenerate(
                   starsCount: 1,
                   ratingStarCount: state.stats!.oneStars,
+                  totalCount: stats.totalCount,
                 ),
                 SizedBox(height: 10.h),
-                Divider(color: AppColors.primary.withValues(alpha: 0.1)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '${state.reviews!.length} reviews',
+                      style: TextStyle(
+                        color: AppColors.primary.withValues(alpha: 0.9),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      "Most relevant",
+                      style: TextStyle(
+                        color: AppColors.primary.withValues(alpha: 0.5),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.h),
                 BlocBuilder<ReviewBloc, ReviewState>(
                   builder: (context, state) {
                     final reviews = state.reviews;
+                    if (state.status == ReviewStatus.loading) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
                     if (reviews == null || reviews.isEmpty) {
                       return const Text('No reviews yet.');
                     }
-                    if (state.status == ReviewStatus.loading) {
-                      return Center(child: CircularProgressIndicator());
-                    }
-                    return Row(children: [Text(reviews[0].comment)]);
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: List.generate(
+                        reviews.length,
+                        (index) => Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4.0),
+                          child: Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                spacing: 20.h,
+                                children: [
+                                  StarGenerate(
+                                    starsCount: reviews[index].rating as int,
+                                  ),
+                                  Text(reviews[index].comment),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        reviews[index].userFullName,
+                                        style: TextStyle(
+                                          color: AppColors.primary.withValues(
+                                            alpha: 0.9,
+                                          ),
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
                   },
                 ),
+                Divider(color: AppColors.primary.withValues(alpha: 0.1)),
               ],
             ),
           );
