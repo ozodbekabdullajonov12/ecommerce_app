@@ -47,7 +47,7 @@ class ReviewView extends StatelessWidget {
                         fiveStars: stats.fiveStars,
                       ).calculateAverageRating(),
                       style: TextStyle(
-                        color: AppColors.primary.withOpacity(0.9),
+                        color: AppColors.primary.withValues(alpha: 0.9),
                         fontWeight: FontWeight.w600,
                         fontSize: 64,
                         fontFamily: "General Sans",
@@ -78,7 +78,7 @@ class ReviewView extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "${stats!.totalCount} reviews",
+                          "${stats.totalCount} reviews",
                           style: TextStyle(
                             color: AppColors.primary.withValues(alpha: 0.5),
                             fontFamily: "General Sans",
@@ -169,20 +169,24 @@ class ReviewView extends StatelessWidget {
                                   Text(reviews[index].comment),
                                   Row(
                                     children: [
-                                      Text(
-                                        reviews[index].userFullName,
-                                        style: TextStyle(
-                                          color: AppColors.primary.withValues(
-                                            alpha: 0.9,
+                                      Column(
+                                        children: [
+                                          Text(
+                                            reviews[index].userFullName,
+                                            style: TextStyle(
+                                              color: AppColors.primary
+                                                  .withValues(alpha: 0.9),
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                           ),
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                        ],
                                       ),
                                     ],
                                   ),
                                 ],
                               ),
+                              Divider(color: Colors.red,)
                             ],
                           ),
                         ),
@@ -190,7 +194,6 @@ class ReviewView extends StatelessWidget {
                     );
                   },
                 ),
-                Divider(color: AppColors.primary.withValues(alpha: 0.1)),
               ],
             ),
           );

@@ -1,6 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:store/core/routing/routes.dart';
+import 'package:store/features/add_address/presentation/manager/add_address_bloc.dart';
+import 'package:store/features/add_address/presentation/pages/add_address_view.dart';
+import 'package:store/features/address/presentation/pages/address_view.dart';
 import 'package:store/features/auth/presentation/manager/login/login_bloc.dart';
 import 'package:store/features/auth/presentation/manager/sign_up/sign_up_bloc.dart';
 import 'package:store/features/auth/presentation/pages/login_view.dart';
@@ -21,7 +24,7 @@ import '../../features/review/presentation/manager/review/review_bloc.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.review(1),
+  initialLocation: Routes.address,
   routes: [
     GoRoute(
       path: Routes.onboarding,
@@ -80,9 +83,18 @@ final GoRouter router = GoRouter(
       path: Routes.review(1),
       builder:
           (context, state) => BlocProvider(
-        create: (context) => ReviewBloc(repo: context.read()),
-        child: ReviewView(),
-      ),
+            create: (context) => ReviewBloc(repo: context.read()),
+            child: ReviewView(),
+          ),
+    ),
+    GoRoute(path: Routes.address, builder: (context, state) => AddressView()),
+    GoRoute(
+      path: Routes.addAddress,
+      builder:
+          (context, state) => BlocProvider(
+            create: (context) => AddAddressBloc(),
+            child: AddAddressView(),
+          ),
     ),
   ],
 );

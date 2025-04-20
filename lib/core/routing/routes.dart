@@ -10,5 +10,7 @@ class Routes {
   static const search = '/search';
   static const notifications = '/notifications';
   static const productDetails = '/product-details';
+  static const address = '/address';
+  static const addAddress = '/addAddress';
   static String review(int id) => "/review/$id";
 }

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:store/features/review/data/models/review_stats_model.dart';
-import '../../../data/models/review_model.dart';
+import 'package:store/data/models/review_stats_model.dart';
+import '../../../../../data/models/review_model.dart';
 
 enum ReviewStatus { idle, loading, error }
 
