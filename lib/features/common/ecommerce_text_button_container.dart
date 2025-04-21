@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store/core/utils/colors.dart';
 
 class EcommerceTextButtonContainer extends StatelessWidget {
   const EcommerceTextButtonContainer({
@@ -11,6 +12,8 @@ class EcommerceTextButtonContainer extends StatelessWidget {
     this.containerHeight = 56,
     this.fontSize = 15,
     this.fontWeight = FontWeight.w500,
+    this.borderColor = AppColors.primary100,
+    this.radius = 10,
   });
 
   final String text;
@@ -18,6 +21,8 @@ class EcommerceTextButtonContainer extends StatelessWidget {
   final double containerWidth, containerHeight;
   final FontWeight fontWeight;
   final Color textColor, containerColor;
+   final Color borderColor;
+   final double radius;
 
   final VoidCallback callback;
 
@@ -29,7 +34,8 @@ class EcommerceTextButtonContainer extends StatelessWidget {
         fixedSize: Size(containerWidth, containerHeight),
         backgroundColor: containerColor,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(22),
+          side: BorderSide(color: borderColor, width: 1),
+          borderRadius: BorderRadius.circular(radius),
         ),
       ),
       child: Text(

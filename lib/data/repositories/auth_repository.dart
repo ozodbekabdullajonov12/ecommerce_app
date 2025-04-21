@@ -63,15 +63,15 @@ class AuthRepository {
       return false;
     }
   }
-  Future<String> forgot(String email) async{
-    return await client.postForgotEmail(email);
+  Future<void> resetPasswordEmail({required String email}) async{
+    client.resetPasswordEmail(email: email);
+  }
+  Future<bool> resetPasswordVerify({required String email, required String code})async{
+    final result = client.resetPasswordVerify(email: email, code: code);
+    return result;
+  }
+  Future<void> resetPasswordReset({required String email, required String code, required String password})async{
+    client.resetPasswordReset(email: email, code: code, password: password);
   }
 }
-class ForgotPassword{
-  final String email;
-  final String code;
-  ForgotPassword({
-    required this.email,
-    required this.code
-});
-}
+

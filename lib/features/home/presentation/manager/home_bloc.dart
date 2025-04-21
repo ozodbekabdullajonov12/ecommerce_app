@@ -1,3 +1,4 @@
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +16,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
 
   HomeBloc({required ProductRepository repo})
-    : _repo = repo,
-      super(HomeState.initial()) {
+      : _repo = repo,
+        super(HomeState.initial()) {
     on<HomeLoading>(_loading);
     on<CurrentCategory>(_currentCategory);
     on<HomeSearch>(_search);
@@ -83,11 +84,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Future _applyFilters(HomeApplyFilters event, Emitter<HomeState> emit) async {
     emit(state.copyWith(
-      status: HomeStatus.loading,
-      maxPrice: event.maxPrice,
-      minPrice: event.minPrice,
-      currentSizeId: event.sizeId,
-      orderBy: event.orderBy
+        status: HomeStatus.loading,
+        maxPrice: event.maxPrice,
+        minPrice: event.minPrice,
+        currentSizeId: event.sizeId,
+        orderBy: event.orderBy
     ));
     final products=await _products(state: state);
     emit(state.copyWith(status: HomeStatus.idle,products: products,));
@@ -96,12 +97,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Future _clearFilters(HomeClearFilters event, Emitter<HomeState> emit) async {
     emit(
         state.copyWith(
-        status: HomeStatus.loading,
-        maxPrice: null,
-        minPrice: null,
-        currentSizeId: null,
-        orderBy: null
-    ));
+            status: HomeStatus.loading,
+            maxPrice: null,
+            minPrice: null,
+            currentSizeId: null,
+            orderBy: null
+        ));
     final products=await _products(state: state);
     emit(state.copyWith(status: HomeStatus.idle,products: products,));
   }

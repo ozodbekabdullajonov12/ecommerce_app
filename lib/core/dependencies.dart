@@ -2,6 +2,7 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart' show SingleChildWidget;
 import 'package:store/core/client.dart';
 import 'package:store/data/repositories/auth_repository.dart';
+import '../data/repositories/store_repository.dart';
 import 'package:store/data/repositories/product_repository.dart';
 import 'package:store/data/repositories/review_repository.dart';
 
