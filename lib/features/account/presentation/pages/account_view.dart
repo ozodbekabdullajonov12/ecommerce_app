@@ -6,8 +6,9 @@ import 'package:store/features/account/presentation/widgets/account_view_details
 import 'package:store/features/account/presentation/widgets/account_view_help_center.dart';
 import 'package:store/features/account/presentation/widgets/account_view_logout.dart';
 import 'package:store/features/account/presentation/widgets/account_view_page.dart';
-import 'package:store/features/home/presentation/widgets/ecommerce_app_bar.dart';
 import 'package:store/features/home/presentation/widgets/ecommerce_bottom_navigation_bar.dart';
+
+import '../../../common/ecommerce_app_bar.dart';
 
 class AccountView extends StatelessWidget {
   const AccountView({super.key});

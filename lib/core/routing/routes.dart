@@ -19,4 +19,6 @@ class Routes {
   static const account = '/account';
   static const helpCenter = '/help-center';
   static const myOrders = '/my-orders';
+  static const productDetails = '/product-details';
+  static String review(int id) => "/review/$id";
 }

@@ -22,10 +22,12 @@ import 'package:store/features/myCart/presentation/pages/my_cart_view.dart';
 import 'package:store/features/myCart/presentation/pages/your_cart_view.dart';
 import 'package:store/features/onboarding/presentation/pages/onboarding_view.dart';
 import 'package:store/features/onboarding/presentation/pages/splash_screen.dart';
+import 'package:store/features/product_details/presentation/pages/product_details_view.dart';
+import 'package:store/features/review/presentation/pages/review_view.dart';
 import 'package:store/features/saved_items/presentation/pages/saved_items_view.dart';
 import 'package:store/main.dart';
-
 import '../../features/home/presentation/pages/notifications_view.dart';
+import '../../features/review/presentation/manager/review/review_bloc.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
@@ -78,5 +80,25 @@ final GoRouter router = GoRouter(
     GoRoute(path: Routes.account, builder: (context, state) => AccountView()),
     GoRoute(path: Routes.helpCenter, builder: (context, state) => AccountHelpCenterView()),
     GoRoute(path: Routes.myOrders, builder: (context, state) => AccountMyOrdersView()),
+    GoRoute(
+      path: Routes.enterCode,
+      builder: (context, state) => EnterOtpView(),
+    ),
+    GoRoute(
+      path: Routes.resetPassword,
+      builder: (context, state) => ResetPasswordView(),
+    ),
+    GoRoute(
+      path: Routes.productDetails,
+      builder: (context, state) => ProductDetailsView(),
+    ),
+    GoRoute(
+      path: Routes.review(1),
+      builder:
+          (context, state) => BlocProvider(
+        create: (context) => ReviewBloc(repo: context.read()),
+        child: ReviewView(),
+      ),
+    ),
   ],
 );

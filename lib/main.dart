@@ -1,16 +1,15 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:store/core/dependencies.dart';
 import 'package:store/core/routing/router.dart';
-import 'package:store/core/utils/theme.dart';
 
 
 
 final navigatorKey=GlobalKey<NavigatorState>();
 void main() {
-
   runApp(Ecommerce());
 }
 
@@ -19,14 +18,15 @@ class Ecommerce extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, designSize: const Size(390, 844));
-    return MultiBlocProvider(
+    return ScreenUtilInit(
+      designSize: const Size(390, 844),
+      child: MultiBlocProvider(
         providers: providers,
-       child: MaterialApp.router(
-         routerConfig: router,
-         debugShowCheckedModeBanner: false,
-         theme: AppThemes.lightTheme,
-       ),
+        child: MaterialApp.router(
+          routerConfig: router,
+          debugShowCheckedModeBanner: false,
+        ),
+      ),
     );
   }
 }

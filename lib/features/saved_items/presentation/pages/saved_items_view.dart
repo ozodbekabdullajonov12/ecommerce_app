@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:store/features/home/presentation/widgets/ecommerce_app_bar.dart';
 import 'package:store/features/saved_items/presentation/pages/saved_items_page.dart';
+
+import '../../../common/ecommerce_app_bar.dart';
 
 class SavedItemsView extends StatelessWidget {
   const SavedItemsView({super.key});

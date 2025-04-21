@@ -3,8 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:store/features/account/presentation/widgets/account_help_center_page.dart';
 import 'package:store/features/home/presentation/widgets/ecommerce_bottom_navigation_bar.dart';
-
-import '../../../home/presentation/widgets/ecommerce_app_bar.dart';
+import '../../../common/ecommerce_app_bar.dart';
 
 class AccountHelpCenterView extends StatelessWidget {
   const AccountHelpCenterView({super.key});

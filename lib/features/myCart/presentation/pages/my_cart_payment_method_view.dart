@@ -6,7 +6,8 @@ import 'package:store/core/routing/routes.dart';
 import 'package:store/core/utils/colors.dart';
 import 'package:store/features/common/ecommerce_text_button_container.dart';
 
-import '../../../home/presentation/widgets/ecommerce_app_bar.dart';
+import '../../../common/ecommerce_app_bar.dart';
+
 
 class MyCartPaymentMethodView extends StatefulWidget {
   const MyCartPaymentMethodView({super.key});

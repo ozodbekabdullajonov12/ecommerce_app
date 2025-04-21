@@ -11,7 +11,7 @@ import 'package:store/features/myCart/presentation/widgets/my_cart_check_out_vis
 import 'package:store/features/myCart/presentation/widgets/my_cart_view_colculate_price.dart';
 
 import '../../../../core/routing/routes.dart';
-import '../../../home/presentation/widgets/ecommerce_app_bar.dart';
+import '../../../common/ecommerce_app_bar.dart';
 
 class MyCartCheckOut extends StatelessWidget {
   const MyCartCheckOut({super.key});
