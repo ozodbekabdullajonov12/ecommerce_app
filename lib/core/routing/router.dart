@@ -4,6 +4,9 @@ import 'package:store/core/routing/routes.dart';
 import 'package:store/features/account/presentation/pages/account_help_center_view.dart';
 import 'package:store/features/account/presentation/pages/account_my_orders_view.dart';
 import 'package:store/features/account/presentation/pages/account_view.dart';
+import 'package:store/features/add_address/presentation/manager/add_address_bloc.dart';
+import 'package:store/features/add_address/presentation/pages/add_address_view.dart';
+import 'package:store/features/address/presentation/pages/address_view.dart';
 import 'package:store/features/auth/presentation/manager/login/login_bloc.dart';
 import 'package:store/features/auth/presentation/manager/sign_up/sign_up_bloc.dart';
 import 'package:store/features/auth/presentation/pages/login_view.dart';
@@ -31,7 +34,7 @@ import '../../features/review/presentation/manager/review/review_bloc.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.account,
+  initialLocation: Routes.address,
   routes: [
     GoRoute(path: Routes.onboarding, builder: (context, state) => OnboardingView()),
     GoRoute(
@@ -96,9 +99,18 @@ final GoRouter router = GoRouter(
       path: Routes.review(1),
       builder:
           (context, state) => BlocProvider(
-        create: (context) => ReviewBloc(repo: context.read()),
-        child: ReviewView(),
-      ),
+            create: (context) => ReviewBloc(repo: context.read()),
+            child: ReviewView(),
+          ),
+    ),
+    GoRoute(path: Routes.address, builder: (context, state) => AddressView()),
+    GoRoute(
+      path: Routes.addAddress,
+      builder:
+          (context, state) => BlocProvider(
+            create: (context) => AddAddressBloc(),
+            child: AddAddressView(),
+          ),
     ),
   ],
 );

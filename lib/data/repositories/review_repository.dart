@@ -1,6 +1,6 @@
 import '../../core/client.dart';
-import '../../features/review/data/models/review_model.dart';
-import '../../features/review/data/models/review_stats_model.dart';
+import '../models/review_model.dart';
+import '../models/review_stats_model.dart';
 
 
 class ReviewRepository {
