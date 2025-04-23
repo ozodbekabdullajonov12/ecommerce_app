@@ -10,6 +10,8 @@ class AppColors {
   static const onError = Colors.white;
   static const surface = Colors.white;
 
+  static const successGreen = Color(0xFF0C9409);
+
   static const onSurface = Color(0xFF1A1A1A);
 
   static const primary200 = Color(0xFFCCCCCC);

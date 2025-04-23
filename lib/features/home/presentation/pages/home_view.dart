@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +33,7 @@ class HomeView extends StatelessWidget {
             itemCount: state.products!.length,
             itemBuilder:
                 (context, index) =>
-                    SmallProduct(product: state.products[index]),
+                SmallProduct(product: state.products[index]),
           );
         },
       ),

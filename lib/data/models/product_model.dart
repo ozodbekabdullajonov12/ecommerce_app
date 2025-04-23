@@ -1,8 +1,10 @@
 class ProductModel {
   final int id;
-  final String image, title;
+  final String image;
+  final String title;
   final bool isLiked;
-  final int price, discount;
+  final int price;
+  final int discount;
 
   ProductModel({
     required this.price,

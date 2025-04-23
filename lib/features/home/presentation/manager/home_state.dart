@@ -1,3 +1,4 @@
+
 import 'package:equatable/equatable.dart';
 import 'package:store/data/models/category_model.dart';
 import 'package:store/data/models/product_model.dart';

@@ -78,7 +78,7 @@ class EcommerceBottomNavigationBar extends StatelessWidget {
           Column(
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () => context.push(Routes.myCart),
                 icon: SvgPicture.asset("assets/icons/cart.svg"),
               ),
               Text(
@@ -95,7 +95,7 @@ class EcommerceBottomNavigationBar extends StatelessWidget {
           Column(
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () => context.push(Routes.account),
                 icon: SvgPicture.asset(
                   "assets/icons/account.svg",
                   colorFilter: ColorFilter.mode(
