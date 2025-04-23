@@ -7,7 +7,7 @@ class ApiClient {
   ApiClient() {
     dio = Dio(
       BaseOptions(
-        baseUrl: "http://172.20.10.2:8888/api/v1",
+        baseUrl: "http://192.168.8.21:8888/api/v1",
         validateStatus: (value) => true,
       ),
     );
@@ -55,6 +55,7 @@ class ApiClient {
       throw Exception("xato ketdi reset email");
     }
   }
+
   Future<List<dynamic>> fetchProducts({
     Map<String, dynamic>? queryParams,
   }) async {
@@ -70,53 +71,46 @@ class ApiClient {
     }
   }
 
-  Future save({required int productId}) async{
-    var response=await dio.post("/auth/save/$productId");
-    if(response.statusCode!=200){
+  Future save({required int productId}) async {
+    var response = await dio.post("/auth/save/$productId");
+    if (response.statusCode != 200) {
       return AuthException();
     }
-
   }
 
-
-  Future unSave({required int productId}) async{
-    var response=await dio.post("/auth/unsave/$productId");
-    if(response.statusCode!=200){
+  Future unSave({required int productId}) async {
+    var response = await dio.post("/auth/unsave/$productId");
+    if (response.statusCode != 200) {
       return AuthException();
     }
-
   }
 
-
-  Future<List<dynamic>> fetchCategories() async{
-    var response=await dio.get("/categories/list");
-    List<dynamic> data=response.data;
-    if(response.statusCode==200){
+  Future<List<dynamic>> fetchCategories() async {
+    var response = await dio.get("/categories/list");
+    List<dynamic> data = response.data;
+    if (response.statusCode == 200) {
       return data;
-    }
-    else{
+    } else {
       throw Exception("Categories not found");
     }
   }
 
-  Future<List<dynamic>> fetchSizes() async{
-    var response=await dio.get("/sizes/list");
-    List<dynamic> data=response.data;
-    if(response.statusCode==200){
+  Future<List<dynamic>> fetchSizes() async {
+    var response = await dio.get("/sizes/list");
+    List<dynamic> data = response.data;
+    if (response.statusCode == 200) {
       return data;
-    }
-    else{
+    } else {
       throw Exception("Sizes  not found");
     }
   }
 
-  Future<List<dynamic>> savedProducts() async{
-    var response=await dio.get("/products/saved-products");
-    List<dynamic> data=response.data;
-    if(response.statusCode==200){
+  Future<List<dynamic>> savedProducts() async {
+    var response = await dio.get("/products/saved-products");
+    List<dynamic> data = response.data;
+    if (response.statusCode == 200) {
       return data;
-    }
-    else{
+    } else {
       throw Exception("Saved Products   not found");
     }
   }
@@ -137,12 +131,22 @@ class ApiClient {
       if (response.statusCode == 200) {
         return response.data;
       } else {
-        throw Exception("reviews Statsda xatolik (statusCode: ${response.statusCode})");
+        throw Exception(
+          "reviews Statsda xatolik (statusCode: ${response.statusCode})",
+        );
       }
     } catch (e) {
       throw Exception("reviews Statsda xatolik");
     }
   }
 
-
+  Future<dynamic> fetchProductDetail(int productId) async {
+    var response = await dio.get("/products/detail/$productId");
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      return response.data;
+    } else {
+      throw Exception("Product Detailsni olib kelishda xatolik");
+    }
+  }
 }
