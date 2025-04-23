@@ -25,6 +25,7 @@ import 'package:store/features/myCart/presentation/pages/my_cart_view.dart';
 import 'package:store/features/myCart/presentation/pages/your_cart_view.dart';
 import 'package:store/features/onboarding/presentation/pages/onboarding_view.dart';
 import 'package:store/features/onboarding/presentation/pages/splash_screen.dart';
+import 'package:store/features/product_details/presentation/manager/product_details_bloc.dart';
 import 'package:store/features/product_details/presentation/pages/product_details_view.dart';
 import 'package:store/features/review/presentation/pages/review_view.dart';
 import 'package:store/features/saved_items/presentation/pages/saved_items_view.dart';
@@ -34,7 +35,7 @@ import '../../features/review/presentation/manager/review/review_bloc.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.address,
+  initialLocation: Routes.productDetails,
   routes: [
     GoRoute(path: Routes.onboarding, builder: (context, state) => OnboardingView()),
     GoRoute(
@@ -93,7 +94,11 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: Routes.productDetails,
-      builder: (context, state) => ProductDetailsView(),
+      builder:
+          (context, state) => BlocProvider(
+            create: (context) => ProductDetailsBloc(repo: context.read()),
+            child: ProductDetailsView(),
+          ),
     ),
     GoRoute(
       path: Routes.review(1),
