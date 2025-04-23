@@ -1,11 +1,8 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:pinput/pinput.dart';
-import 'package:store/core/routing/routes.dart';
 import 'package:store/core/utils/colors.dart';
 import 'package:store/features/forget_reset_password/presentation/manager/reset_password_bloc.dart';
 import 'package:store/features/forget_reset_password/presentation/manager/reset_password_state.dart';

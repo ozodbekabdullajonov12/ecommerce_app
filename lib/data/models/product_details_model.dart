@@ -6,8 +6,8 @@ class ProductDetailsModel {
   final int? price, reviewCount;
   final bool? isLiked;
   final double? rating;
-  //final List<ProductDetailImagesModel>? images;
- // final List<SizeModel>? sizes;
+  final List<ProductDetailImagesModel>? images;
+  //final List<SizeModel>? sizes;
 
   ProductDetailsModel({
     required this.rating,
@@ -17,7 +17,7 @@ class ProductDetailsModel {
     required this.title,
     required this.description,
     required this.reviewCount,
-   // required this.images,
+    required this.images,
     //required this.sizes,
   });
 
@@ -34,10 +34,10 @@ class ProductDetailsModel {
       //    (json["productSizes"] ?? json['productSizes'] as List<dynamic>)
       //        .map((e) => ProductDetailsSizeModel.fromJson(e))
       //        .toList(),
-      //images:
-       //   (json["productImages"] ?? json['productImages'] as List<dynamic>)
-       //       .map((e) => ProductDetailImagesModel.fromJson(e))
-       //       .toList(),
+      images:
+          (json["productImages"] as List<dynamic>)
+              .map((e) => ProductDetailImagesModel.fromJson(e))
+              .toList(),
     );
   }
 }
