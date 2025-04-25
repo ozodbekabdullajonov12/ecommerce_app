@@ -38,7 +38,7 @@ class HomeState extends Equatable {
       products: [],
       categories: [],
       sizes: [],
-      currentCategoryId: null,
+      currentCategoryId: 0,
       currentSizeId: null,
       maxPrice: null,
       minPrice: null,

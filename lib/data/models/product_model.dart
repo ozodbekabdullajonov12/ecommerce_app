@@ -1,7 +1,7 @@
 class ProductModel {
   final int id;
   final String image, title;
-  final bool isLiked;
+  bool isLiked;
   final int price, discount;
 
   ProductModel({
@@ -23,4 +23,7 @@ class ProductModel {
       isLiked: json['isLiked'],
     );
   }
+
+
+
 }

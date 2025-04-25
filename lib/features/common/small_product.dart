@@ -52,14 +52,7 @@ class SmallProduct extends StatelessWidget {
                         ),
                         child: Center(
                           child: SvgPicture.asset(
-                            "assets/icons/heart.svg",
-                            colorFilter:
-                                product.isLiked
-                                    ? ColorFilter.mode(
-                                      Colors.red,
-                                      BlendMode.srcIn,
-                                    )
-                                    : null,
+                            "assets/icons/${(product.isLiked)?"heart.svg":"heart_filled.svg"}",
                           ),
                         ),
                       ),

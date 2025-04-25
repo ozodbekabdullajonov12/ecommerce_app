@@ -5,12 +5,12 @@ import 'package:store/features/auth/presentation/manager/login/login_bloc.dart';
 import 'package:store/features/auth/presentation/manager/sign_up/sign_up_bloc.dart';
 import 'package:store/features/auth/presentation/pages/login_view.dart';
 import 'package:store/features/auth/presentation/pages/sign_up_view.dart';
-import 'package:store/features/home/presentation/manager/home_bloc.dart';
-import 'package:store/features/home/presentation/pages/home_view.dart';
-import 'package:store/features/home/presentation/pages/search_view.dart';
 import 'package:store/features/forget_reset_password/presentation/pages/enter_otp_view.dart';
 import 'package:store/features/forget_reset_password/presentation/pages/forgot_view.dart';
 import 'package:store/features/forget_reset_password/presentation/pages/reset_password_view.dart';
+import 'package:store/features/home/presentation/manager/home_bloc.dart';
+import 'package:store/features/home/presentation/manager/search/search_bloc.dart';
+import 'package:store/features/home/presentation/pages/home_view.dart';
 import 'package:store/features/onboarding/presentation/pages/onboarding_view.dart';
 import 'package:store/features/onboarding/presentation/pages/splash_screen.dart';
 import 'package:store/features/product_details/presentation/pages/product_details_view.dart';
@@ -18,10 +18,11 @@ import 'package:store/features/review/presentation/pages/review_view.dart';
 import 'package:store/main.dart';
 
 import '../../features/home/presentation/pages/notifications_view.dart';
+import '../../features/home/presentation/pages/search_view.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.home,
+  initialLocation: Routes.search,
   routes: [
     GoRoute(
       path: Routes.onboarding,
@@ -55,7 +56,15 @@ final GoRouter router = GoRouter(
             child: HomeView(),
           ),
     ),
-    GoRoute(path: Routes.search, builder: (context, state) => SearchView()),
+    GoRoute(path: Routes.search,
+        builder: (context, state) =>
+            BlocProvider(create: (context) =>
+                SearchBloc(productRepo: context.read(),
+                    historyRepo: context.read()
+                 ),
+            child:  SearchView(),
+            ),
+    ),
     GoRoute(
       path: Routes.notifications,
       builder: (context, state) => NotificationsView(),

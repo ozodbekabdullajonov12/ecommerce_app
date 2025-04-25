@@ -31,7 +31,7 @@ class EcommerceAppBar extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 36.w, vertical: 10.h),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.h),
       child: AppBar(
         toolbarHeight: toolbarHeight,
         leading: Align(
