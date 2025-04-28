@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:store/core/routing/routes.dart';
 import 'package:store/core/utils/colors.dart';
 import 'package:store/features/common/store_icon_button.dart';
 
@@ -35,7 +37,7 @@ class AccountViewDetails extends StatelessWidget {
                 icon: "assets/icons/chevron.svg",
                 width: 10.w,
                 height: 11.h,
-                callback: () {},
+                callback: () =>context.push(Routes.myDetails),
               ),
             ],
           ),

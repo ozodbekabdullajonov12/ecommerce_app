@@ -50,6 +50,12 @@ dependencies:
   geocoding: ^3.0.0
   permission_handler: ^12.0.0+1
   pinput: ^5.0.1
+  intl_phone_field: ^3.2.0
+  flutter_switch: ^0.3.2
+  latlng: ^2.0.7
+  freezed_annotation: ^3.0.0
+  build_runner: ^2.4.15
+  remove: ^1.0.10
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +67,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  freezed: ^3.0.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
