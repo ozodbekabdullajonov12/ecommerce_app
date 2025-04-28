@@ -68,7 +68,6 @@ final GoRouter router = GoRouter(
             create:
                 (context) => HomeBloc(
                   repo: context.read(),
-
                 ),
             child: HomeView(),
           ),
@@ -141,12 +140,6 @@ final GoRouter router = GoRouter(
           ),
     ),
     GoRoute(path: Routes.address, builder: (context, state) => AddressView()),
-    // GoRoute(
-    //   path: Routes.addAddress,
-    //   builder:
-    //       (context, state) =>
-    //           BlocProvider(create: (context) => AddAddressBloc(), child: AddAddressView()),
-    // ),
     GoRoute(path: Routes.myDetails,
     builder: (context, state)=>AccountMyDetailsView()),
     GoRoute(path: Routes.myNotifications,
