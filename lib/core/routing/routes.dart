@@ -19,10 +19,11 @@ class Routes {
   static const account = '/account';
   static const helpCenter = '/help-center';
   static const myOrders = '/my-orders';
-  static const productDetails = '/product-details';
+  static const productDetails = '/product-details/productId';
   static const address = '/address';
   static const addAddress = '/addAddress';
   static String review(int id) => "/review/$id";
   static const myDetails = "/my-details";
   static const myNotifications = '/my-notifications';
+  static String productDetailsBuilder(int id) => '/productId/$id';
 }
