@@ -29,7 +29,7 @@ abstract class HomeState with  _$HomeState{
       products: [],
       categories: [],
       sizes: [],
-      currentCategoryId: null,
+      currentCategoryId: 0,
       currentSizeId: null,
       maxPrice: null,
       minPrice: null,

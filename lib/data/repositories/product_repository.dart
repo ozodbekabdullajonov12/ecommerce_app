@@ -13,6 +13,8 @@ class ProductRepository {
 
   List<CategoryModel> categories = [];
 
+  List<ProductModel> searchedProducts=[];
+
   List<SizeModel> sizes = [];
 
   ProductRepository({required this.client});
@@ -25,8 +27,33 @@ class ProductRepository {
     return products;
   }
 
-  Future save({required int productId}) async {
-    await client.save(productId: productId);
+
+  Future<List<ProductModel>> fetchSearchedProducts({required String? title}) async {
+    var rawProducts = await client.fetchProducts(queryParams: {
+      "Title":title??""
+    });
+    searchedProducts = rawProducts.map((e) => ProductModel.fromJson(e)).toList();
+    return searchedProducts;
+  }
+
+  Future<List<ProductModel>> saveOrUnSave(
+      {required int productId, required bool isLiked, Map<String,
+          dynamic>? queryParams,}) async {
+    if (isLiked) {
+      await client.unSave(productId: productId);
+    } else {
+      await client.save(productId: productId);
+    }
+    if (products.isNotEmpty) {
+      var productIndex = products.indexWhere((product) =>
+      product.id == productId);
+      products[productIndex].isLiked = !products[productIndex].isLiked;
+      return products;
+    } else {
+      var rawProducts = await client.fetchProducts(queryParams: queryParams);
+      products = rawProducts.map((e) => ProductModel.fromJson(e)).toList();
+      return products;
+    }
   }
 
   Future unSave({required int productId}) async {
@@ -43,6 +70,7 @@ class ProductRepository {
     if(categories.isNotEmpty) return categories;
     var rawCategories = await client.fetchCategories();
     categories = rawCategories.map((e) => CategoryModel.fromJson(e)).toList();
+    categories.insert(0, CategoryModel(id: 0, title: "All"));
     return categories;
   }
 

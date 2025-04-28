@@ -1,10 +1,9 @@
 class ProductModel {
   final int id;
-  final String image;
-  final String title;
-  final bool isLiked;
-  final int price;
-  final int discount;
+  final String image, title;
+  bool isLiked;
+  final int price, discount;
+
 
   ProductModel({
     required this.price,
@@ -25,4 +24,7 @@ class ProductModel {
       isLiked: json['isLiked'],
     );
   }
+
+
+
 }

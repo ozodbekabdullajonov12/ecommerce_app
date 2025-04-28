@@ -14,12 +14,13 @@ import 'package:store/features/auth/presentation/manager/sign_up/sign_up_bloc.da
 import 'package:store/features/auth/presentation/pages/login_view.dart';
 import 'package:store/features/auth/presentation/pages/sign_up_view.dart';
 import 'package:store/features/forget_reset_password/presentation/manager/reset_password_bloc.dart';
-import 'package:store/features/home/presentation/manager/home_bloc.dart';
-import 'package:store/features/home/presentation/pages/home_view.dart';
-import 'package:store/features/home/presentation/pages/search_view.dart';
 import 'package:store/features/forget_reset_password/presentation/pages/enter_otp_view.dart';
 import 'package:store/features/forget_reset_password/presentation/pages/forgot_view.dart';
 import 'package:store/features/forget_reset_password/presentation/pages/reset_password_view.dart';
+import 'package:store/features/home/presentation/manager/home_bloc.dart';
+import 'package:store/features/home/presentation/manager/search/search_bloc.dart';
+import 'package:store/features/home/presentation/pages/home_view.dart';
+import 'package:store/features/home/presentation/pages/search_view.dart';
 import 'package:store/features/myCart/presentation/pages/my_cart_check_out_view.dart';
 import 'package:store/features/myCart/presentation/pages/my_cart_new_card_view.dart';
 import 'package:store/features/myCart/presentation/pages/my_cart_payment_method_view.dart';
@@ -32,8 +33,11 @@ import 'package:store/features/product_details/presentation/pages/product_detail
 import 'package:store/features/review/presentation/pages/review_view.dart';
 import 'package:store/features/saved_items/presentation/pages/saved_items_view.dart';
 import 'package:store/main.dart';
+
 import '../../features/home/presentation/pages/notifications_view.dart';
 import '../../features/review/presentation/manager/review/review_bloc.dart';
+
+
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
@@ -68,7 +72,26 @@ final GoRouter router = GoRouter(
             child: HomeView(),
           ),
     ),
-    GoRoute(path: Routes.search, builder: (context, state) => SearchView()),
+
+    GoRoute(path: Routes.search,
+        builder: (context, state) =>
+            BlocProvider(create: (context) =>
+                SearchBloc(productRepo: context.read(),
+                    historyRepo: context.read()
+                 ),
+            child:  SearchView(),
+            ),
+    ),
+    GoRoute(
+      path: Routes.notifications,
+      builder: (context, state) => NotificationsView(),),
+   GoRoute(path: Routes.search,
+       builder: (context, state) =>
+           BlocProvider(create: (context) =>
+               SearchBloc(
+                 productRepo: context.read(), historyRepo: context.read(),),
+
+           child: SearchView(),)),
     GoRoute(path: Routes.notifications, builder: (context, state) => NotificationsView()),
     ShellRoute(
       builder:
