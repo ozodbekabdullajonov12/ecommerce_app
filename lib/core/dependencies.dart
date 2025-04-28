@@ -12,6 +12,6 @@ final List<SingleChildWidget> providers = [
   Provider(create: (context) => ApiClient()),
   Provider(create: (context) => AuthRepository(client: context.read())),
   Provider(create: (context) => ProductRepository(client: context.read())),
-  Provider(create: (context) => SearchHistoryRepository(),)
+  Provider(create: (context) => SearchHistoryRepository(),),
   Provider(create: (context) => ReviewRepository(client: context.read()),),
 ];
