@@ -4,6 +4,7 @@ class ProductModel {
   bool isLiked;
   final int price, discount;
 
+
   ProductModel({
     required this.price,
     required this.title,

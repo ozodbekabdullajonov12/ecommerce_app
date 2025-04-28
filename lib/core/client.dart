@@ -7,6 +7,7 @@ class ApiClient {
   ApiClient() {
     dio = Dio(
       BaseOptions(
+
         baseUrl: "http://192.168.8.149:8888/api/v1",
         validateStatus: (value) => true,
       ),
@@ -42,22 +43,47 @@ class ApiClient {
       return {"result": true, "token": null};
     }
   }
-
-  Future<String> postForgotEmail(String email) async {
+  Future<void> resetPasswordEmail({ required String email}) async {
     var response = await dio.post(
       "/auth/reset-password/email",
-      data: {'email': email},
+      data: {
+        'email': email,
+      },
     );
-    if (response.statusCode == 200) {
-      final data = Map<String, String>.from(response.data);
-      return data['email']!;
-    } else {
+    if (response.statusCode!=200){
       throw Exception("xato ketdi reset email");
     }
   }
+  Future<bool> resetPasswordVerify({ required String email, required String code}) async {
+    var response = await dio.post(
+      "/auth/reset-password/verify",
+      data: {
+        'email': email,
+        'code': code,
+      },
+    );
+    if (response.data == true && response.statusCode == 200){
+       return response.data;
+    }
+    else{
+      return false;
+    }
+  }
+  Future<void> resetPasswordReset({ required String email, required String code, required String password}) async {
+    var response = await dio.post(
+      "/auth/reset-password/reset",
+      data: {
+        'email': email,
+        'code': code,
+        'password': password,
+      },
+    );
+    if (response.statusCode ==200){
+      throw Exception("Xatolik vujudga keldi");
+    }
 
-
-
+  }
+  
   Future<List<dynamic>> fetchProducts({
     Map<String, dynamic>? queryParams,
   }) async {
@@ -72,55 +98,83 @@ class ApiClient {
       throw Exception("Productlarni olib kelib bo'lmadi");
     }
   }
-  
-  Future save({required int productId}) async{
-    var response=await dio.post("/auth/save/$productId");
-    if(response.statusCode!=200){
+
+  Future save({required int productId}) async {
+    var response = await dio.post("/auth/save/$productId");
+    if (response.statusCode != 200) {
       return AuthException();
     }
-    
   }
 
-
-  Future unSave({required int productId}) async{
-    var response=await dio.post("/auth/unsave/$productId");
-    if(response.statusCode!=200){
+  Future unSave({required int productId}) async {
+    var response = await dio.post("/auth/unsave/$productId");
+    if (response.statusCode != 200) {
       return AuthException();
     }
-
   }
 
-
-  Future<List<dynamic>> fetchCategories() async{
-    var response=await dio.get("/categories/list");
-    List<dynamic> data=response.data;
-    if(response.statusCode==200){
+  Future<List<dynamic>> fetchCategories() async {
+    var response = await dio.get("/categories/list");
+    List<dynamic> data = response.data;
+    if (response.statusCode == 200) {
       return data;
-    }
-    else{
+    } else {
       throw Exception("Categories not found");
     }
   }
 
-  Future<List<dynamic>> fetchSizes() async{
-    var response=await dio.get("/sizes/list");
-    List<dynamic> data=response.data;
-    if(response.statusCode==200){
+  Future<List<dynamic>> fetchSizes() async {
+    var response = await dio.get("/sizes/list");
+    List<dynamic> data = response.data;
+    if (response.statusCode == 200) {
       return data;
-    }
-    else{
+    } else {
       throw Exception("Sizes  not found");
     }
   }
 
-  Future<List<dynamic>> savedProducts() async{
-    var response=await dio.get("/products/saved-products");
-    List<dynamic> data=response.data;
-    if(response.statusCode==200){
+  Future<List<dynamic>> savedProducts() async {
+    var response = await dio.get("/products/saved-products");
+    List<dynamic> data = response.data;
+    if (response.statusCode == 200) {
       return data;
-    }
-    else{
+    } else {
       throw Exception("Saved Products   not found");
+    }
+  }
+    Future<List<dynamic>> fetchReviews(int productId) async {
+      var response = await dio.get('/reviews/list/$productId');
+      List<dynamic> data = response.data;
+      if (response.statusCode == 200) {
+        return data;
+      } else {
+        throw Exception(
+          "reviews Statsda xatolik (statusCode: ${response.statusCode})",
+        );
+        throw Exception("Reviewsda xatolik");
+      }
+    }
+
+    Future<dynamic> fetchReviewStats(int productId) async {
+      try {
+        var response = await dio.get("/reviews/stats/$productId");
+        if (response.statusCode == 200) {
+          return response.data;
+        } else {
+          throw Exception("reviews Statsda xatolik (statusCode: ${response.statusCode})");
+        }
+      } catch (e) {
+        throw Exception("reviews Statsda xatolik");
+      }
+    }
+  
+  Future<dynamic> fetchProductDetail(int productId) async {
+    var response = await dio.get("/products/detail/$productId");
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      return response.data;
+    } else {
+      throw Exception("Product Detailsni olib kelishda xatolik");
     }
   }
 }

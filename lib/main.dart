@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
+
 import 'package:store/core/dependencies.dart';
 import 'package:store/core/routing/router.dart';
 import 'package:store/data/models/search_history_model.dart';
@@ -28,11 +29,11 @@ class Ecommerce extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(390, 844),
       child: MultiBlocProvider(
-          providers: providers,
-         child: MaterialApp.router(
-           routerConfig: router,
-           debugShowCheckedModeBanner: false,
-         ),
+        providers: providers,
+        child: MaterialApp.router(
+          routerConfig: router,
+          debugShowCheckedModeBanner: false,
+        ),
       ),
     );
   }
