@@ -7,8 +7,9 @@ part 'product_details_event.dart';
 class ProductDetailsBloc
     extends Bloc<ProductDetailsEvent, ProductDetailsState> {
   final ProductRepository _repo;
+  final int productId;
 
-  ProductDetailsBloc({required ProductRepository repo})
+  ProductDetailsBloc({required ProductRepository repo,required this.productId})
     : _repo = repo,
       super(ProductDetailsState.initial()) {
     on<ProductDetailsLoading>(_loading);

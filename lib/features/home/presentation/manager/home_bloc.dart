@@ -15,7 +15,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final TextEditingController searchController = TextEditingController();
 
 
-  HomeBloc({required ProductRepository repo})
+
+  HomeBloc({required ProductRepository repo,})
       : _repo = repo,
         super(HomeState.initial()) {
     on<HomeLoading>(_loading);
