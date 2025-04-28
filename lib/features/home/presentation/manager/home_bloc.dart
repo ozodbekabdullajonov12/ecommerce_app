@@ -72,12 +72,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future _saveOrUnSave(HomeSaveOrUnSave event, Emitter<HomeState> emit) async {
-    if (event.isLiked) {
-      await _repo.unSave(productId: event.id);
-    } else {
-      await _repo.save(productId: event.id);
-    }
-    emit(state.copyWith(status: HomeStatus.loading));
+   await _repo.saveOrUnSave(productId: event.id, isLiked: event.isLiked);
+   emit(state.copyWith(status: HomeStatus.loading));
     var products = await _products(state: state);
     emit(state.copyWith(products: products, status: HomeStatus.idle));
   }
@@ -112,7 +108,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final products = await _repo.fetchProducts(
       queryParams: {
         "Title": state.title ?? "",
-        "CategoryId": state.currentCategoryId ?? "",
+        "CategoryId": (state.currentCategoryId==null||state.currentCategoryId==0) ? "":state.currentCategoryId,
         "SizeId": state.currentSizeId ?? "",
         "MinPrice": state.minPrice ?? "",
         "MaxPrice": state.maxPrice ?? "",

@@ -245,6 +245,7 @@ class _HomeBottomSheetState extends State<HomeBottomSheet> {
                 inputDecorationTheme: InputDecorationTheme(
                   constraints: BoxConstraints.tight(Size(100, 35)),
                   border: InputBorder.none,
+
                 ),
                 dropdownMenuEntries: List.generate(
                   widget.sizes.length,
