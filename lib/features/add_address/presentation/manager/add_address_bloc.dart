@@ -15,7 +15,6 @@ class AddAddressBloc extends Bloc<AddAddressEvent, AddAddressState> {
   }
 
   final controller = MapController();
-
   Future<void> _onGoToCurrentLocation(GoToCurrentLocation event, Emitter<AddAddressState> emit) async {
     var status = await Permission.locationWhenInUse.status;
 

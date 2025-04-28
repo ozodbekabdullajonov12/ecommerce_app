@@ -1,39 +1,29 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:store/core/utils/colors.dart';
 
 import '../../../auth/presentation/manager/sign_up/sign_up_state.dart';
+part 'reset_password_state.freezed.dart';
 
 enum ResetPasswordStatus { idle, error, success }
 
-@immutable
-class ResetPasswordState extends Equatable {
-  final String? emailSuffix;
-  final Color emailBorderColor;
+@freezed
+abstract class ResetPasswordState with _$ResetPasswordState{
 
-  final TextFormFieldStatus emailStatus;
-  final Color passwordBorderColor;
-  final bool showPassword;
-  final TextFormFieldStatus passwordStatus;
-  final Color cPasswordBorderColor;
-  final bool cShowPassword;
-  final TextFormFieldStatus cPasswordStatus;
-  final String? code;
-  final ResetPasswordStatus status;
-
-  const ResetPasswordState({
-    required this.emailSuffix,
-    required this.emailBorderColor,
-    required this.emailStatus,
-    required this.passwordBorderColor,
-    required this.showPassword,
-    required this.passwordStatus,
-    required this.cPasswordBorderColor,
-    required this.cShowPassword,
-    required this.cPasswordStatus,
-    required this.code,
-    required this.status
-  });
+  const factory ResetPasswordState({
+    required String? emailSuffix,
+    required Color emailBorderColor,
+    required TextFormFieldStatus emailStatus,
+    required Color passwordBorderColor,
+    required bool showPassword,
+    required TextFormFieldStatus passwordStatus,
+    required Color cPasswordBorderColor,
+    required bool cShowPassword,
+    required TextFormFieldStatus cPasswordStatus,
+    required String? code,
+    required ResetPasswordStatus status
+  }) = _ResetPasswordState;
 
   factory ResetPasswordState.initial() {
     return ResetPasswordState(
@@ -52,46 +42,5 @@ class ResetPasswordState extends Equatable {
   }
 
 
-  ResetPasswordState copyWith({
-    String? emailSuffix,
-    Color? emailBorderColor,
-    TextFormFieldStatus? emailStatus,
-    Color? passwordBorderColor,
-    bool? showPassword,
-    TextFormFieldStatus? passwordStatus,
-    Color? cPasswordBorderColor,
-    bool? cShowPassword,
-    TextFormFieldStatus? cPasswordStatus,
-    String? code,
-    ResetPasswordStatus? status
-  }) {
-    return ResetPasswordState(
-      emailSuffix: emailSuffix ?? this.emailSuffix,
-      emailBorderColor: emailBorderColor ?? this.emailBorderColor,
-      emailStatus: emailStatus ?? this.emailStatus,
-      passwordBorderColor: passwordBorderColor ?? this.passwordBorderColor,
-      showPassword: showPassword ?? this.showPassword,
-      passwordStatus: passwordStatus ?? this.passwordStatus,
-      cPasswordBorderColor: cPasswordBorderColor ?? this.cPasswordBorderColor,
-      cShowPassword: cShowPassword ?? this.cShowPassword,
-      cPasswordStatus: cPasswordStatus ?? this.cPasswordStatus,
-      code: code ?? this.code,
-      status: status ?? this.status
-    );
-  }
 
-  @override
-  List<Object?> get props => [
-    emailSuffix,
-    emailBorderColor,
-    emailStatus,
-    passwordBorderColor,
-    showPassword,
-    passwordStatus,
-    cPasswordBorderColor,
-    cShowPassword,
-    cPasswordStatus,
-    code,
-    status,
-  ];
 }
