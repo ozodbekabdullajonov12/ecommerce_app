@@ -127,7 +127,7 @@ final GoRouter router = GoRouter(
     GoRoute(path: Routes.myDetails,
     builder: (context, state)=>AccountMyDetailsView()),
     GoRoute(path: Routes.myNotifications,
-    builder: (context,state)=>AccountNotificationsView())
+    builder: (context,state)=>AccountNotificationsView()),
     GoRoute(
       path: Routes.addAddress,
       builder:
