@@ -85,5 +85,4 @@ class ProductRepository {
     var rawProductDetail = await client.fetchProductDetail(productId);
     return ProductDetailsModel.fromJson(rawProductDetail);
   }
-
 }
