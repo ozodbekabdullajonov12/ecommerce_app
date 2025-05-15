@@ -9,14 +9,14 @@ import 'package:store/features/common/ecommerce_text_button_container.dart';
 import '../../../common/ecommerce_app_bar.dart';
 
 
-class MyCartPaymentMethodView extends StatefulWidget {
-  const MyCartPaymentMethodView({super.key});
+class PaymentMethodView extends StatefulWidget {
+  const PaymentMethodView({super.key});
 
   @override
-  State<MyCartPaymentMethodView> createState() => _MyCartPaymentMethodViewState();
+  State<PaymentMethodView> createState() => _PaymentMethodViewState();
 }
 
-class _MyCartPaymentMethodViewState extends State<MyCartPaymentMethodView> {
+class _PaymentMethodViewState extends State<PaymentMethodView> {
   int selectedIndex = 0;
 
   @override

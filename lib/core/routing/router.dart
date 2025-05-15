@@ -23,7 +23,7 @@ import 'package:store/features/home/presentation/pages/home_view.dart';
 import 'package:store/features/home/presentation/pages/search_view.dart';
 import 'package:store/features/myCart/presentation/pages/my_cart_check_out_view.dart';
 import 'package:store/features/myCart/presentation/pages/my_cart_new_card_view.dart';
-import 'package:store/features/myCart/presentation/pages/my_cart_payment_method_view.dart';
+import 'package:store/features/payment/presentation/pages/my_cart_payment_method_view.dart';
 import 'package:store/features/myCart/presentation/pages/my_cart_view.dart';
 import 'package:store/features/myCart/presentation/pages/your_cart_view.dart';
 import 'package:store/features/notification/presentation/manager/notification_bloc.dart';
@@ -39,7 +39,7 @@ import '../../features/review/presentation/manager/review/review_bloc.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.home,
+  initialLocation: Routes.paymentMethod,
   routes: [
     GoRoute(path: Routes.onboarding, builder: (context, state) => OnboardingView()),
     GoRoute(
@@ -99,8 +99,8 @@ final GoRouter router = GoRouter(
     GoRoute(path: Routes.myCart, builder: (context, state) => MyCartView()),
     GoRoute(path: Routes.yourCart, builder: (context, state) => YourCartView()),
     GoRoute(path: Routes.checkout, builder: (context, state) => MyCartCheckOut()),
-    GoRoute(path: Routes.paymentMethod, builder: (context, state) => MyCartPaymentMethodView()),
-    GoRoute(path: Routes.newCard, builder: (context, state) => MyCartNewCardView()),
+    GoRoute(path: Routes.paymentMethod, builder: (context, state) => PaymentMethodView()),
+    GoRoute(path: Routes.newCard, builder: (context, state) => NewCardView()),
     GoRoute(path: Routes.account, builder: (context, state) => AccountView()),
     GoRoute(path: Routes.helpCenter, builder: (context, state) => AccountHelpCenterView()),
     GoRoute(path: Routes.myOrders, builder: (context, state) => AccountMyOrdersView()),

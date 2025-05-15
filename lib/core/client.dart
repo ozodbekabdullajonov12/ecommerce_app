@@ -6,7 +6,7 @@ import 'interceptor.dart';
 class ApiClient {
   ApiClient() {
     dio = Dio(
-      BaseOptions(baseUrl: "http://192.168.0.102:8888/api/v1", validateStatus: (value) => true),
+      BaseOptions(baseUrl: "http://192.168.9.58:8888/api/v1", validateStatus: (value) => true),
     );
     dio.interceptors.add(AuthInterceptor());
   }
