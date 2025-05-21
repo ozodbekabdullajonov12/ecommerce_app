@@ -6,13 +6,8 @@ import 'interceptor.dart';
 class ApiClient {
   ApiClient() {
     dio = Dio(
-      BaseOptions(
-
-        baseUrl: "http://192.168.8.149:8888/api/v1",
-        validateStatus: (value) => true,
-      ),
-    );
-    dio.interceptors.add(AuthInterceptor());
+      BaseOptions(baseUrl: "http://192.168.10.138:8888/api/v1", validateStatus: (value) => true),
+    );dio.interceptors.add(AuthInterceptor());
   }
 
   late final Dio dio;
@@ -170,11 +165,26 @@ class ApiClient {
   
   Future<dynamic> fetchProductDetail(int productId) async {
     var response = await dio.get("/products/detail/$productId");
-    print(response.statusCode);
     if (response.statusCode == 200) {
       return response.data;
     } else {
       throw Exception("Product Detailsni olib kelishda xatolik");
+    }
+  }
+  Future<Map<String,dynamic>> fetchMyCart()async{
+    var response = await dio.get('/my-cart/my-cart-items');
+    if (response.statusCode == 200) {
+      return response.data;
+    }else{
+     throw Exception('Malumot kemadi');
+    }
+  }
+  Future<dynamic> fetchMyDetails()async{
+    var response = await dio.get("/auth/details");
+    if (response.statusCode ==  200) {
+      return response.data;
+    } else{
+      throw Exception("Not Found");
     }
   }
 }
