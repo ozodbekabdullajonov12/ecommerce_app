@@ -21,10 +21,10 @@ class EcommerceTextButtonContainer extends StatelessWidget {
   final double containerWidth, containerHeight;
   final FontWeight fontWeight;
   final Color textColor, containerColor;
-   final Color borderColor;
-   final double radius;
+  final Color borderColor;
+  final double radius;
 
-  final VoidCallback callback;
+  final VoidCallback? callback; // ✅ nullable bo‘ldi
 
   @override
   Widget build(BuildContext context) {
