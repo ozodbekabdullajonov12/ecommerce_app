@@ -24,9 +24,11 @@ import 'package:store/features/home/presentation/pages/search_view.dart';
 import 'package:store/features/myCart/presentation/manager/my_cart_bloc.dart';
 import 'package:store/features/myCart/presentation/pages/my_cart_check_out_view.dart';
 import 'package:store/features/myCart/presentation/pages/my_cart_new_card_view.dart';
-import 'package:store/features/myCart/presentation/pages/my_cart_payment_method_view.dart';
+import 'package:store/features/payment/presentation/pages/my_cart_payment_method_view.dart';
 import 'package:store/features/myCart/presentation/pages/my_cart_view.dart';
 import 'package:store/features/myCart/presentation/pages/your_cart_view.dart';
+import 'package:store/features/notification/presentation/manager/notification_bloc.dart';
+import 'package:store/features/notification/presentation/pages/notification_view.dart';
 import 'package:store/features/onboarding/presentation/pages/onboarding_view.dart';
 import 'package:store/features/onboarding/presentation/pages/splash_screen.dart';
 import 'package:store/features/product_details/presentation/manager/product_details_bloc.dart';
@@ -34,21 +36,17 @@ import 'package:store/features/product_details/presentation/pages/product_detail
 import 'package:store/features/review/presentation/pages/review_view.dart';
 import 'package:store/features/saved_items/presentation/pages/saved_items_view.dart';
 import 'package:store/main.dart';
-
-import '../../features/home/presentation/pages/notifications_view.dart';
 import '../../features/review/presentation/manager/review/review_bloc.dart';
-
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.productDetails,
+  initialLocation: Routes.productDetailsBuilder(1),
   routes: [
     GoRoute(path: Routes.onboarding, builder: (context, state) => OnboardingView()),
     GoRoute(
       path: Routes.signUp,
       builder:
-          (context, state) =>
-          BlocProvider(
+          (context, state) => BlocProvider(
             create: (context) => SignUpBloc(repo: context.read()),
             child: SignUpView(),
           ),
@@ -57,8 +55,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: Routes.login,
       builder:
-          (context, state) =>
-          BlocProvider(
+          (context, state) => BlocProvider(
             create: (context) => LoginBloc(repo: context.read()),
             child: LoginView(),
           ),
@@ -67,40 +64,29 @@ final GoRouter router = GoRouter(
       path: Routes.home,
       builder:
           (context, state) =>
-          BlocProvider(
-            create:
-                (context) =>
-                HomeBloc(
-                  repo: context.read(),
-                ),
-            child: HomeView(),
-          ),
+              BlocProvider(create: (context) => HomeBloc(repo: context.read()), child: HomeView()),
     ),
-
-    GoRoute(path: Routes.search,
-      builder: (context, state) =>
-          BlocProvider(create: (context) =>
-              SearchBloc(productRepo: context.read(),
-                  historyRepo: context.read()
-              ),
+    GoRoute(
+      path: Routes.search,
+      builder:
+          (context, state) => BlocProvider(
+            create:
+                (context) => SearchBloc(productRepo: context.read(), historyRepo: context.read()),
             child: SearchView(),
           ),
     ),
     GoRoute(
-      path: Routes.notifications,
-      builder: (context, state) => NotificationsView(),),
-    GoRoute(path: Routes.search,
-        builder: (context, state) =>
-            BlocProvider(create: (context) =>
-                SearchBloc(
-                  productRepo: context.read(), historyRepo: context.read(),),
-
-              child: SearchView(),)),
-    GoRoute(path: Routes.notifications, builder: (context, state) => NotificationsView()),
+      path: Routes.search,
+      builder:
+          (context, state) => BlocProvider(
+            create:
+                (context) => SearchBloc(productRepo: context.read(), historyRepo: context.read()),
+            child: SearchView(),
+          ),
+    ),
     ShellRoute(
       builder:
-          (context, state, child) =>
-          BlocProvider(
+          (context, state, child) => BlocProvider(
             create: (context) => ResetPasswordBloc(repoReset: context.read()),
             child: child,
           ),
@@ -111,30 +97,29 @@ final GoRouter router = GoRouter(
       ],
     ),
     GoRoute(path: Routes.savedItems, builder: (context, state) => SavedItemsView()),
-    GoRoute(path: Routes.myCart, builder: (context, state) =>
-        BlocProvider(create: ( context)=>MyCartBloc(myCartRepo: context.read()),
-          child: MyCartView(),
-        )),
+    GoRoute(
+      path: Routes.myCart,
+      builder:
+          (context, state) => BlocProvider(
+            create: (context) => MyCartBloc(myCartRepo: context.read()),
+            child: MyCartView(),
+          ),
+    ),
     GoRoute(path: Routes.yourCart, builder: (context, state) => YourCartView()),
     GoRoute(path: Routes.checkout, builder: (context, state) => MyCartCheckOut()),
-    GoRoute(path: Routes.paymentMethod, builder: (context, state) => MyCartPaymentMethodView()),
-    GoRoute(path: Routes.newCard, builder: (context, state) => MyCartNewCardView()),
+    GoRoute(path: Routes.paymentMethod, builder: (context, state) => PaymentMethodView()),
+    GoRoute(path: Routes.newCard, builder: (context, state) => NewCardView()),
     GoRoute(path: Routes.account, builder: (context, state) => AccountView()),
     GoRoute(path: Routes.helpCenter, builder: (context, state) => AccountHelpCenterView()),
     GoRoute(path: Routes.myOrders, builder: (context, state) => AccountMyOrdersView()),
     GoRoute(path: Routes.enterCode, builder: (context, state) => EnterOtpView()),
     GoRoute(path: Routes.resetPassword, builder: (context, state) => ResetPasswordView()),
-
-    GoRoute(path: Routes.productDetails, builder: (context, state) => ProductDetailsView()),
-
     GoRoute(
       path: Routes.productDetails,
       builder:
-          (context, state) =>
-          BlocProvider(
+          (context, state) => BlocProvider(
             create:
-                (context) =>
-                ProductDetailsBloc(
+                (context) => ProductDetailsBloc(
                   repo: context.read(),
                   productId: int.parse(state.pathParameters["productId"]!),
                 ),
@@ -144,22 +129,28 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: Routes.review(1),
       builder:
-          (context, state) =>
-          BlocProvider(
+          (context, state) => BlocProvider(
             create: (context) => ReviewBloc(repo: context.read()),
             child: ReviewView(),
           ),
     ),
     GoRoute(path: Routes.address, builder: (context, state) => AddressView()),
-    GoRoute(path: Routes.myDetails,
-        builder: (context, state) => AccountMyDetailsView()),
-    GoRoute(path: Routes.myNotifications,
-        builder: (context, state) => AccountNotificationsView()),
+    GoRoute(path: Routes.myDetails, builder: (context, state) => AccountMyDetailsView()),
+    GoRoute(path: Routes.myNotifications, builder: (context, state) => AccountNotificationsView()),
     GoRoute(
       path: Routes.addAddress,
       builder:
           (context, state) =>
-          BlocProvider(create: (context) => AddAddressBloc(), child: AddAddressView()),
+              BlocProvider(create: (context) => AddAddressBloc(), child: AddAddressView()),
+    ),
+    GoRoute(
+      path: Routes.notifications,
+      builder:
+          (context, state) => BlocProvider(
+            create: (context) => NotificationBloc(repo: context.read()),
+            child: NotificationsView(),
+          ),
     ),
   ],
 );
+ 

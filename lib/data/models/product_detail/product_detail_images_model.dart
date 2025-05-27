@@ -1,6 +1,6 @@
 class ProductDetailImagesModel {
-  final int? id;
-  final String? image;
+  final int id;
+  final String image;
 
   ProductDetailImagesModel({required this.id, required this.image});
 

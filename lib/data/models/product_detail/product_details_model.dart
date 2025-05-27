@@ -1,4 +1,5 @@
-import 'package:store/data/models/product_detail_images_model.dart';
+import 'package:store/data/models/product_detail/product_detail_images_model.dart';
+import 'package:store/data/models/product_detail/product_details_size_model.dart';
 
 class ProductDetailsModel {
   final int? id;
@@ -6,8 +7,10 @@ class ProductDetailsModel {
   final int? price, reviewCount;
   final bool? isLiked;
   final double? rating;
-  final List<ProductDetailImagesModel>? images;
-  //final List<SizeModel>? sizes;
+  final List<ProductDetailImagesModel> images;
+  // final List<ProductDetailsSizeModel> sizes;
+
+
 
   ProductDetailsModel({
     required this.rating,
@@ -18,10 +21,11 @@ class ProductDetailsModel {
     required this.description,
     required this.reviewCount,
     required this.images,
+    // required this.sizes,
     //required this.sizes,
   });
 
-  factory ProductDetailsModel.fromJson(Map<String, dynamic?> json) {
+  factory ProductDetailsModel.fromJson(Map<String, dynamic> json) {
     return ProductDetailsModel(
       rating: json['rating'],
       id: json['id'],
@@ -30,14 +34,8 @@ class ProductDetailsModel {
       title: json['title'],
       description: json['description'],
       reviewCount: json['reviewCount'],
-      //sizes:
-      //    (json["productSizes"] ?? json['productSizes'] as List<dynamic>)
-      //        .map((e) => ProductDetailsSizeModel.fromJson(e))
-      //        .toList(),
-      images:
-          (json["productImages"] as List<dynamic>)
-              .map((e) => ProductDetailImagesModel.fromJson(e))
-              .toList(),
+      images: (json["productImages"] as List<dynamic>).map((e) => ProductDetailImagesModel.fromJson(e)).toList(),
+      // sizes: (json["productSizes"] as List<dynamic>).map((s)=>ProductDetailsSizeModel.fromJson(s)).toList()
     );
   }
 }

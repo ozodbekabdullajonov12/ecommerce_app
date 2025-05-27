@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:store/core/routing/routes.dart';
 import 'package:store/core/utils/colors.dart';
 import 'package:store/features/common/ecommerce_text_button_container.dart';
 import 'package:store/features/myCart/presentation/widgets/my_cart_new_card_date.dart';
@@ -8,8 +10,8 @@ import 'package:store/features/myCart/presentation/widgets/my_cart_new_card_date
 import '../../../common/ecommerce_app_bar.dart';
 
 
-class MyCartNewCardView extends StatelessWidget {
-  const MyCartNewCardView({super.key});
+class NewCardView extends StatelessWidget {
+  const NewCardView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +22,7 @@ class MyCartNewCardView extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: Column(
-          spacing: 10,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
             Divider(color: AppColors.primary100, height: 1),
             Text(
@@ -59,15 +59,19 @@ class MyCartNewCardView extends StatelessWidget {
                 MyCartNewCardDate(title: 'Security Date', label: "CVC"),
               ],
             ),
-            SizedBox(height: 470,),
-            EcommerceTextButtonContainer(
-              text: "Add Card",
-              textColor: Colors.white,
-              containerColor: AppColors.primary,
-              containerHeight: 54.h,
-              containerWidth: 341.w,
-              callback: () {
-                showDialog(context: context, builder: (context)=>
+          ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(24),
+        child: EcommerceTextButtonContainer(
+          text: "Add Card",
+          textColor: Colors.white,
+          containerColor: AppColors.primary,
+          containerHeight: 54.h,
+          containerWidth: 341.w,
+          callback: () {
+            showDialog(context: context, builder: (context)=>
                 SimpleDialog(
                   children: [
                     Container(
@@ -112,7 +116,7 @@ class MyCartNewCardView extends StatelessWidget {
                             containerColor: AppColors.primary,
                             containerWidth: 293.w,
                             containerHeight: 54.h,
-                            callback: () {},
+                            callback: () {context.go(Routes.paymentMethod);},
                             borderColor: AppColors.primary100,
                             radius: 10,
                           ),
@@ -121,9 +125,7 @@ class MyCartNewCardView extends StatelessWidget {
                     ),
                   ],
                 ));
-              },
-            ),
-          ],
+          },
         ),
       ),
     );

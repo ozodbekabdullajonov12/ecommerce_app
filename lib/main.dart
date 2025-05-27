@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,9 +21,26 @@ void main() async {
   Hive.init(cashDir.path);
   Hive.registerAdapter(MyCartModelAdapter());
   await Hive.openBox<MyCartModel>("myCart");
+  await Firebase.initializeApp();
   final directory = await getDownloadsDirectory();
   Hive.init(directory!.path);
   Hive.registerAdapter(SearchHistoryModelAdapter());
+
+  await FirebaseMessaging.instance.requestPermission(
+    alert: true,
+    announcement: false,
+    provisional: false,
+    criticalAlert: false,
+    carPlay: false,
+    badge: false,
+    sound: true,
+  );
+  String? token = await FirebaseMessaging.instance.getToken();
+  print(token);
+
+
+
+
   runApp(const Ecommerce());
 }
 

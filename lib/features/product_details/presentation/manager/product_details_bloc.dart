@@ -13,6 +13,7 @@ class ProductDetailsBloc
     : _repo = repo,
       super(ProductDetailsState.initial()) {
     on<ProductDetailsLoading>(_loading);
+    on<ProductDetailAddProduct>(_addProduct);
     add(ProductDetailsLoading());
   }
 
@@ -25,5 +26,8 @@ class ProductDetailsBloc
         productDetails: details,
       ),
     );
+  }
+  Future<void> _addProduct(ProductDetailAddProduct event, Emitter<ProductDetailsState> emit) async{
+    await _repo.addProduct(productId: event.productId, sizeId: event.sizeId);
   }
 }

@@ -1,7 +1,7 @@
 class ProductDetailsSizeModel {
-  final int? id;
+  final int id;
 
-  final String? title;
+  final String title;
 
   ProductDetailsSizeModel({required this.id, required this.title});
 

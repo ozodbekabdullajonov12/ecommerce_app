@@ -1,8 +1,9 @@
 import 'package:store/core/client.dart';
 import 'package:store/data/models/category_model.dart';
-import 'package:store/data/models/product_details_model.dart';
-import 'package:store/data/models/product_model.dart';
 import 'package:store/data/models/size_model.dart';
+
+import '../models/product_detail/product_details_model.dart';
+import '../models/product_model.dart';
 
 class ProductRepository {
   final ApiClient client;
@@ -14,6 +15,7 @@ class ProductRepository {
   List<CategoryModel> categories = [];
 
   List<ProductModel> searchedProducts=[];
+  ProductDetailsModel? detailsModel;
 
   List<SizeModel> sizes = [];
 
@@ -83,7 +85,11 @@ class ProductRepository {
 
   Future<ProductDetailsModel> fetchProductDetail(int productId) async {
     var rawProductDetail = await client.fetchProductDetail(productId);
-    return ProductDetailsModel.fromJson(rawProductDetail);
+    detailsModel =  ProductDetailsModel.fromJson(rawProductDetail);
+    return detailsModel!;
   }
-
+  Future<bool>addProduct({required int productId, required int sizeId})async{
+    var result = await client.addProduct(productId: productId, sizeId: sizeId);
+    return result;
+  }
 }

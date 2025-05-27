@@ -5,11 +5,11 @@ import 'package:store/data/repositories/auth_repository.dart';
 import 'package:store/data/repositories/my_cart_repository/my_cart_local_repository.dart';
 import 'package:store/data/repositories/my_cart_repository/my_cart_remote_repository.dart';
 import 'package:store/data/repositories/my_cart_repository/my_cart_repositoroy.dart';
+import 'package:store/data/repositories/notification_repository.dart';
 import '../data/repositories/store_repository.dart';
 import 'package:store/data/repositories/product_repository.dart';
 import 'package:store/data/repositories/search_history_repository.dart';
 import 'package:store/data/repositories/review_repository.dart';
-
 
 final List<SingleChildWidget> providers = [
   Provider(create: (context) => ApiClient()),
@@ -18,4 +18,7 @@ final List<SingleChildWidget> providers = [
   Provider(create: (context) => SearchHistoryRepository(),),
   Provider(create: (context) => ReviewRepository(client: context.read()),),
   Provider(create: (context)=>MyCartRepository(local: MyCartLocalRepository(), remote: MyCartRemoteRepository(client: context.read()))),
+  Provider(create: (context) => SearchHistoryRepository()),
+  Provider(create: (context) => ReviewRepository(client: context.read())),
+  Provider(create: (context) => NotificationRepository(client: context.read())),
 ];

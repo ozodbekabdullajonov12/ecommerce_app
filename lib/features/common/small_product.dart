@@ -4,11 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:store/core/routing/routes.dart';
-import 'package:store/data/models/product_model.dart';
 import 'package:store/features/home/presentation/manager/home_bloc.dart';
 import 'package:store/features/home/presentation/manager/home_state.dart';
 
 import '../../core/utils/colors.dart';
+import '../../data/models/product_model.dart';
 
 class SmallProduct extends StatelessWidget {
   const SmallProduct({super.key, required this.product});
