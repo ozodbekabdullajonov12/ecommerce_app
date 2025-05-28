@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,12 +26,22 @@ class SmallProduct extends StatelessWidget {
               Stack(
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      product.image,
-                      width: 161.w,
-                      height: 174.h,
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(9)),
+                    child: CachedNetworkImage(
+                      imageUrl: product.image,
                       fit: BoxFit.cover,
+                      height: 174.h,
+                      width: 161.w,
+                      progressIndicatorBuilder: (context, url, progress) {
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: progress.progress,
+                            color: Colors.black,
+                          ),
+                        );
+                      },
+                      errorWidget: (context, url, error) =>
+                          Icon(Icons.error, color: Colors.red),
                     ),
                   ),
                   Positioned(
@@ -54,7 +65,7 @@ class SmallProduct extends StatelessWidget {
                         ),
                         child: Center(
                           child: SvgPicture.asset(
-                            "assets/icons/${(product.isLiked)?"heart.svg":"heart_filled.svg"}",
+                            "assets/icons/${(!product.isLiked)?"heart.svg":"heart_filled.svg"}",
                           ),
                         ),
                       ),

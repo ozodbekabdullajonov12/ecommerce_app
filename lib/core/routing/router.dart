@@ -31,17 +31,18 @@ import 'package:store/features/onboarding/presentation/pages/splash_screen.dart'
 import 'package:store/features/product_details/presentation/manager/product_details_bloc.dart';
 import 'package:store/features/product_details/presentation/pages/product_details_view.dart';
 import 'package:store/features/review/presentation/pages/review_view.dart';
-import 'package:store/features/saved_items/presentation/pages/saved_items_view.dart';
+import 'package:store/features/saved_items/presentation/manager/saved_items_bloc.dart';
 import 'package:store/main.dart';
 
 import '../../features/home/presentation/pages/notifications_view.dart';
 import '../../features/review/presentation/manager/review/review_bloc.dart';
+import '../../features/saved_items/presentation/pages/saved_items_view.dart';
 
 
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.home,
+  initialLocation: Routes.login,
  routes: [
     GoRoute(path: Routes.onboarding, builder: (context, state) => OnboardingView()),
     GoRoute(
@@ -106,7 +107,12 @@ final GoRouter router = GoRouter(
         GoRoute(path: Routes.resetPassword, builder: (context, state) => ResetPasswordView()),
       ],
     ),
-    GoRoute(path: Routes.savedItems, builder: (context, state) => SavedItemsView()),
+   GoRoute(path: Routes.savedItems,
+       builder: (context, state) =>
+           BlocProvider(
+             child: SavedItemsView(),
+             create: (context) => SavedItemsBloc(productRepo: context.read())
+             ,)),
     GoRoute(path: Routes.myCart, builder: (context, state) => MyCartView()),
     GoRoute(path: Routes.yourCart, builder: (context, state) => YourCartView()),
     GoRoute(path: Routes.checkout, builder: (context, state) => MyCartCheckOut()),

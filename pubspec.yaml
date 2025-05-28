@@ -59,6 +59,8 @@ dependencies:
   freezed_annotation: ^3.0.0
   build_runner: ^2.4.15
   remove: ^1.0.10
+  connectivity_plus: ^6.1.4
+  cached_network_image: ^3.4.1
 
 
 dev_dependencies:

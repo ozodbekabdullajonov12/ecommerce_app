@@ -1,32 +1,36 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'search_history_model.dart';
+part of 'product_detail_images_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class SearchHistoryModelAdapter extends TypeAdapter<SearchHistoryModel> {
+class ProductDetailImagesModelAdapter
+    extends TypeAdapter<ProductDetailImagesModel> {
   @override
-  final int typeId = 5;
+  final int typeId = 1;
 
   @override
-  SearchHistoryModel read(BinaryReader reader) {
+  ProductDetailImagesModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return SearchHistoryModel(
-      title: fields[0] as String,
+    return ProductDetailImagesModel(
+      id: fields[0] as int?,
+      image: fields[1] as String?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, SearchHistoryModel obj) {
+  void write(BinaryWriter writer, ProductDetailImagesModel obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.title);
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.image);
   }
 
   @override
@@ -35,7 +39,7 @@ class SearchHistoryModelAdapter extends TypeAdapter<SearchHistoryModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is SearchHistoryModelAdapter &&
+      other is ProductDetailImagesModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

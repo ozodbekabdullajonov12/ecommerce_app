@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,12 +22,22 @@ class SearchViewProducts extends StatelessWidget {
                     spacing: 10,
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(6),
-                        child: Image.network(
-                          product.image,
-                          width: 56.w,
-                          height: 53.h,
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(6)),
+                        child: CachedNetworkImage(
+                          imageUrl: product.image,
                           fit: BoxFit.cover,
+                          height: 53.h,
+                          width: 56.w,
+                          progressIndicatorBuilder: (context, url, progress) {
+                            return Center(
+                              child: CircularProgressIndicator(
+                                value: progress.progress,
+                                color: Colors.black,
+                              ),
+                            );
+                          },
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error, color: Colors.red),
                         ),
                       ),
                       Column(

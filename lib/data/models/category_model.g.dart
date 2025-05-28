@@ -1,31 +1,34 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'search_history_model.dart';
+part of 'category_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class SearchHistoryModelAdapter extends TypeAdapter<SearchHistoryModel> {
+class CategoryModelAdapter extends TypeAdapter<CategoryModel> {
   @override
-  final int typeId = 5;
+  final int typeId = 0;
 
   @override
-  SearchHistoryModel read(BinaryReader reader) {
+  CategoryModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return SearchHistoryModel(
-      title: fields[0] as String,
+    return CategoryModel(
+      id: fields[0] as int,
+      title: fields[1] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, SearchHistoryModel obj) {
+  void write(BinaryWriter writer, CategoryModel obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(2)
       ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
       ..write(obj.title);
   }
 
@@ -35,7 +38,7 @@ class SearchHistoryModelAdapter extends TypeAdapter<SearchHistoryModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is SearchHistoryModelAdapter &&
+      other is CategoryModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

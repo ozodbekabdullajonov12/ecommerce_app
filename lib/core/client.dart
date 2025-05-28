@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:store/data/models/create_user_model.dart';
+
 import 'exceptions/auth_exception.dart';
 import 'interceptor.dart';
 
@@ -7,8 +8,7 @@ class ApiClient {
   ApiClient() {
     dio = Dio(
       BaseOptions(
-
-        baseUrl: "http://192.168.8.149:8888/api/v1",
+        baseUrl: "http://10.10.2.143:8888/api/v1",
         validateStatus: (value) => true,
       ),
     );
@@ -91,7 +91,7 @@ class ApiClient {
       "/products/list",
       queryParameters: queryParams,
     );
-    List<dynamic> data = response.data;
+    List<dynamic> data= response.data;
     if (response.statusCode == 200) {
       return data;
     } else {

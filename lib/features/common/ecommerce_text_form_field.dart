@@ -68,7 +68,7 @@ class EcommerceTextFormField extends StatelessWidget {
               icon: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: SvgPicture.asset(
-                  "assets/icons/${showPassword! ? "show_password" : "hide_password"}.svg",
+                  "assets/icons/${showPassword!? "show_password" : "hide_password"}.svg",
                   width: 24,
                   height: 24,
                   fit: BoxFit.contain,

@@ -3,7 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:store/data/models/product_model.dart';
-import 'package:store/data/repositories/product_repository.dart';
+import 'package:store/data/repositories/product_repositories/product_repository.dart';
 import 'package:store/features/home/presentation/manager/home_state.dart';
 import 'package:store/main.dart';
 
@@ -33,12 +33,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final products = await _repo.fetchProducts();
     final categories = await _repo.fetchCategories();
     final sizes = await _repo.fetchSizes();
+    final isInNetwork=_repo.isOnline;
     emit(
       state.copyWith(
         products: products,
         categories: categories,
         sizes: sizes,
         status: HomeStatus.idle,
+        isInNetwork: isInNetwork
       ),
     );
   }

@@ -61,7 +61,9 @@ class EcommerceBottomNavigationBar extends StatelessWidget {
           Column(
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.push(Routes.savedItems);
+                },
                 icon: SvgPicture.asset("assets/icons/saved.svg"),
               ),
               Text(
