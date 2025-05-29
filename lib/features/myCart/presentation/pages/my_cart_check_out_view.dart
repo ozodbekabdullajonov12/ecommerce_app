@@ -6,7 +6,7 @@ import 'package:store/core/utils/colors.dart';
 import 'package:store/features/common/ecommerce_text_button_container.dart';
 import 'package:store/features/common/store_icon_button.dart';
 import 'package:store/features/myCart/presentation/widgets/my_cart_check_out_deliver_adress.dart';
-import 'package:store/features/myCart/presentation/widgets/my_cart_check_out_payment_method.dart';
+import 'package:store/features/payment/presentation/widgets/my_cart_check_out_payment_method.dart';
 import 'package:store/features/myCart/presentation/widgets/my_cart_check_out_visa.dart';
 import 'package:store/features/myCart/presentation/widgets/my_cart_view_colculate_price.dart';
 

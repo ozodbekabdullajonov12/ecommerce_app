@@ -14,16 +14,18 @@ class Routes {
   static const myCart = "/my-cart";
   static const yourCart = "/your-cart";
   static const checkout = '/checkout';
-  static const paymentMethod = '/my_cart-payment';
+  static const paymentMethod = '/payment-method';
   static const newCard = '/new-card';
   static const account = '/account';
   static const helpCenter = '/help-center';
   static const myOrders = '/my-orders';
-  static const productDetails = '/product-details/productId';
+  static const productDetails = '/product-details/:productId';
   static const address = '/address';
   static const addAddress = '/addAddress';
   static String review(int id) => "/review/$id";
   static const myDetails = "/my-details";
+
   static const myNotifications = '/my-notifications';
-  static String productDetailsBuilder(int id) => '/productId/$id';
+  static const customerService = '/customer-service';
+  static String productDetailsBuilder(int id) => '/product-details/$id';
 }
