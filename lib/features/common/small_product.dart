@@ -1,13 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:store/core/routing/routes.dart';
 import 'package:store/data/models/product_model.dart';
 import 'package:store/features/home/presentation/manager/home_bloc.dart';
 import 'package:store/features/home/presentation/manager/home_state.dart';
 
+import '../../core/connection_state.dart';
+import '../../core/routing/routes.dart';
 import '../../core/utils/colors.dart';
 
 class SmallProduct extends StatelessWidget {
@@ -24,15 +26,26 @@ class SmallProduct extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () =>  context.push(Routes.productDetailsBuilder(product.id)),
+
                 child: Stack(
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        product.image,
-                        width: 161.w,
-                        height: 174.h,
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(9)),
+                      child: CachedNetworkImage(
+                        imageUrl: product.image,
                         fit: BoxFit.cover,
+                        height: 174.h,
+                        width: 161.w,
+                        progressIndicatorBuilder: (context, url, progress) {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              value: progress.progress,
+                              color: Colors.black,
+                            ),
+                          );
+                        },
+                        errorWidget: (context, url, error) =>
+                            Icon(Icons.error, color: Colors.red),
                       ),
                     ),
                     Positioned(
@@ -40,10 +53,16 @@ class SmallProduct extends StatelessWidget {
                       top: 10,
                       child: GestureDetector(
                         onTap: () {
-                          context.read<HomeBloc>().add(
-                            HomeSaveOrUnSave(isLiked: product.isLiked, id: product.id),
-                          );
-                        },
+                          if(context.read<ConnectionStateCubit>().state.isOnline) {
+                            context.read<HomeBloc>().add(
+                              HomeSaveOrUnSave(
+                                isLiked: product.isLiked,
+                                id: product.id,
+                              ),
+                            );
+                          }else{
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("You can't save or unsave when you are not in network ")));
+                          } },
                         child: Container(
                           height: 34.h,
                           width: 34.w,
@@ -53,7 +72,7 @@ class SmallProduct extends StatelessWidget {
                           ),
                           child: Center(
                             child: SvgPicture.asset(
-                              "assets/icons/${(product.isLiked) ? "heart.svg" : "heart_filled.svg"}",
+                              "assets/icons/${(!product.isLiked)?"heart.svg":"heart_filled.svg"}",
                             ),
                           ),
                         ),
@@ -82,7 +101,7 @@ class SmallProduct extends StatelessWidget {
                       fontFamily: "General Sans",
                     ),
                   ),
-                  if (product.discount != 0)
+                  if (product.discount !=0)
                     Text(
                       "-${product.discount}%",
                       style: TextStyle(

@@ -1,13 +1,33 @@
-import 'package:store/data/models/product_detail_images_model.dart';
+import 'package:hive/hive.dart';
+import 'product_detail_images_model.dart';
 
+part 'product_details_model.g.dart';
+
+@HiveType(typeId: 2)
 class ProductDetailsModel {
+  @HiveField(0)
   final int? id;
-  final String? title, description;
-  final int? price, reviewCount;
+
+  @HiveField(1)
+  final String? title;
+
+  @HiveField(2)
+  final String? description;
+
+  @HiveField(3)
+  final int? price;
+
+  @HiveField(4)
+  final int? reviewCount;
+
+  @HiveField(5)
   final bool? isLiked;
+
+  @HiveField(6)
   final double? rating;
+
+  @HiveField(7)
   final List<ProductDetailImagesModel>? images;
-  //final List<SizeModel>? sizes;
 
   ProductDetailsModel({
     required this.rating,
@@ -18,7 +38,6 @@ class ProductDetailsModel {
     required this.description,
     required this.reviewCount,
     required this.images,
-    //required this.sizes,
   });
 
   factory ProductDetailsModel.fromJson(Map<String, dynamic?> json) {
@@ -30,14 +49,9 @@ class ProductDetailsModel {
       title: json['title'],
       description: json['description'],
       reviewCount: json['reviewCount'],
-      //sizes:
-      //    (json["productSizes"] ?? json['productSizes'] as List<dynamic>)
-      //        .map((e) => ProductDetailsSizeModel.fromJson(e))
-      //        .toList(),
-      images:
-          (json["productImages"] as List<dynamic>)
-              .map((e) => ProductDetailImagesModel.fromJson(e))
-              .toList(),
+      images: (json["productImages"] as List<dynamic>)
+          .map((e) => ProductDetailImagesModel.fromJson(e))
+          .toList(),
     );
   }
 }

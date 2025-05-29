@@ -9,8 +9,6 @@ part 'home_state.freezed.dart';
 enum HomeStatus { idle, loading, error }
 @freezed
 abstract class HomeState with  _$HomeState{
-
-
   const factory HomeState({
     required List<ProductModel> products,
     required List<CategoryModel> categories,
@@ -22,6 +20,7 @@ abstract class HomeState with  _$HomeState{
     required String? title,
     required HomeStatus? status,
     required bool? orderBy,
+    required bool? isInNetwork,
   }) = _HomeState;
 
   factory HomeState.initial() {
@@ -36,6 +35,7 @@ abstract class HomeState with  _$HomeState{
       title: null,
       status: HomeStatus.loading,
       orderBy: false,
+      isInNetwork: null
     );
   }
 

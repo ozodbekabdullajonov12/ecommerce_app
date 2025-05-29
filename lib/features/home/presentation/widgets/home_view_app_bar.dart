@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:store/core/connection_state.dart';
 import 'package:store/core/routing/routes.dart';
 import 'package:store/core/utils/colors.dart';
 import 'package:store/features/home/presentation/manager/home_bloc.dart';
@@ -23,6 +24,8 @@ class HomeViewAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: AppBar(
+        surfaceTintColor: Colors.transparent,
+        backgroundColor: Colors.white,
         title: Text(
           "Discover",
           style: TextStyle(
@@ -96,13 +99,17 @@ class HomeViewAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      final filters = await showModalBottomSheet<HomeApplyFilters?>(
+                      if(context.read<ConnectionStateCubit>().state.isOnline) {
+                        final filters = await showModalBottomSheet<HomeApplyFilters?>(
                         useSafeArea: true,
                         context: context,
                         builder: (context) =>
                             HomeBottomSheet(sizes: state.sizes),);
-                      if (filters != null){
-                        context.read<HomeBloc>().add(filters);
+                        if (filters != null){
+                          context.mounted?  context.read<HomeBloc>().add(filters):null;
+                      }
+                      }else{
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("You can't use filters when you are not in network ")));
                       }
                     },
                     child: Container(
@@ -123,7 +130,7 @@ class HomeViewAppBar extends StatelessWidget implements PreferredSizeWidget {
                 height: 60,
                 child: (state.status == HomeStatus.idle) ?
                 ListView.separated(
-                  itemCount: state.categories!.length,
+                  itemCount: state.categories.length,
                   scrollDirection: Axis.horizontal,
                   separatorBuilder: (context, index) => SizedBox(width: 10,),
                   itemBuilder: (context, index) =>
@@ -138,7 +145,7 @@ class HomeViewAppBar extends StatelessWidget implements PreferredSizeWidget {
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: (state.currentCategoryId !=
-                                  state.categories![index].id) ? AppColors
+                                  state.categories[index].id) ? AppColors
                                   .primary.withValues(alpha: 0.1) : Colors
                                   .transparent,
                             ),
