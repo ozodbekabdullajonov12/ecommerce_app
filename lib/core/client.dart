@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:store/data/models/create_user_model.dart';
+
 import '../data/models/new_card_model.dart';
 import 'exceptions/auth_exception.dart';
 import 'interceptor.dart';
@@ -200,8 +201,7 @@ class ApiClient {
         data: {"id": cardId},
       );
 
-      if (response.statusCode == 204) {
-      } else {
+      if (response.statusCode == 204) {} else {
         print("Delete failed: ${response.statusCode} - ${response.data}");
         throw Exception("Cartani o'chirishda xatolik");
       }
