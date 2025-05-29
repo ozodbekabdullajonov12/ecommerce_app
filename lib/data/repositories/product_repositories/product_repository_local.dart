@@ -18,17 +18,23 @@ class ProductRepositoryLocal implements IProductRepository {
   Future<List<ProductModel>> fetchProducts({
     Map<String, dynamic>? queryParams,
   }) async {
-    final String? title = queryParams?["Title"];
-    final int? id = queryParams?["CategoryId"];
     final box = Hive.box<ProductModel>(productsBoxName);
-    List<ProductModel> products = box.values.toList();
-    if (id != null) {
-      products = products.where((product) => product.categoryId == id).toList();
+    Iterable<ProductModel> products = box.values.toList();
+
+    if (queryParams != null){
+      final String? title = queryParams['Title'];
+      if (title != null) {
+        products = products.where((product) => product.title.toLowerCase().contains(title.toLowerCase()));
+      }
+
+      final id = queryParams["CategoryId"];
+      if (id != null&&id!="") {
+        products = products.where((product) => product.categoryId == id);
+      }
     }
-    if (title != null) {
-      products = products.where((product) => product.title.toLowerCase().contains(title.toLowerCase())).toList();
-    }
-    return products;
+
+
+    return products.toList();
   }
 
   @override

@@ -25,6 +25,7 @@ class HomeViewAppBar extends StatelessWidget implements PreferredSizeWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: AppBar(
         surfaceTintColor: Colors.transparent,
+        backgroundColor: Colors.white,
         title: Text(
           "Discover",
           style: TextStyle(

@@ -43,8 +43,6 @@ import '../../features/saved_items/presentation/pages/saved_items_view.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.login,
- routes: [
   initialLocation: Routes.home,
   routes: [
     GoRoute(path: Routes.onboarding, builder: (context, state) => OnboardingView()),
@@ -77,19 +75,6 @@ final GoRouter router = GoRouter(
             child: HomeView(),
           ),
     ),
-
-    GoRoute(path: Routes.search,
-        builder: (context, state) =>
-            BlocProvider(create: (context) =>
-                SearchBloc(productRepo: context.read(),
-                    historyRepo: context.read()
-                 ),
-            child:  SearchView(),
-            ),
-    ),
-    GoRoute(
-      path: Routes.notifications,
-      builder: (context, state) => NotificationsView(),),
    GoRoute(path: Routes.search,
        builder: (context, state) =>
            BlocProvider(create: (context) =>
@@ -97,7 +82,7 @@ final GoRouter router = GoRouter(
                  productRepo: context.read(), historyRepo: context.read(),),
 
            child: SearchView(),)),
-    GoRoute(path: Routes.notifications, builder: (context, state) => NotificationsView()),
+
     ShellRoute(
       builder:
           (context, state, child) => BlocProvider(
@@ -138,8 +123,6 @@ final GoRouter router = GoRouter(
     GoRoute(path: Routes.account, builder: (context, state) => AccountView()),
     GoRoute(path: Routes.helpCenter, builder: (context, state) => AccountHelpCenterView()),
     GoRoute(path: Routes.myOrders, builder: (context, state) => AccountMyOrdersView()),
-    GoRoute(path: Routes.enterCode, builder: (context, state) => EnterOtpView()),
-    GoRoute(path: Routes.resetPassword, builder: (context, state) => ResetPasswordView()),
     GoRoute(
       path: Routes.productDetails,
       builder: (context, state) {
@@ -167,18 +150,16 @@ final GoRouter router = GoRouter(
     GoRoute(path: Routes.myNotifications, builder: (context, state) => AccountNotificationsView()),
     GoRoute(
       path: Routes.addAddress,
-      builder:
-          (context, state) =>
-              BlocProvider(create: (context) => AddAddressBloc(), child: AddAddressView()),
+      builder: (context, state) => BlocProvider(create: (context) => AddAddressBloc(), child: AddAddressView()),
     ),
+    GoRoute(path: Routes.customerService, builder: (context, state) => CustomerServiceView()),
     GoRoute(
       path: Routes.notifications,
       builder:
           (context, state) => BlocProvider(
-            create: (context) => NotificationBloc(repo: context.read()),
-            child: NotificationsView(),
-          ),
+        create: (context) => NotificationBloc(repo: context.read()),
+        child: NotificationsView(),
+      ),
     ),
-    GoRoute(path: Routes.customerService, builder: (context, state) => CustomerServiceView()),
   ],
 );

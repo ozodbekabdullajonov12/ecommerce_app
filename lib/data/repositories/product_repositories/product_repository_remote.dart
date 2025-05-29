@@ -29,8 +29,8 @@ class ProductRepositoryRemote implements IProductRepository {
   }) async {
     var rawProducts = await client.fetchProducts(queryParams: queryParams);
     products = rawProducts.map((e) => ProductModel.fromJson(e)).toList();
-    productsBox.clear();
-    productsBox.addAll(products);
+    await productsBox.clear();
+    await productsBox.addAll(products);
     return products;
   }
 

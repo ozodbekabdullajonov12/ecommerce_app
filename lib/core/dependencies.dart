@@ -10,10 +10,10 @@ import 'package:store/data/repositories/product_repositories/product_repository_
 import 'package:store/data/repositories/new_card_repository.dart';
 import 'package:store/data/repositories/notification_repository.dart';
 import 'package:store/data/repositories/payment_repository.dart';
-import 'package:store/data/repositories/product_repository.dart';
+
 import 'package:store/data/repositories/search_history_repository.dart';
 import 'package:store/data/repositories/review_repository.dart';
-import 'package:store/data/repositories/search_history_repository.dart';
+
 
 
 final List<SingleChildWidget> providers = [

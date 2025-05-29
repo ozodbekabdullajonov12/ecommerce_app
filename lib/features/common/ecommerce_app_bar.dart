@@ -34,6 +34,8 @@ class EcommerceAppBar extends StatelessWidget
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.h),
       child: AppBar(
         toolbarHeight: toolbarHeight,
+        surfaceTintColor: Colors.transparent,
+        backgroundColor:Colors.white,
         leading: Align(
           alignment: Alignment.centerLeft,
           child: IconButton(
