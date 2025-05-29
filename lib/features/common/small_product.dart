@@ -22,45 +22,45 @@ class SmallProduct extends StatelessWidget {
           (context, state) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      product.image,
-                      width: 161.w,
-                      height: 174.h,
-                      fit: BoxFit.cover,
+              GestureDetector(
+                onTap: () =>  context.push(Routes.productDetailsBuilder(product.id)),
+                child: Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
+                        product.image,
+                        width: 161.w,
+                        height: 174.h,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    right: 10,
-                    top: 10,
-                    child: GestureDetector(
-                      onTap: () {
-                        context.read<HomeBloc>().add(
-                          HomeSaveOrUnSave(
-                            isLiked: product.isLiked,
-                            id: product.id,
+                    Positioned(
+                      right: 10,
+                      top: 10,
+                      child: GestureDetector(
+                        onTap: () {
+                          context.read<HomeBloc>().add(
+                            HomeSaveOrUnSave(isLiked: product.isLiked, id: product.id),
+                          );
+                        },
+                        child: Container(
+                          height: 34.h,
+                          width: 34.w,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                        );
-                      },
-                      child: Container(
-                        height: 34.h,
-                        width: 34.w,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Center(
-                          child: SvgPicture.asset(
-                            "assets/icons/${(product.isLiked)?"heart.svg":"heart_filled.svg"}",
+                          child: Center(
+                            child: SvgPicture.asset(
+                              "assets/icons/${(product.isLiked) ? "heart.svg" : "heart_filled.svg"}",
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Text(
                 product.title,
@@ -82,7 +82,7 @@ class SmallProduct extends StatelessWidget {
                       fontFamily: "General Sans",
                     ),
                   ),
-                  if (product.discount !=0)
+                  if (product.discount != 0)
                     Text(
                       "-${product.discount}%",
                       style: TextStyle(

@@ -7,6 +7,7 @@ class MyDetailsState extends Equatable {
   final MyDetailsModel? myDetails;
   final MyDetailsStatus? status;
 
+
   const MyDetailsState({required this.myDetails, required this.status});
 
   factory MyDetailsState.initial() {

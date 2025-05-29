@@ -49,7 +49,7 @@ class _ProductDetailsItemState extends State<ProductDetailsItem> {
               ),
               SizedBox(height: 10.h),
               Text(
-                detail.title as String,
+                detail.title ,
                 style: TextStyle(
                   color: AppColors.primary.withValues(alpha: 0.9),
                   fontFamily: "General Sans",
@@ -63,7 +63,7 @@ class _ProductDetailsItemState extends State<ProductDetailsItem> {
                   SvgPicture.asset("assets/icons/star_filled.svg"),
                   SizedBox(width: 5.w),
                   Text(
-                    "${detail.rating?.toStringAsFixed(1)}/5",
+                    "${detail.rating.toStringAsFixed(1)}/5",
                     style: TextStyle(
                       color: AppColors.primary.withValues(alpha: 0.9),
                       fontWeight: FontWeight.w500,
@@ -83,7 +83,7 @@ class _ProductDetailsItemState extends State<ProductDetailsItem> {
               ),
               SizedBox(height: 10.h),
               Text(
-                "${detail.description}",
+                detail.description,
                 style: TextStyle(
                   color: AppColors.primary.withValues(alpha: 0.5),
                   fontSize: 16.sp,
@@ -102,32 +102,32 @@ class _ProductDetailsItemState extends State<ProductDetailsItem> {
                 ),
               ),
               SizedBox(height: 10.h),
-              // SizedBox(
-              //   width: 50,
-              //   child: ListView.builder(
-              //     scrollDirection: Axis.horizontal,
-              //     itemCount: detail!.sizes.length,
-              //     itemBuilder:
-              //         (context, index) => Row(
-              //           mainAxisAlignment: MainAxisAlignment.start,
-              //           children: [
-              //             StoreButtonContainer(size: detail.sizes[index].title,
-              //             callback: (){
-              //               setState(() {
-              //                  selectedSize = index;
-              //               });
-              //             },
-              //               textColor: selectedSize == index
-              //                   ? Colors.white
-              //                   : AppColors.primary,
-              //               buttonColor: selectedSize == index
-              //                   ? AppColors.primary
-              //                   : Colors.white,
-              //             ),
-              //           ],
-              //         ),
-              //   ),
-              // ),
+              SizedBox(
+                width: 50,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: state.sizes.length,
+                  itemBuilder:
+                      (context, index) => Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          StoreButtonContainer(size: state.sizes[index].title,
+                          callback: (){
+                            setState(() {
+                               selectedSize = index;
+                            });
+                          },
+                            textColor: selectedSize == index
+                                ? Colors.white
+                                : AppColors.primary,
+                            buttonColor: selectedSize == index
+                                ? AppColors.primary
+                                : Colors.white,
+                          ),
+                        ],
+                      ),
+                ),
+              ),
             ],
           ),
         );

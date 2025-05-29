@@ -2,13 +2,14 @@ import 'package:store/data/models/product_detail/product_detail_images_model.dar
 import 'package:store/data/models/product_detail/product_details_size_model.dart';
 
 class ProductDetailsModel {
-  final int? id;
-  final String? title, description;
-  final int? price, reviewCount;
-  final bool? isLiked;
-  final double? rating;
+  final int id;
+  final String title, description;
+  final int price;
+  final double reviewCount;
+  final bool isLiked;
+  final double rating;
   final List<ProductDetailImagesModel> images;
-  // final List<ProductDetailsSizeModel> sizes;
+
 
 
 
@@ -21,7 +22,6 @@ class ProductDetailsModel {
     required this.description,
     required this.reviewCount,
     required this.images,
-    // required this.sizes,
     //required this.sizes,
   });
 
@@ -35,7 +35,6 @@ class ProductDetailsModel {
       description: json['description'],
       reviewCount: json['reviewCount'],
       images: (json["productImages"] as List<dynamic>).map((e) => ProductDetailImagesModel.fromJson(e)).toList(),
-      // sizes: (json["productSizes"] as List<dynamic>).map((s)=>ProductDetailsSizeModel.fromJson(s)).toList()
     );
   }
 }

@@ -13,6 +13,7 @@ import 'package:store/features/auth/presentation/manager/login/login_bloc.dart';
 import 'package:store/features/auth/presentation/manager/sign_up/sign_up_bloc.dart';
 import 'package:store/features/auth/presentation/pages/login_view.dart';
 import 'package:store/features/auth/presentation/pages/sign_up_view.dart';
+import 'package:store/features/customer_service/presentation/pages/customer_service_view.dart';
 import 'package:store/features/forget_reset_password/presentation/manager/reset_password_bloc.dart';
 import 'package:store/features/forget_reset_password/presentation/pages/enter_otp_view.dart';
 import 'package:store/features/forget_reset_password/presentation/pages/forgot_view.dart';
@@ -23,8 +24,10 @@ import 'package:store/features/home/presentation/pages/home_view.dart';
 import 'package:store/features/home/presentation/pages/search_view.dart';
 import 'package:store/features/myCart/presentation/manager/my_cart_bloc.dart';
 import 'package:store/features/myCart/presentation/pages/my_cart_check_out_view.dart';
-import 'package:store/features/myCart/presentation/pages/my_cart_new_card_view.dart';
-import 'package:store/features/payment/presentation/pages/my_cart_payment_method_view.dart';
+import 'package:store/features/payment/presentation/manager/newCard/newcard_bloc.dart';
+import 'package:store/features/payment/presentation/manager/paymentMethod/payment_bloc.dart';
+import 'package:store/features/payment/presentation/pages/new_card_view.dart';
+import 'package:store/features/payment/presentation/pages/payment_view.dart';
 import 'package:store/features/myCart/presentation/pages/my_cart_view.dart';
 import 'package:store/features/myCart/presentation/pages/your_cart_view.dart';
 import 'package:store/features/notification/presentation/manager/notification_bloc.dart';
@@ -40,7 +43,7 @@ import '../../features/review/presentation/manager/review/review_bloc.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.login,
+  initialLocation: Routes.home,
   routes: [
     GoRoute(path: Routes.onboarding, builder: (context, state) => OnboardingView()),
     GoRoute(
@@ -107,8 +110,22 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(path: Routes.yourCart, builder: (context, state) => YourCartView()),
     GoRoute(path: Routes.checkout, builder: (context, state) => MyCartCheckOut()),
-    GoRoute(path: Routes.paymentMethod, builder: (context, state) => PaymentMethodView()),
-    GoRoute(path: Routes.newCard, builder: (context, state) => NewCardView()),
+    GoRoute(
+      path: Routes.paymentMethod,
+      builder:
+          (context, state) => BlocProvider(
+            create: (context) => PaymentBloc(repo: context.read()),
+            child: PaymentMethodView(),
+          ),
+    ),
+    GoRoute(
+      path: Routes.newCard,
+      builder:
+          (context, state) => BlocProvider(
+            create: (context) => NewCardBloc(repository: context.read()),
+            child: NewCardView(),
+          ),
+    ),
     GoRoute(path: Routes.account, builder: (context, state) => AccountView()),
     GoRoute(path: Routes.helpCenter, builder: (context, state) => AccountHelpCenterView()),
     GoRoute(path: Routes.myOrders, builder: (context, state) => AccountMyOrdersView()),
@@ -116,15 +133,17 @@ final GoRouter router = GoRouter(
     GoRoute(path: Routes.resetPassword, builder: (context, state) => ResetPasswordView()),
     GoRoute(
       path: Routes.productDetails,
-      builder:
-          (context, state) => BlocProvider(
-            create:
-                (context) => ProductDetailsBloc(
-                  repo: context.read(),
-                  productId: int.parse(state.pathParameters["productId"]!),
-                ),
-            child: ProductDetailsView(),
-          ),
+      builder: (context, state) {
+        return BlocProvider(
+          create: (context) {
+            return ProductDetailsBloc(
+              repo: context.read(),
+              productId: int.parse(state.pathParameters["productId"]!),
+            );
+          },
+          child: ProductDetailsView(),
+        );
+      },
     ),
     GoRoute(
       path: Routes.review(1),
@@ -151,6 +170,6 @@ final GoRouter router = GoRouter(
             child: NotificationsView(),
           ),
     ),
+    GoRoute(path: Routes.customerService, builder: (context, state) => CustomerServiceView()),
   ],
 );
- 
