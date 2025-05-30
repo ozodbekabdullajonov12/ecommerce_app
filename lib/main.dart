@@ -17,7 +17,6 @@ import 'package:store/data/repositories/product_repositories/product_repository_
 
 import 'data/models/category_model.dart';
 import 'data/models/product_detail_images_model.dart';
-import 'data/models/product_details_size_model.dart';
 import 'data/models/search_history_model.dart';
 
 final navigatorKey=GlobalKey<NavigatorState>();
@@ -65,10 +64,9 @@ Future hiveInitFunc() async {
   Hive.registerAdapter(CategoryModelAdapter());
   Hive.registerAdapter(ProductDetailImagesModelAdapter());
   Hive.registerAdapter(ProductDetailsModelAdapter());
-  Hive.registerAdapter(ProductDetailsSizeModelAdapter());
   Hive.registerAdapter(ProductModelAdapter());
   Hive.registerAdapter(SizeModelAdapter());
-  await Hive.openBox<MyCartModel>("myCart");
+  // await Hive.openBox<MyCartModel>("myCart");
   await Hive.openBox<ProductModel>(ProductRepositoryLocal.productsBoxName);
   await Hive.openBox<ProductModel>(ProductRepositoryLocal.savedProductBoxName);
   await Hive.openBox<SizeModel>(ProductRepositoryLocal.sizesBoxName);

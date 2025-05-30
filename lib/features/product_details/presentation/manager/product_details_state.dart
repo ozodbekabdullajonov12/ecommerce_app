@@ -1,8 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:store/data/models/product_detail/product_details_size_model.dart';
 import 'package:store/data/models/size_model.dart';
 
-import '../../../../data/models/product_detail/product_details_model.dart';
+import '../../../../data/models/product_details_model.dart';
 
 enum ProductDetailsStatus { idle, loading, error, success }
 

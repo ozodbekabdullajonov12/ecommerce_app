@@ -44,7 +44,7 @@ import '../../features/saved_items/presentation/pages/saved_items_view.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.myCart,
+  initialLocation: Routes.login,
   routes: [
     GoRoute(path: Routes.onboarding, builder: (context, state) => OnboardingView()),
     GoRoute(
@@ -96,7 +96,6 @@ final GoRouter router = GoRouter(
         GoRoute(path: Routes.resetPassword, builder: (context, state) => ResetPasswordView()),
       ],
     ),
-    GoRoute(path: Routes.savedItems, builder: (context, state) => SavedItemsView()),
     GoRoute(
       path: Routes.myCart,
       builder:

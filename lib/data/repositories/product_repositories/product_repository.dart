@@ -7,6 +7,7 @@ import 'package:store/data/repositories/product_repositories/product_repository_
 import 'package:store/data/repositories/product_repositories/product_repository_local.dart';
 import 'package:store/data/repositories/product_repositories/product_repository_remote.dart';
 
+
 class ProductRepository implements IProductRepository {
   final ProductRepositoryLocal _localRepo;
 
@@ -99,4 +100,6 @@ class ProductRepository implements IProductRepository {
     required bool isLiked,
     Map<String, dynamic>? queryParams,
   }) => _remoteRepo.saveOrUnSave(productId: productId, isLiked: isLiked);
+  Future<bool> addProduct({required int productId, required int sizeId})=>
+      _remoteRepo.addProduct(productId: productId, sizeId: sizeId);
 }

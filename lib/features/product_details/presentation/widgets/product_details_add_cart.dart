@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:store/core/utils/colors.dart';
-import 'package:store/data/models/product_detail/product_details_model.dart';
 import 'package:store/features/product_details/presentation/manager/product_details_bloc.dart';
+
+import '../../../../data/models/product_details_model.dart';
 
 class ProductDetailsAddCart extends StatelessWidget {
   const ProductDetailsAddCart({super.key, required this.detail, required this.selectedSize});

@@ -1,10 +1,17 @@
-import 'my_cart_items_model.dart';
+import 'package:hive/hive.dart';
 
+import 'my_cart_items_model.dart';
+@HiveType(typeId: 9)
 class MyCartModel {
+  @HiveField(0)
   final List<MyCartItemsModel> cartItems;
+  @HiveField(1)
   final int subTotal;
+  @HiveField(2)
   final int vat;
+  @HiveField(3)
   final int shippingFee;
+  @HiveField(4)
   final int total;
 
   MyCartModel({

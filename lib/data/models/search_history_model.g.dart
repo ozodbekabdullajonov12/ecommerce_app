@@ -2,6 +2,10 @@
 
 part of 'search_history_model.dart';
 
+// **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
 class SearchHistoryModelAdapter extends TypeAdapter<SearchHistoryModel> {
   @override
   final int typeId = 5;

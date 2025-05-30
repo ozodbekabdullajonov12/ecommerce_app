@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:store/data/repositories/product_repository.dart';
 import 'package:store/features/product_details/presentation/manager/product_details_state.dart';
+
+import '../../../../data/repositories/product_repositories/product_repository.dart';
 part 'product_details_event.dart';
 
 class ProductDetailsBloc extends Bloc<ProductDetailsEvent, ProductDetailsState> {

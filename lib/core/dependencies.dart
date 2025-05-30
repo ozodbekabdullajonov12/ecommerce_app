@@ -22,19 +22,15 @@ import 'package:store/data/repositories/review_repository.dart';
 final List<SingleChildWidget> providers = [
   Provider(create: (context) => ApiClient()),
   Provider(create: (context) => AuthRepository(client: context.read())),
-  Provider(create: (context) => ProductRepository(client: context.read())),
-  Provider(create: (context) => SearchHistoryRepository(),),
-  Provider(create: (context) => ReviewRepository(client: context.read()),),
-  Provider(create: (context)=>MyCartRepository(local: MyCartLocalRepository(), remote: MyCartRemoteRepository(client: context.read()))),
-  Provider(create: (context) => SearchHistoryRepository()),
-  Provider(create: (context) => ReviewRepository(client: context.read())),
   BlocProvider(create: (context) => ConnectionStateCubit(),),
   RepositoryProvider(create: (context) => ProductRepositoryLocal(),),
   RepositoryProvider(create: (context) => ProductRepositoryRemote(client: context.read()),),
   RepositoryProvider(create: (context) => ProductRepository(localRepo: context.read(), remoteRepo: context.read(), connectionCubit: context.read(),),),
   Provider(create: (context) => SearchHistoryRepository(),),
+  Provider(create: (context)=>MyCartRepository(local: MyCartLocalRepository(), remote: MyCartRemoteRepository(client: context.read()))),
   Provider(create: (context) => ReviewRepository(client: context.read()),),
   Provider(create: (context) => NotificationRepository(client: context.read())),
   Provider(create: (context) => PaymentRepository(client: context.read())),
-  Provider(create: (context) => NewCardRepository(client: context.read())),
+
+
 ];

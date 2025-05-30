@@ -1,9 +1,18 @@
+import 'package:hive/hive.dart';
+
+@HiveType(typeId: 8)
 class MyCartItemsModel {
+  @HiveField(0)
   final int id;
+  @HiveField(1)
   final String title;
+  @HiveField(2)
   final String size;
+  @HiveField(3)
   final int price;
+  @HiveField(4)
   final String image;
+  @HiveField(5)
   final num quantity;
 
   MyCartItemsModel({

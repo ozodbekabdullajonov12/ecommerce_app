@@ -4,7 +4,7 @@ import 'my_cart_items_model.dart';
 
 class MyCartModelAdapter extends TypeAdapter<MyCartModel> {
   @override
-  final int typeId = 3;
+  final int typeId = 7;
 
   @override
   MyCartModel read(BinaryReader reader) {
