@@ -219,14 +219,14 @@ class ApiClient {
     }
   }
   Future<bool>addProduct({required int productId, required int sizeId})async{
-    var response = await dio.post("my-cart/add-item", data: {
+    var response = await dio.post("/my-cart/add-item", data: {
       "productId" : productId,
       "sizeId": sizeId,
     });
     if (response.statusCode == 200) {
       return true;
     }else{
-      throw false;
+      return false;
     }
   }
 }

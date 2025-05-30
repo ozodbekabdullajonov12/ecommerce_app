@@ -43,7 +43,7 @@ import '../../features/review/presentation/manager/review/review_bloc.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.home,
+  initialLocation: Routes.myCart,
   routes: [
     GoRoute(path: Routes.onboarding, builder: (context, state) => OnboardingView()),
     GoRoute(

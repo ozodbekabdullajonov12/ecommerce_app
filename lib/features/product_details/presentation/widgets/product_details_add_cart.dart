@@ -47,7 +47,16 @@ class ProductDetailsAddCart extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              context.read<ProductDetailsBloc>().add(ProductDetailAddProduct(productId: detail!.id, sizeId: selectedSize));
+              context.read<ProductDetailsBloc>().add(
+                ProductDetailAddProduct(
+                  productId: detail!.id,
+                  sizeId: selectedSize,
+                ),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("Product Added"), duration: Duration(seconds: 3),
+                ),
+              );
             },
             child: Container(
               width: 240.w,

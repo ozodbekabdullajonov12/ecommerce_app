@@ -54,3 +54,20 @@ class Ecommerce extends StatelessWidget {
     );
   }
 }
+// Future hiveInitFunc() async {
+//   final directory = await getApplicationDocumentsDirectory();
+//   Hive.init(directory.path);
+//   Hive.registerAdapter(SearchHistoryModelAdapter());
+//   Hive.registerAdapter(CategoryModelAdapter());
+//   Hive.registerAdapter(ProductDetailImagesModelAdapter());
+//   Hive.registerAdapter(ProductDetailsModelAdapter());
+//   Hive.registerAdapter(ProductDetailsSizeModelAdapter());
+//   Hive.registerAdapter(ProductModelAdapter());
+//   Hive.registerAdapter(SizeModelAdapter());
+//   await Hive.openBox<ProductModel>(ProductRepositoryLocal.productsBoxName);
+//   await Hive.openBox<ProductModel>(ProductRepositoryLocal.savedProductBoxName);
+//   await Hive.openBox<SizeModel>(ProductRepositoryLocal.sizesBoxName);
+//   await Hive.openBox<CategoryModel>(ProductRepositoryLocal.categoriesBoxName);
+//   await Hive.openBox<ProductModel>(ProductRepositoryLocal.searchedProductsBoxName);
+//   await Hive.openBox<ProductDetailsModel>(ProductRepositoryLocal.productDetailBoxName);
+// }

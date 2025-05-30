@@ -21,13 +21,6 @@ class ProductDetailsBloc extends Bloc<ProductDetailsEvent, ProductDetailsState> 
     final sizes = await _repo.fetchSizes();
     sizes.sort((a,b) => a.id.compareTo(b.id));
     emit(state.copyWith(productDetails: details, sizes: sizes, status: ProductDetailsStatus.success));
-    emit(
-      ProductDetailsState(
-        status: ProductDetailsStatus.idle,
-        productDetails: details,
-        sizes: sizes,
-      ),
-    );
   }
   Future<void> _addProduct(ProductDetailAddProduct event, Emitter<ProductDetailsState> emit) async{
     await _repo.addProduct(productId: event.productId, sizeId: event.sizeId);

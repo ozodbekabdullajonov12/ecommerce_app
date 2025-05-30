@@ -4,8 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:store/features/common/ecommerce_app_bar.dart';
 import 'package:store/features/product_details/presentation/manager/product_details_bloc.dart';
 import 'package:store/features/product_details/presentation/manager/product_details_state.dart';
-import 'package:store/features/product_details/presentation/pages/product_details_add_cart.dart';
-import 'package:store/features/product_details/presentation/pages/product_details_item.dart';
+import 'package:store/features/product_details/presentation/widgets/product_details_add_cart.dart';
+import 'package:store/features/product_details/presentation/widgets/product_details_item.dart';
 
 class ProductDetailsView extends StatefulWidget {
   const ProductDetailsView({super.key});
@@ -16,7 +16,7 @@ class ProductDetailsView extends StatefulWidget {
 }
 
 class _ProductDetailsViewState extends State<ProductDetailsView> {
-  int selectedSize = -1;
+  int selectedSize = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +37,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             Center(child: Text("Xatolik"));
           }
           return ProductDetailsAddCart(detail: detail, selectedSize: selectedSize,);
+
         },
       ),
     );
