@@ -16,6 +16,7 @@ class NotificationsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: EcommerceAppBar(title: "Notifications", actions: []),
       body: BlocBuilder<NotificationBloc, NotificationState>(
         builder: (context, state) {

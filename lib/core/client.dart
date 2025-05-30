@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:store/data/models/create_user_model.dart';
+
 import '../data/models/new_card_model.dart';
 import 'exceptions/auth_exception.dart';
 import 'interceptor.dart';
@@ -66,11 +67,17 @@ class ApiClient {
     if (response.statusCode == 200) {
       throw Exception("Xatolik vujudga keldi");
     }
+
   }
 
-  Future<List<dynamic>> fetchProducts({Map<String, dynamic>? queryParams}) async {
-    var response = await dio.get("/products/list", queryParameters: queryParams);
-    List<dynamic> data = response.data;
+  Future<List<dynamic>> fetchProducts({
+    Map<String, dynamic>? queryParams,
+  }) async {
+    var response = await dio.get(
+      "/products/list",
+      queryParameters: queryParams,
+    );
+    List<dynamic> data= response.data;
     if (response.statusCode == 200) {
       return data;
     } else {
@@ -191,8 +198,7 @@ class ApiClient {
         data: {"id": cardId},
       );
 
-      if (response.statusCode == 204) {
-      } else {
+      if (response.statusCode == 204) {} else {
         print("Delete failed: ${response.statusCode} - ${response.data}");
         throw Exception("Cartani o'chirishda xatolik");
       }

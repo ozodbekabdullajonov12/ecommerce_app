@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:store/data/models/search_history_model.dart';
-import 'package:store/data/repositories/product_repository.dart';
+import 'package:store/data/repositories/product_repositories/product_repository.dart';
 import 'package:store/data/repositories/search_history_repository.dart';
 import 'package:store/features/home/presentation/manager/search/search_state.dart';
 

@@ -4,7 +4,7 @@ part of 'search_history_model.dart';
 
 class SearchHistoryModelAdapter extends TypeAdapter<SearchHistoryModel> {
   @override
-  final int typeId = 0;
+  final int typeId = 5;
 
   @override
   SearchHistoryModel read(BinaryReader reader) {
