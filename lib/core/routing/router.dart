@@ -67,23 +67,18 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: Routes.home,
       builder:
+          (context, state) =>
+              BlocProvider(create: (context) => HomeBloc(repo: context.read()), child: HomeView()),
+    ),
+    GoRoute(
+      path: Routes.search,
+      builder:
           (context, state) => BlocProvider(
             create:
-                (context) => HomeBloc(
-                  repo: context.read(),
-
-                ),
-            child: HomeView(),
+                (context) => SearchBloc(productRepo: context.read(), historyRepo: context.read()),
+            child: SearchView(),
           ),
     ),
-   GoRoute(path: Routes.search,
-       builder: (context, state) =>
-           BlocProvider(create: (context) =>
-               SearchBloc(
-                 productRepo: context.read(), historyRepo: context.read(),),
-
-           child: SearchView(),)),
-
     ShellRoute(
       builder:
           (context, state, child) => BlocProvider(
@@ -97,6 +92,13 @@ final GoRouter router = GoRouter(
       ],
     ),
     GoRoute(
+      path: Routes.savedItems,
+      builder:
+          (context, state) => BlocProvider(
+            child: SavedItemsView(),
+            create: (context) => SavedItemsBloc(productRepo: context.read()),
+          ),
+    ),
       path: Routes.myCart,
       builder:
           (context, state) => BlocProvider(
@@ -159,16 +161,18 @@ final GoRouter router = GoRouter(
     GoRoute(path: Routes.myNotifications, builder: (context, state) => AccountNotificationsView()),
     GoRoute(
       path: Routes.addAddress,
-      builder: (context, state) => BlocProvider(create: (context) => AddAddressBloc(), child: AddAddressView()),
+      builder:
+          (context, state) =>
+              BlocProvider(create: (context) => AddAddressBloc(), child: AddAddressView()),
     ),
     GoRoute(path: Routes.customerService, builder: (context, state) => CustomerServiceView()),
     GoRoute(
       path: Routes.notifications,
       builder:
           (context, state) => BlocProvider(
-        create: (context) => NotificationBloc(repo: context.read()),
-        child: NotificationsView(),
-      ),
+            create: (context) => NotificationBloc(repo: context.read()),
+            child: NotificationsView(),
+          ),
     ),
   ],
 );
