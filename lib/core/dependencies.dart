@@ -4,6 +4,9 @@ import 'package:provider/single_child_widget.dart' show SingleChildWidget;
 import 'package:store/core/client.dart';
 import 'package:store/core/connection_state.dart';
 import 'package:store/data/repositories/auth_repository.dart';
+import 'package:store/data/repositories/my_cart_repository/my_cart_local_repository.dart';
+import 'package:store/data/repositories/my_cart_repository/my_cart_remote_repository.dart';
+import 'package:store/data/repositories/my_cart_repository/my_cart_repositoroy.dart';
 import 'package:store/data/repositories/product_repositories/product_repository.dart';
 import 'package:store/data/repositories/product_repositories/product_repository_local.dart';
 import 'package:store/data/repositories/product_repositories/product_repository_remote.dart';
@@ -24,8 +27,10 @@ final List<SingleChildWidget> providers = [
   RepositoryProvider(create: (context) => ProductRepositoryRemote(client: context.read()),),
   RepositoryProvider(create: (context) => ProductRepository(localRepo: context.read(), remoteRepo: context.read(), connectionCubit: context.read(),),),
   Provider(create: (context) => SearchHistoryRepository(),),
+  Provider(create: (context)=>MyCartRepository(local: MyCartLocalRepository(), remote: MyCartRemoteRepository(client: context.read()))),
   Provider(create: (context) => ReviewRepository(client: context.read()),),
   Provider(create: (context) => NotificationRepository(client: context.read())),
   Provider(create: (context) => PaymentRepository(client: context.read())),
-  Provider(create: (context) => NewCardRepository(client: context.read())),
+
+
 ];

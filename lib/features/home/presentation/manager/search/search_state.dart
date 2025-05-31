@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:store/data/models/product_model.dart';
 import 'package:store/data/models/search_history_model.dart';
+
+import '../../../../../data/models/product_model.dart';
 
 enum SearchStatus { idle, loading, notFound,error,starting}
 

@@ -7,6 +7,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:store/core/dependencies.dart';
 import 'package:store/core/routing/router.dart';
+import 'package:store/data/models/my_cart/my_cart_adapter.dart';
+import 'package:store/data/models/my_cart/my_cart_model.dart';
+import 'package:store/data/models/search_history_model.dart';
 import 'package:store/data/models/product_details_model.dart';
 import 'package:store/data/models/product_model.dart';
 import 'package:store/data/models/size_model.dart';
@@ -14,7 +17,6 @@ import 'package:store/data/repositories/product_repositories/product_repository_
 
 import 'data/models/category_model.dart';
 import 'data/models/product_detail_images_model.dart';
-import 'data/models/product_details_size_model.dart';
 import 'data/models/search_history_model.dart';
 
 final navigatorKey=GlobalKey<NavigatorState>();
@@ -57,13 +59,14 @@ class Ecommerce extends StatelessWidget {
 Future hiveInitFunc() async {
   final directory = await getApplicationDocumentsDirectory();
   Hive.init(directory.path);
+  Hive.registerAdapter(MyCartModelAdapter());
   Hive.registerAdapter(SearchHistoryModelAdapter());
   Hive.registerAdapter(CategoryModelAdapter());
   Hive.registerAdapter(ProductDetailImagesModelAdapter());
   Hive.registerAdapter(ProductDetailsModelAdapter());
-  Hive.registerAdapter(ProductDetailsSizeModelAdapter());
   Hive.registerAdapter(ProductModelAdapter());
   Hive.registerAdapter(SizeModelAdapter());
+  // await Hive.openBox<MyCartModel>("myCart");
   await Hive.openBox<ProductModel>(ProductRepositoryLocal.productsBoxName);
   await Hive.openBox<ProductModel>(ProductRepositoryLocal.savedProductBoxName);
   await Hive.openBox<SizeModel>(ProductRepositoryLocal.sizesBoxName);

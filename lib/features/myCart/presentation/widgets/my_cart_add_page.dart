@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:store/core/utils/colors.dart';
+import 'package:store/data/models/my_cart/my_cart_items_model.dart';
 import 'package:store/features/common/store_icon_button.dart';
 
 class MyCartAddPage extends StatelessWidget {
-  const MyCartAddPage({super.key});
+  const MyCartAddPage({super.key, required this.item,});
+  final MyCartItemsModel item;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +27,8 @@ class MyCartAddPage extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(4),
-                child: Image.asset(
-                  "assets/images/slogan.png",
+                child: Image.network(
+                  item.image,
                   width: 83.w,
                   height: 79.h,
                   fit: BoxFit.cover,
@@ -39,7 +41,7 @@ class MyCartAddPage extends StatelessWidget {
                     spacing: 98,
                     children: [
                       Text(
-                        "Regular Fit Slogan",
+                      item.title,
                         style: TextStyle(
                           color: AppColors.primary,
                           fontFamily: "General Sans",
@@ -51,7 +53,7 @@ class MyCartAddPage extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    "Size L",
+                    "Size ${item.size}",
                     style: TextStyle(
                       color: Colors.grey,
                       fontWeight: FontWeight.w400,
@@ -65,7 +67,7 @@ class MyCartAddPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text(
-                        "1,200",
+                        "\$ ${item.price}",
                         style: TextStyle(
                           color: AppColors.primary,
                           fontFamily: "General Sans",
@@ -88,7 +90,7 @@ class MyCartAddPage extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "2",
+                            item.quantity.toString(),
                             style: TextStyle(
                               color: AppColors.primary,
                               fontFamily: "General Sans",

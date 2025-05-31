@@ -2,8 +2,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:store/data/models/category_model.dart';
-import 'package:store/data/models/product_model.dart';
 import 'package:store/data/models/size_model.dart';
+
+import '../../../../data/models/product_model.dart';
 part 'home_state.freezed.dart';
 
 enum HomeStatus { idle, loading, error }

@@ -18,20 +18,21 @@ class ProductDetailsModelAdapter extends TypeAdapter<ProductDetailsModel> {
     };
     return ProductDetailsModel(
       rating: fields[6] as double?,
-      id: fields[0] as int?,
-      isLiked: fields[5] as bool?,
-      price: fields[3] as int?,
-      title: fields[1] as String?,
-      description: fields[2] as String?,
+      id: fields[0] as int,
+      isLiked: fields[5] as bool,
+      price: fields[3] as int,
+      title: fields[1] as String,
+      description: fields[2] as String,
       reviewCount: fields[4] as int?,
-      images: (fields[7] as List?)?.cast<ProductDetailImagesModel>(),
+      images: (fields[7] as List).cast<ProductDetailImagesModel>(),
+      sizes: (fields[8] as List).cast<SizeModel>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, ProductDetailsModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -47,7 +48,9 @@ class ProductDetailsModelAdapter extends TypeAdapter<ProductDetailsModel> {
       ..writeByte(6)
       ..write(obj.rating)
       ..writeByte(7)
-      ..write(obj.images);
+      ..write(obj.images)
+      ..writeByte(8)
+      ..write(obj.sizes);
   }
 
   @override
