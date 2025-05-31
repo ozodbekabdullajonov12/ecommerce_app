@@ -5,10 +5,10 @@ part 'product_detail_images_model.g.dart';
 @HiveType(typeId: 1)
 class ProductDetailImagesModel extends HiveObject {
   @HiveField(0)
-  final int? id;
+  final int id;
 
   @HiveField(1)
-  final String? image;
+  final String image;
 
   ProductDetailImagesModel({required this.id, required this.image});
 

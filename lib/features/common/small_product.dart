@@ -20,101 +20,102 @@ class SmallProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
-      builder:
-          (context, state) => Column(
+        builder:
+            (context, state) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              GestureDetector(
-                onTap: () =>  context.push(Routes.productDetailsBuilder(product.id)),
+            GestureDetector(
+            onTap: () =>  context.push(Routes.productDetailsBuilder(product.id)),
 
-                child: Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(9)),
-                      child: CachedNetworkImage(
-                        imageUrl: product.image,
-                        fit: BoxFit.cover,
-                        height: 174.h,
-                        width: 161.w,
-                        progressIndicatorBuilder: (context, url, progress) {
-                          return Center(
-                            child: CircularProgressIndicator(
-                              value: progress.progress,
-                              color: Colors.black,
-                            ),
-                          );
-                        },
-                        errorWidget: (context, url, error) =>
-                            Icon(Icons.error, color: Colors.red),
-                      ),
-                    ),
-                    Positioned(
-                      right: 10,
-                      top: 10,
-                      child: GestureDetector(
-                        onTap: () {
-                          if(context.read<ConnectionStateCubit>().state.isOnline) {
-                            context.read<HomeBloc>().add(
-                              HomeSaveOrUnSave(
-                                isLiked: product.isLiked,
-                                id: product.id,
-                              ),
-                            );
-                          }else{
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("You can't save or unsave when you are not in network ")));
-                          } },
-                        child: Container(
-                          height: 34.h,
-                          width: 34.w,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Center(
-                            child: SvgPicture.asset(
-                              "assets/icons/${(!product.isLiked)?"heart.svg":"heart_filled.svg"}",
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Text(
-                product.title,
-                style: TextStyle(
-                  color: AppColors.primary.withValues(alpha: 0.9),
-                  fontFamily: "General Sans",
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Row(
-                children: [
-                  Text(
-                    "\$${product.price}",
-                    style: TextStyle(
-                      color: AppColors.primary.withValues(alpha: 0.5),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
-                      fontFamily: "General Sans",
-                    ),
-                  ),
-                  if (product.discount !=0)
-                    Text(
-                      "-${product.discount}%",
-                      style: TextStyle(
-                        color: Color(0xFFED1010),
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "General Sans",
-                      ),
-                    ),
-                ],
-              ),
-            ],
+    child: Stack(
+    children: [
+    ClipRRect(
+    borderRadius: BorderRadius.vertical(top: Radius.circular(9)),
+    child: CachedNetworkImage(
+    imageUrl: product.image,
+    fit: BoxFit.cover,
+    height: 174.h,
+    width: 161.w,
+    progressIndicatorBuilder: (context, url, progress) {
+    return Center(
+    child: CircularProgressIndicator(
+    value: progress.progress,
+    color: Colors.black,
+    ),
+    );
+    },
+    errorWidget: (context, url, error) =>
+    Icon(Icons.error, color: Colors.red),
+    ),
+    ),
+    Positioned(
+    right: 10,
+    top: 10,
+    child: GestureDetector(
+    onTap: () {
+    if(context.read<ConnectionStateCubit>().state.isOnline) {
+    context.read<HomeBloc>().add(
+    HomeSaveOrUnSave(
+    isLiked: product.isLiked,
+    id: product.id,
+    ),
+    );
+    }else{
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("You can't save or unsave when you are not in network ")));
+    } },
+    child: Container(
+    height: 34.h,
+    width: 34.w,
+    decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(8),
+    ),
+    child: Center(
+    child: SvgPicture.asset(
+    "assets/icons/${(!product.isLiked)?"heart.svg":"heart_filled.svg"}",
+    ),
+    ),
+    ),
+    ),
+    ),
+    ],
+    ),
+    ),
+    Text(
+    product.title,
+    style: TextStyle(
+    color: AppColors.primary.withValues(alpha: 0.9),
+    fontFamily: "General Sans",
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    ),
+    ),
+    Row(
+    children: [
+    Text(
+    "\$${product.price}",
+    style: TextStyle(
+    color: AppColors.primary.withValues(alpha: 0.5),
+
+      fontWeight: FontWeight.w500,
+      fontSize: 12,
+      fontFamily: "General Sans",
+    ),
+    ),
+      if (product.discount !=0)
+        Text(
+          "-${product.discount}%",
+          style: TextStyle(
+            color: Color(0xFFED1010),
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            fontFamily: "General Sans",
           ),
+        ),
+    ],
+    ),
+            ],
+            ),
     );
   }
 }

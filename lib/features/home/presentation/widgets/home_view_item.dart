@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/utils/colors.dart';
-import 'package:store/data/models/product_model.dart';
+
+import '../../../../data/models/product_model.dart';
 
 class HomeViewItem extends StatelessWidget {
   const HomeViewItem({super.key, required this.products});

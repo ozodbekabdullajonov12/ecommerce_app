@@ -26,6 +26,6 @@ class Routes {
   static const myDetails = "/my-details";
 
   static const myNotifications = '/my-notifications';
-  static const customerService = '/customer-service';
   static String productDetailsBuilder(int id) => '/product-details/$id';
+  static const customerService = '/customer-service';
 }

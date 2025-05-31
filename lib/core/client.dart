@@ -8,10 +8,7 @@ import 'interceptor.dart';
 class ApiClient {
   ApiClient() {
     dio = Dio(
-      BaseOptions(
-        baseUrl: "http://10.10.2.143:8888/api/v1",
-        validateStatus: (value) => true,
-      ),
+      BaseOptions(baseUrl: "http://192.168.8.29:8888/api/v1", validateStatus: (value) => true),
     );
     dio.interceptors.add(AuthInterceptor());
   }
@@ -72,7 +69,7 @@ class ApiClient {
     }
 
   }
-  
+
   Future<List<dynamic>> fetchProducts({
     Map<String, dynamic>? queryParams,
   }) async {
@@ -207,6 +204,35 @@ class ApiClient {
       }
     } catch (e) {
       throw Exception("Server bilan bog‘lanishda xatolik");
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchMyCart() async {
+    var response = await dio.get('/my-cart/my-cart-items');
+    if (response.statusCode == 200) {
+      return response.data;
+    } else {
+      throw Exception('Malumot kemadi');
+    }
+  }
+
+  Future<dynamic> fetchMyDetails() async {
+    var response = await dio.get("/auth/details");
+    if (response.statusCode == 200) {
+      return response.data;
+    } else {
+      throw Exception("Not Found");
+    }
+  }
+  Future<bool>addProduct({required int productId, required int sizeId})async{
+    var response = await dio.post("/my-cart/add-item", data: {
+      "productId" : productId,
+      "sizeId": sizeId,
+    });
+    if (response.statusCode == 200) {
+      return true;
+    }else{
+      return false;
     }
   }
 }

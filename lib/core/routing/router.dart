@@ -22,6 +22,7 @@ import 'package:store/features/home/presentation/manager/home_bloc.dart';
 import 'package:store/features/home/presentation/manager/search/search_bloc.dart';
 import 'package:store/features/home/presentation/pages/home_view.dart';
 import 'package:store/features/home/presentation/pages/search_view.dart';
+import 'package:store/features/myCart/presentation/manager/my_cart_bloc.dart';
 import 'package:store/features/myCart/presentation/pages/my_cart_check_out_view.dart';
 import 'package:store/features/payment/presentation/manager/newCard/newcard_bloc.dart';
 import 'package:store/features/payment/presentation/manager/paymentMethod/payment_bloc.dart';
@@ -43,7 +44,7 @@ import '../../features/saved_items/presentation/pages/saved_items_view.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
-  initialLocation: Routes.home,
+  initialLocation: Routes.login,
   routes: [
     GoRoute(path: Routes.onboarding, builder: (context, state) => OnboardingView()),
     GoRoute(
@@ -94,6 +95,14 @@ final GoRouter router = GoRouter(
         GoRoute(path: Routes.enterCode, builder: (context, state) => EnterOtpView()),
         GoRoute(path: Routes.resetPassword, builder: (context, state) => ResetPasswordView()),
       ],
+    ),
+    GoRoute(
+      path: Routes.myCart,
+      builder:
+          (context, state) => BlocProvider(
+            create: (context) => MyCartBloc(myCartRepo: context.read()),
+            child: MyCartView(),
+          ),
     ),
    GoRoute(path: Routes.savedItems,
        builder: (context, state) =>

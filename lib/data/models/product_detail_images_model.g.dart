@@ -18,8 +18,8 @@ class ProductDetailImagesModelAdapter
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ProductDetailImagesModel(
-      id: fields[0] as int?,
-      image: fields[1] as String?,
+      id: fields[0] as int,
+      image: fields[1] as String,
     );
   }
 
